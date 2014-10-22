@@ -1,0 +1,96 @@
+
+LCRUD Version 2.8  August , 19 2014 
+
+    Fix Error Select Custom
+    Fix Backend change themes option menu
+    Fix Image Required issue
+	Fix Installer SQL text and file
+	Fix Unpack Installer 
+    Fix Grid when working on large table rows
+    Added new feature : Select multiple ( Only for Custom value )
+    Added New feature : Frontend theme
+    Added New Feature : Simple Blog
+    Added New Feature : Form Tooltip
+    Added New Feature : Form required mark ( * )
+    Added New Feature : auto filled created & updated field
+
+
+
+LCRUD Version 2.7  June , 16 2014 
+
+    Translation Manager
+    Frontend Theme
+    Option template for Pages ( Backend & Frontend )
+    Themes Sxin Option ( Light , Blue , Grey , Dark )
+    Remove Expand Grid Detail
+    Fix download uploaded file at grid records
+    Fix Resize uploaded Image
+
+
+
+LCRUD Version 2.5  may , 5 2014 
+
+    - Disable frontend option
+    - Disable registration
+    - View expand Grid table
+    - auto search field column grid
+    - Captcha 
+  
+
+LCRUD Version 2.4 : Apr , 25 2014
+
+    2014-04-17 : Log activity ( audit trail ) 
+    2014-04-17 : Interface translation ( beta ) : experimental
+
+LCRUD Version 2.3 : Apr , 17 2014
+
+    2014-04-17 : GOOGLE Login 
+    2014-04-17 : Facebook Login
+    2014-04-17 : Twitter Login
+    2014-04-17 : Setting Social Media
+    2014-04-17 : Setting Default registration Group
+    2014-04-17 : Registration approval , Auto , Manual , Confirmation
+    2014-04-17 : add new setting , meta keyword and meta description for frontend
+    2014-04-17 : SEO Page URL
+
+
+LCRUD Version 2.3 : Apr , 17 2014  
+
+    2014-04-17 : GOOGLE Login 
+    2014-04-17 : Facebook Login
+    2014-04-17 : Twitter Login
+    2014-04-17 : Setting Social Media
+    2014-04-17 : Setting Default registration Group
+    2014-04-17 : Registration approval , Auto , Manual , Confirmation
+    2014-04-17 : add new setting , meta keyword and meta description for frontend
+    2014-04-17 : SEO Page URL
+
+
+LCRUD Version 2.2 ( Apr , 11 2014 ) 
+
+    2014-07-03 : Form Layout Design
+    2014-07-03 : - Form layout tab vertical form
+    2014-07-03 : - Form layout tab horizontal form
+    2014-07-03 : - Form Layout Grid vertical form ( Column )
+    2014-07-03 : - Form Layout Grid horizontal( Column )
+    2014-07-03 : Connect field to other table
+
+LCRUD Version 2.1 ( Apr , 04 2014 )
+
+    2014-04-03 : new Layout Design
+    2014-04-03 : new sidebar
+    2014-04-03 : new Dashboard
+    2014-04-03 : fix checkbox form issue
+
+LCRUD Version 2.0 ( March , 29 2014 )
+
+    2014-03-24 : new page CMS
+    2014-03-24 : new blast email users
+    2014-03-24 : new feature cpllapsed Sidemenu
+    2014-03-24 : new feature 3 level menu
+    2014-03-24 : Adding new feature self define query statment
+    2014-03-24 : Adding Auto Detect relation table
+    2014-03-24 : Adding new feature permission limit access row data
+    2014-03-24 : Adding new feature master detail
+    2014-03-24 : Adding new validation ( Alpha , Numeric , Alpha numeric )
+
