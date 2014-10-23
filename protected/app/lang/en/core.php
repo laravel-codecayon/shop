@@ -155,4 +155,9 @@ return array(
 	"note_error"				=> "The following errors occurred !",
 	"note_success_delete"		=> "Removed successfully!",	// updated apidevlab
 
+	"category"					=> "Category",
+	"category_id"				=> "Category ID",
+	"category_name"				=> "Category name",
+	"category_des"				=> "Description",
+	"category_image"			=> "Image",
 );

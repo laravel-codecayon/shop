@@ -6,7 +6,7 @@ return array(
 	"create" => "Create New",
 
 	// General , Login Info & Signup
-	"home" => "Home",
+	"home" => "Trang chủ",
 	"group" => "Group",
 	"username" => "Username",
 	"email" => "Email Address",
@@ -146,7 +146,7 @@ return array(
 	"loginsocial"				=> "Login via Social Networking", // updated apidevlab
 	"enteremailforgot"			=> "Enter Your Email Address",
 	"detail" 					=> "View Detail",
-	"addedit" 					=> "Add - Edit",
+	"addedit" 					=> "Thêm - Sửa",
 	
 /* Notification */
 	"note_noexists"				=> "Sorry, The Page Does Not Exist!", // updated apidevlab
@@ -154,5 +154,11 @@ return array(
 	"note_success"				=> "Saved successfully!", // updated apidevlab
 	"note_error"				=> "Các lỗi sau !",
 	"note_success_delete"		=> "Removed successfully!",	// updated apidevlab
+
+	"category"					=> "Danh mục",
+	"category_id"				=> "ID Danh mục",
+	"category_name"				=> "Tên danh mục",
+	"category_des"				=> "Mô tả",
+	"category_image"			=> "Hình ảnh",
 
 );
