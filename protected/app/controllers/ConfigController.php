@@ -450,7 +450,7 @@ return array(
 		);
 		$validator = Validator::make(Input::all(), $rules);	
 		if ($validator->passes()) {
-/*			$folder = Input::get('folder');
+			$folder = Input::get('folder');
 			mkdir( app_path()."/lang/".$folder ,0777 );	
 			
 			$info = json_encode(array("name"=> Input::get('name'),"folder"=> $folder , "author" => Input::get('author')));
@@ -465,7 +465,7 @@ return array(
 				{
 					copy('./protected/app/lang/en/'.$f, './protected/app/lang/'.$folder.'/'.$f);
 				}
-			}*/
+			}
 			return Redirect::to('config/translation')->with('message',SiteHelpers::alert('success','New Translation has been added !') );			
 			
 		} else {

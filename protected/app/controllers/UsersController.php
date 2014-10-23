@@ -143,7 +143,7 @@ class UsersController extends BaseController {
 				}
 			}
 			
-		//	$this->model->insertRow($data , Input::get('id'));
+			$this->model->insertRow($data , Input::get('id'));
 
 			return Redirect::to('users')->with('message', SiteHelpers::alert('success','Data Has Been Save Successfull'));
 		} else {

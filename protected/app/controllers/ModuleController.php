@@ -1490,7 +1490,7 @@ class ModuleController extends BaseController {
 	
 	function postSavepermission()
 	{
-		/*
+		
 		$id = Input::get('module_id');
 		$row = DB::table('tb_module')->where('module_id', $id)
 								->get();
@@ -1513,6 +1513,7 @@ class ModuleController extends BaseController {
 		/* Update permission global / own access new ver 1.1
 		   Adding new param is_global
 		   End Update permission global / own access new ver 1.1
+		   */
 		
 		if(isset($config['tasks'])) {
 			foreach($config['tasks'] as $row)
@@ -1552,7 +1553,7 @@ class ModuleController extends BaseController {
 				
 		return Redirect::to($this->module.'/permission/'.$row->module_name)
 		->with('message',SiteHelpers::alert('success','Permission Has Changed Successful.')); 
-		*/
+		
 			return Redirect::to('module')
 			->with('message', SiteHelpers::alert('error',' Feature disabled on demo page '));			
 	}	

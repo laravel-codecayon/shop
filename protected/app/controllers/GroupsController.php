@@ -140,13 +140,13 @@ class GroupsController extends BaseController {
 		$validator = Validator::make(Input::all(), $rules);	
 		if ($validator->passes()) {
 			$data = $this->validatePost('tb_groups');
-		//	$ID = $this->model->insertRow($data , Input::get('group_id'));
+			$ID = $this->model->insertRow($data , Input::get('group_id'));
 			// Input logs
 			if( Input::get('group_id') =='')
 			{
-			//	$this->inputLogs("New Entry row with ID : $ID  , Has Been Save Successfull");
+				$this->inputLogs("New Entry row with ID : $ID  , Has Been Save Successfull");
 			} else {
-			//	$this->inputLogs(" ID : $ID  , Has Been Changed Successfull");
+				$this->inputLogs(" ID : $ID  , Has Been Changed Successfull");
 			}
 			// Redirect after save	
 			return Redirect::to('groups')->with('message', SiteHelpers::alert('success','Data Has Been Save Successfull'));

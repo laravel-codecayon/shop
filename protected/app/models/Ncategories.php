@@ -23,5 +23,8 @@ class Ncategories extends BaseModel  {
 		return "  ";
 	}
 	
-
+	public static $rules=array(
+			"categoryName" => "required",
+			"Description" => "required"
+		);
 }

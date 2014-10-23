@@ -146,12 +146,12 @@ class NcategoriesController extends BaseController {
 	function postSave( $id =0)
 	{
 		$trackUri = $this->data['trackUri'];
-		$rules = $this->validateForm();
-		$validator = Validator::make(Input::all(), $rules);	
+		//$rules = $this->validateForm();
+		$validator = Validator::make(Input::all(), Ncategories::$rules);	
 		if ($validator->passes()) {
 
 			if(!is_null(Input::file('file')))
-			{
+			{//asdasdasdasd
 				$file = Input::file('file'); 
 				$destinationPath = './uploads/categories/';
 				$filename = $file->getClientOriginalName();
@@ -180,7 +180,7 @@ class NcategoriesController extends BaseController {
 			$redirect = (!is_null(Input::get('apply')) ? 'Ncategories/add/'.$id.'?md='.$md.$trackUri :  'Ncategories?md='.$md.$trackUri );
 			return Redirect::to($redirect)->with('message', SiteHelpers::alert('success',Lang::get('core.note_success')));
 		} else {
-			return Redirect::to('Ncategories/add/'.$id.'?md='.$md)->with('message', SiteHelpers::alert('error',Lang::get('core.note_error')))
+			return Redirect::to('Ncategories/add/'.$id)->with('message', SiteHelpers::alert('error',Lang::get('core.note_error')))
 			->withErrors($validator)->withInput();
 		}	
 	
