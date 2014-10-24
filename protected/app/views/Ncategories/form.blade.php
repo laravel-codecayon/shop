@@ -37,10 +37,10 @@
 		</ul>
 		 {{ Form::open(array('url'=>'Ncategories/save/'.SiteHelpers::encryptID($row['CategoryID']).'?md='.$filtermd.$trackUri, 'class'=>'form-horizontal','files' => true , 'parsley-validate'=>'','novalidate'=>' ')) }}
 				<div class="col-md-12">
-						<fieldset><legend> Categories</legend>
-									
+						<fieldset><legend> {{ Lang::get('core.category') }}</legend>
+									<input type="hidden" name="action" value="{{$id}}" />
 								  <div class="form-group  " >
-									<label for="CategoryID" class=" control-label col-md-4 text-left"> CategoryID </label>
+									<label for="CategoryID" class=" control-label col-md-4 text-left"> {{ Lang::get('core.category_id') }} </label>
 									<div class="col-md-6">
 									  {{ Form::text('CategoryID', $row['CategoryID'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 									 </div> 
@@ -49,7 +49,7 @@
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="CategoryName" class=" control-label col-md-4 text-left"> CategoryName </label>
+									<label for="CategoryName" class=" control-label col-md-4 text-left"> {{ Lang::get('core.category_name') }} </label>
 									<div class="col-md-6">
 									  {{ Form::text('CategoryName', $row['CategoryName'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 									 </div> 
@@ -58,7 +58,7 @@
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="Description" class=" control-label col-md-4 text-left"> Description </label>
+									<label for="Description" class=" control-label col-md-4 text-left"> {{ Lang::get('core.category_des') }} </label>
 									<div class="col-md-6">
 									  {{ Form::text('Description', $row['Description'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 									 </div> 
@@ -67,11 +67,13 @@
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="Picture" class=" control-label col-md-4 text-left"> Picture </label>
+									<label for="Picture" class=" control-label col-md-4 text-left"> {{ Lang::get('core.category_image') }} </label>
 									<div class="col-md-6">
 									  <input id="upload" name="file" type="file" />
 									  <div id="result">
-	
+											@if($row['Picture'] != "")
+												<img width="150px" src="/uploads/categories/thumb/{{$row['Picture']}}">
+											@endif
 										</div>
 									 </div> 
 									 <div class="col-md-2">

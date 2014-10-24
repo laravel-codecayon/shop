@@ -23,5 +23,9 @@ class Ncategories extends BaseModel  {
 		return "  ";
 	}
 	
-
+	public static $rules=array(
+			"CategoryName" => "required",
+			"Description" => "required",
+			"file" => "mimes:gif,png,jpg,jpeg|image|max:20000",
+		);
 }

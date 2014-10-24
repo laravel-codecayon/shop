@@ -212,7 +212,7 @@ class BaseModel extends Eloquent  {
 		$row = DB::table('tb_groups_access')->where('module_id','=', $id)
 				->where('group_id','=', Session::get('gid'))
 				->get();
-		
+		//print_r(Session::get('gid'));die;
 		if(count($row) >= 1)
 		{
 			$row = $row[0];

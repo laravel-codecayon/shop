@@ -813,6 +813,9 @@ public static function alphaID($in, $to_num = false, $pad_up = false, $passKey =
 			case 'jpg':
 				$simg = imagecreatefromjpeg($source);
 				break;
+			case 'jpeg':
+				$simg = imagecreatefromjpeg($source);
+				break;
 			case 'png':
 				$simg = imagecreatefrompng($source);
 				break;

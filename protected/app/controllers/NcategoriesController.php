@@ -5,6 +5,8 @@ class NcategoriesController extends BaseController {
 	protected $data = array();	
 	public $module = 'Ncategories';
 	static $per_page	= '10';
+	protected $img_width = 150;
+	protected $img_height = 150;
 	
 	public function __construct() {
 		parent::__construct();
@@ -146,26 +148,34 @@ class NcategoriesController extends BaseController {
 	function postSave( $id =0)
 	{
 		$trackUri = $this->data['trackUri'];
-		$rules = $this->validateForm();
-		$validator = Validator::make(Input::all(), $rules);	
+		//$rules = $this->validateForm();
+		$validator = Validator::make(Input::all(), Ncategories::$rules);
+		SiteHelpers::globalXssClean();
 		if ($validator->passes()) {
-
 			if(!is_null(Input::file('file')))
 			{
-				$file = Input::file('file'); 
+				$file = Input::file('file');
 				$destinationPath = './uploads/categories/';
 				$filename = $file->getClientOriginalName();
 				$extension = $file->getClientOriginalExtension(); //if you need extension of the file
-				$newfilename = Session::get('uid').'.'.$extension;
-				echo $newfilename;die;
-				$uploadSuccess = Input::file('avatar')->move($destinationPath, $newfilename);				 
+				$newfilename = Input::get('CategoryName').'_'.time().'.'.$extension;
+				$uploadSuccess = Input::file('file')->move($destinationPath, $newfilename);
 				if( $uploadSuccess ) {
-				    $data['avatar'] = $newfilename; 
-				} 
-				
+				    $data['Picture'] = $newfilename;
+				    $orgFile = $destinationPath.'/'.$newfilename;
+				    $thumbFile = $destinationPath.'/thumb/'.$newfilename;
+				    SiteHelpers::cropImage($this->img_width , $this->img_height , $orgFile ,  $extension,	 $thumbFile);
+				    if(Input::get('action') != "")
+				    {
+				    	$data_old = $this->model->getRow(Input::get('action'));
+				    	@unlink(ROOT .'/uploads/categories/'.$data_old->Picture);
+				    	@unlink(ROOT .'/uploads/categories/thumb/'.$data_old->Picture);
+				    }
+				}
 			}
-
-			$data = $this->validatePost('categories');
+			$data['CategoryName'] = Input::get('CategoryName');
+			$data['Description'] = Input::get('Description');
+			//$data = $this->validatePost('categories');
 			$ID = $this->model->insertRow($data , Input::get('CategoryID'));
 			// Input logs
 			if( Input::get('CategoryID') =='')
@@ -176,11 +186,11 @@ class NcategoriesController extends BaseController {
 				$this->inputLogs(" ID : $ID  , Has Been Changed Successfull");
 			}
 			// Redirect after save	
-			$md = str_replace(" ","+",Input::get('md'));
-			$redirect = (!is_null(Input::get('apply')) ? 'Ncategories/add/'.$id.'?md='.$md.$trackUri :  'Ncategories?md='.$md.$trackUri );
+			//$md = str_replace(" ","+",Input::get('md'));
+			$redirect = (!is_null(Input::get('apply')) ? 'Ncategories/add/'.$id :  'Ncategories?md=' );
 			return Redirect::to($redirect)->with('message', SiteHelpers::alert('success',Lang::get('core.note_success')));
 		} else {
-			return Redirect::to('Ncategories/add/'.$id.'?md='.$md)->with('message', SiteHelpers::alert('error',Lang::get('core.note_error')))
+			return Redirect::to('Ncategories/add/'.$id)->with('message', SiteHelpers::alert('error',Lang::get('core.note_error')))
 			->withErrors($validator)->withInput();
 		}	
 	

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: Oct 22, 2014 at 12:15 PM
+-- Generation Time: Oct 23, 2014 at 12:32 PM
 -- Server version: 5.5.38
 -- PHP Version: 5.5.14
 
@@ -3649,7 +3649,7 @@ CREATE TABLE `tb_groups` (
   `name` varchar(20) DEFAULT NULL,
   `description` varchar(100) DEFAULT NULL,
   `level` int(6) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `tb_groups`
@@ -3658,7 +3658,8 @@ CREATE TABLE `tb_groups` (
 INSERT INTO `tb_groups` (`group_id`, `name`, `description`, `level`) VALUES
 (1, 'Superadmin', 'Root Superadmin , should be as top level group', 1),
 (2, 'Administrator', 'Administrator level, level No 2', 2),
-(3, 'Users', '<p>Users as registered / member</p>', 3);
+(3, 'Users', '<p>Users as registered / member</p>', 3),
+(4, 'Test', '<p>test</p>', 4);
 
 -- --------------------------------------------------------
 
@@ -3671,7 +3672,7 @@ CREATE TABLE `tb_groups_access` (
   `group_id` int(6) DEFAULT NULL,
   `module_id` int(6) DEFAULT NULL,
   `access_data` text
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=412 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=419 ;
 
 --
 -- Dumping data for table `tb_groups_access`
@@ -3711,9 +3712,10 @@ INSERT INTO `tb_groups_access` (`id`, `group_id`, `module_id`, `access_data`) VA
 (406, 1, 56, '{"is_global":"1","is_view":"1","is_detail":"1","is_add":"1","is_edit":"1","is_remove":"1","is_excel":"1"}'),
 (407, 2, 56, '{"is_global":"0","is_view":"0","is_detail":"0","is_add":"0","is_edit":"0","is_remove":"0","is_excel":"0"}'),
 (408, 3, 56, '{"is_global":"0","is_view":"0","is_detail":"0","is_add":"0","is_edit":"0","is_remove":"0","is_excel":"0"}'),
-(409, 1, 57, '{"is_global":"1","is_view":"1","is_detail":"1","is_add":"1","is_edit":"1","is_remove":"1","is_excel":"1"}'),
-(410, 2, 57, '{"is_global":"0","is_view":"0","is_detail":"0","is_add":"0","is_edit":"0","is_remove":"0","is_excel":"0"}'),
-(411, 3, 57, '{"is_global":"0","is_view":"0","is_detail":"0","is_add":"0","is_edit":"0","is_remove":"0","is_excel":"0"}');
+(415, 1, 57, '{"is_global":"1","is_view":"1","is_detail":"1","is_add":"1","is_edit":"1","is_remove":"1","is_excel":"1"}'),
+(416, 2, 57, '{"is_global":"1","is_view":"1","is_detail":"1","is_add":"1","is_edit":"1","is_remove":"0","is_excel":"0"}'),
+(417, 3, 57, '{"is_global":"0","is_view":"0","is_detail":"0","is_add":"0","is_edit":"0","is_remove":"0","is_excel":"0"}'),
+(418, 4, 57, '{"is_global":"1","is_view":"1","is_detail":"0","is_add":"0","is_edit":"0","is_remove":"0","is_excel":"0"}');
 
 -- --------------------------------------------------------
 
@@ -3729,7 +3731,7 @@ CREATE TABLE `tb_logs` (
   `task` varchar(50) DEFAULT NULL,
   `note` text,
   `logdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `tb_logs`
@@ -3744,7 +3746,8 @@ INSERT INTO `tb_logs` (`auditID`, `ipaddress`, `user_id`, `module`, `task`, `not
 (6, '127.0.0.1', 1, 'Ncategories', 'save', 'New Entry row with ID : 9  , Has Been Save Successfull', '2014-10-22 07:24:53'),
 (7, '127.0.0.1', 1, 'Ncategories', 'save', ' ID : 9  , Has Been Changed Successfull', '2014-10-22 07:39:04'),
 (8, '127.0.0.1', 1, 'Ncategories', 'save', ' ID : 9  , Has Been Changed Successfull', '2014-10-22 07:39:14'),
-(9, '127.0.0.1', 1, 'Ncategories', 'save', 'New Entry row with ID : 10  , Has Been Save Successfull', '2014-10-22 09:50:27');
+(9, '127.0.0.1', 1, 'Ncategories', 'save', 'New Entry row with ID : 10  , Has Been Save Successfull', '2014-10-22 09:50:27'),
+(10, '127.0.0.1', 1, 'groups', 'save', 'New Entry row with ID : 4  , Has Been Save Successfull', '2014-10-22 10:50:49');
 
 -- --------------------------------------------------------
 
@@ -3887,8 +3890,8 @@ CREATE TABLE `tb_users` (
 --
 
 INSERT INTO `tb_users` (`id`, `group_id`, `username`, `password`, `email`, `first_name`, `last_name`, `avatar`, `active`, `login_attempt`, `last_login`, `created_at`, `updated_at`, `reminder`, `activation`, `remember_token`) VALUES
-(1, 1, 'superadmin', '$2y$10$fhLaiYD38sT5TZ7ZGaSrte5a5Rb6zktmcenuFlbSzSVlJMrfiqfa6', 'superadmin@mail.com', 'Root', 'Admin', '1.png', 1, 12, '2014-10-22 09:49:59', '2014-03-12 09:18:46', '2014-09-15 18:38:29', 'SNLyM4Smv12Ck8jyopZJMfrypTbEDtVhGT5PMRzxs', NULL, 'sofyyoll91cVpEeokzmGjWNBXqEcslQeGI2SW2JbAqxGIGf9PdMGl4ZQwt1e'),
-(4, NULL, '', '$2y$10$VlF4o/jT2DUfZhPJDkiWyOyixq2I6tprA5dbmC3O78sksVib6fUE.', 'blackorwhitemor@gmail.com', 'Dung', 'Tran', NULL, 1, 0, '2014-10-21 03:52:00', '2014-10-20 20:06:44', '2014-10-20 21:06:45', NULL, '8348720', 'mMoesLW84A7OXAg2rYpKyM5hTupswYgG7LEoLYm7E4E4HUExYwB4iepHuUTL');
+(1, 1, 'superadmin', '$2y$10$fhLaiYD38sT5TZ7ZGaSrte5a5Rb6zktmcenuFlbSzSVlJMrfiqfa6', 'superadmin@mail.com', 'Root', 'Admin', '1.png', 1, 12, '2014-10-23 05:02:43', '2014-03-12 09:18:46', '2014-10-22 03:59:23', 'SNLyM4Smv12Ck8jyopZJMfrypTbEDtVhGT5PMRzxs', NULL, 'vnxbSBtvWb7h5UhwCz3J51BObJ5aziEpsCozzj1FhiZHzbP7fN7ikOCbtPI6'),
+(4, 2, 'Dũng', '$2y$10$BHBWh7JLn531XRnYdOcsYujTtZx0dkBijJ.lDFLtLIWITd6bCQd9S', 'blackorwhitemor@gmail.com', 'Dung', 'Tran', NULL, 1, 0, '2014-10-22 10:59:34', '2014-10-20 20:06:44', '2014-10-22 04:02:03', NULL, '8348720', 'EeXQq2oUegS4PGmvNfKFr4CrNOp95mZfpbIFkSOI6n5LEIikLcqIjxKWCPF1');
 
 -- --------------------------------------------------------
 
@@ -4166,17 +4169,17 @@ MODIFY `blogID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 -- AUTO_INCREMENT for table `tb_groups`
 --
 ALTER TABLE `tb_groups`
-MODIFY `group_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `group_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_groups_access`
 --
 ALTER TABLE `tb_groups_access`
-MODIFY `id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=412;
+MODIFY `id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=419;
 --
 -- AUTO_INCREMENT for table `tb_logs`
 --
 ALTER TABLE `tb_logs`
-MODIFY `auditID` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+MODIFY `auditID` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tb_menu`
 --
