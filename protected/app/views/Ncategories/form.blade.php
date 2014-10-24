@@ -38,7 +38,7 @@
 		 {{ Form::open(array('url'=>'Ncategories/save/'.SiteHelpers::encryptID($row['CategoryID']).'?md='.$filtermd.$trackUri, 'class'=>'form-horizontal','files' => true , 'parsley-validate'=>'','novalidate'=>' ')) }}
 				<div class="col-md-12">
 						<fieldset><legend> {{ Lang::get('core.category') }}</legend>
-									
+									<input type="hidden" name="action" value="{{$id}}" />
 								  <div class="form-group  " >
 									<label for="CategoryID" class=" control-label col-md-4 text-left"> {{ Lang::get('core.category_id') }} </label>
 									<div class="col-md-6">
@@ -71,7 +71,9 @@
 									<div class="col-md-6">
 									  <input id="upload" name="file" type="file" />
 									  <div id="result">
-	
+											@if($row['Picture'] != "")
+												<img width="150px" src="/uploads/categories/thumb/{{$row['Picture']}}">
+											@endif
 										</div>
 									 </div> 
 									 <div class="col-md-2">

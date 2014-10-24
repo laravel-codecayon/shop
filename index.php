@@ -17,6 +17,7 @@
 | loading of any our classes "manually". Feels great to relax.
 |
 */
+define(ROOT, __DIR__);
 require __DIR__.'/protected/bootstrap/autoload.php';
 require 'setting.php';
 
