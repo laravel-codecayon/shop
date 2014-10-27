@@ -87,7 +87,7 @@ class NproductsController extends BaseController {
 
 	function getAdd( $id = null)
 	{
-	
+		
 		if($id =='')
 		{
 			if($this->access['is_add'] ==0 )
@@ -146,10 +146,13 @@ class NproductsController extends BaseController {
 	function postSave( $id =0)
 	{
 		$trackUri = $this->data['trackUri'];
-		$rules = $this->validateForm();
-		$validator = Validator::make(Input::all(), $rules);	
+		$rules = Nproducts::$rules;
+		//print_r(Input::all());die;
+		$validator = Validator::make(Input::all(), $rules);
+		SiteHelpers::globalXssClean();
 		if ($validator->passes()) {
 			$data = $this->validatePost('products');
+			$data['Content'] = Input::get('Content');
 			$ID = $this->model->insertRow($data , Input::get('ProductID'));
 			// Input logs
 			if( Input::get('ProductID') =='')
@@ -161,10 +164,10 @@ class NproductsController extends BaseController {
 			}
 			// Redirect after save	
 			$md = str_replace(" ","+",Input::get('md'));
-			$redirect = (!is_null(Input::get('apply')) ? 'Nproducts/add/'.$id.'?md='.$md.$trackUri :  'Nproducts?md='.$md.$trackUri );
+			$redirect = (!is_null(Input::get('apply')) ? 'Nproducts/add/'.$id.$trackUri :  'Nproducts'.$trackUri );
 			return Redirect::to($redirect)->with('message', SiteHelpers::alert('success',Lang::get('core.note_success')));
 		} else {
-			return Redirect::to('Nproducts/add/'.$id.'?md='.$md)->with('message', SiteHelpers::alert('error',Lang::get('core.note_error')))
+			return Redirect::to('Nproducts/add/'.$id)->with('message', SiteHelpers::alert('error',Lang::get('core.note_error')))
 			->withErrors($validator)->withInput();
 		}	
 	

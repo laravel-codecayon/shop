@@ -1,3 +1,16 @@
+<script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+{{ HTML::script('sximo/js/preview-image/modernizr.custom.js')}}
+{{ HTML::script('sximo/js/preview-image/script.js')}}
+<script id="imageTemplate" type="text/x-jquery-tmpl"> 
+    <div class="imageholder">
+		<figure>
+			<img src="${filePath}" alt="${fileName}"/>
+			<figcaption>
+			</figcaption>
+		</figure>
+	</div>
+</script>
+
 {{ HTML::script('sximo/js/plugins/tinymce/jscripts/tiny_mce/jquery.tinymce.js')}}
 {{ HTML::script('sximo/js/plugins/tinymce/jscripts/tiny_mce/tiny_mce.js')}}
 {{ HTML::style('protected/app/views/blog/blog.css')}}
@@ -12,13 +25,13 @@
 		<li><a href="{{ URL::to('Nproducts?md='.$filtermd) }}">{{ $pageTitle }}</a></li>
         <li class="active">{{ Lang::get('core.addedit') }} </li>
       </ul>
-	  	  
+
     </div>
- 
+
  	<div class="page-content-wrapper">
 	<div class="panel-default panel">
 		<div class="panel-body">
-		@if(Session::has('message'))	  
+		@if(Session::has('message'))
 			   {{ Session::get('message') }}
 		@endif	
 		<ul class="parsley-error-list">
@@ -29,25 +42,35 @@
 		 {{ Form::open(array('url'=>'Nproducts/save/'.SiteHelpers::encryptID($row['ProductID']).'?md='.$filtermd.$trackUri, 'class'=>'form-horizontal','files' => true , 'parsley-validate'=>'','novalidate'=>' ')) }}
 				<div class="col-md-12">
 						<fieldset><legend> Products</legend>
-									
 								  <div class="form-group  " >
 									<label for="ProductID" class=" control-label col-md-4 text-left"> ProductID </label>
 									<div class="col-md-6">
 									  {{ Form::text('ProductID', $row['ProductID'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 									 </div> 
 									 <div class="col-md-2">
-									 	
 									 </div>
-								  </div> 					
+								  </div>
+								  <div class="form-group  " >
+									<label for="Picture" class=" control-label col-md-4 text-left"> {{ Lang::get('core.product_image') }} </label>
+									<div class="col-md-6">
+									  <input id="upload" name="file" type="file" />
+									  <div id="result">
+											@if($row['image'] != "")
+												<img width="150px" src="/uploads/product/thumb/{{$row['image']}}">
+											@endif
+										</div>
+									 </div> 
+									 <div class="col-md-2">
+									 </div>
+								  </div>
 								  <div class="form-group  " >
 									<label for="ProductName" class=" control-label col-md-4 text-left"> ProductName </label>
 									<div class="col-md-6">
 									  {{ Form::text('ProductName', $row['ProductName'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
-									 </div> 
-									 <div class="col-md-2">
-									 	
 									 </div>
-								  </div> 					
+									 <div class="col-md-2">
+									 </div>
+								  </div>
 								  <div class="form-group  " >
 									<label for="SupplierID" class=" control-label col-md-4 text-left"> SupplierID </label>
 									<div class="col-md-6">
@@ -124,8 +147,7 @@
 									 <div class="form-group  " >
 									<label for="Discontinued" class=" control-label col-md-4 text-left"> Content </label>
 									<div class="col-md-6">
-									  <textarea name='Content' rows='15' id='editor' style="width:100%;" class='mceEditor form-control' 
-required >{{ $row['Content'] }}</textarea> 
+									  <textarea name='Content' rows='15' id='editor' style="width:100%;" class='mceEditor form-control'  >{{ $row['Content'] }}</textarea> 
 									 </div> 
 									 <div class="col-md-2">
 									 	

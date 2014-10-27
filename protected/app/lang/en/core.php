@@ -160,4 +160,8 @@ return array(
 	"category_name"				=> "Category name",
 	"category_des"				=> "Description",
 	"category_image"			=> "Image",
+
+
+
+	"product_image"				=> "Image",
 );

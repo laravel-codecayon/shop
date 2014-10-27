@@ -22,6 +22,12 @@ class Nproducts extends BaseModel  {
 	public static function queryGroup(){
 		return "  ";
 	}
+
+	public static $rules=array(
+			"ProductName" => "required",
+			"UnitPrice" => "numeric",
+			"file" => "mimes:gif,png,jpg,jpeg|image|max:20000",
+		);
 	
 
 }

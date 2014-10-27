@@ -161,4 +161,7 @@ return array(
 	"category_des"				=> "Mô tả",
 	"category_image"			=> "Hình ảnh",
 
+
+
+	"product_image"				=> "Hình ảnh",
 );

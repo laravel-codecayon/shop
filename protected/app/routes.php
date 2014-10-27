@@ -42,6 +42,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::controller('blogcategories', 'BlogcategoriesController');
 	Route::controller('blogcomment', 'BlogcommentController');
 	Route::controller('nproducts', 'NproductsController');
+	Route::controller('Nproducts', 'NproductsController');
 	Route::controller('ncategories', 'NcategoriesController');
 	/* END CORE APPLICATION  */
 	
