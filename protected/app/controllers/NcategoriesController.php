@@ -155,7 +155,7 @@ class NcategoriesController extends BaseController {
 			if(!is_null(Input::file('file')))
 			{
 				$file = Input::file('file');
-				$destinationPath = './uploads/categories/';
+				$destinationPath = ROOT.'/uploads/categories/';
 				$filename = $file->getClientOriginalName();
 				$extension = $file->getClientOriginalExtension(); //if you need extension of the file
 				$newfilename = Input::get('CategoryName').'_'.time().'.'.$extension;
@@ -164,7 +164,8 @@ class NcategoriesController extends BaseController {
 				    $data['Picture'] = $newfilename;
 				    $orgFile = $destinationPath.'/'.$newfilename;
 				    $thumbFile = $destinationPath.'/thumb/'.$newfilename;
-				    SiteHelpers::cropImage($this->img_width , $this->img_height , $orgFile ,  $extension,	 $thumbFile);
+				    //SiteHelpers::cropImage($this->img_width , $this->img_height , $orgFile ,  $extension,	 $thumbFile);
+				    SiteHelpers::resizewidth("180",$orgFile,$thumbFile);
 				    if(Input::get('action') != "")
 				    {
 				    	$data_old = $this->model->getRow(Input::get('action'));

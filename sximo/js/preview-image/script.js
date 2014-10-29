@@ -9,6 +9,9 @@ $(document).ready(function() {
 		dropzone = $('#droparea'),
 		uploadBtn = $('#uploadbtn'),
 		defaultUploadBtn = $('#upload');
+
+		btnmultiimage = $('#btnmultiimage');
+		defaultUploadBtn_multi = $('#uploadmt');
 		
 
 	/*****************************
@@ -47,6 +50,21 @@ $(document).ready(function() {
 		//retrieve selected uploaded files data
 		var files = $(this)[0].files;
 		processFiles(files);
+		
+		return false;
+	});
+
+
+	btnmultiimage.on('click', function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		defaultUploadBtn_multi.click();
+	});
+
+	defaultUploadBtn_multi.on('change', function() {
+		//retrieve selected uploaded files data
+		var files = $(this)[0].files;
+		processFiles_multi(files);
 		
 		return false;
 	});
@@ -221,6 +239,44 @@ $(document).ready(function() {
 			
 		}
 	}
+
+	var processFiles_multi = function(files) {
+		if(files && typeof FileReader !== "undefined") {
+			//process each files only if browser is supported
+			for(var i=0; i<files.length; i++) {
+				readFile_multi(files[i]);
+			}
+		} else {
+			
+		}
+	}
+
+	var readFile_multi = function(file) {
+		if( (/image/i).test(file.type) ) {
+			//define FileReader object
+			var reader = new FileReader();
+			
+			//init reader onload event handlers
+			reader.onload = function(e) {	
+				var image = $('<img/>')
+				.load(function() {
+					//when image fully loaded
+					var newimageurl = getCanvasImage(this);
+					createPreview_multi(file, newimageurl);
+					uploadToServer(file, dataURItoBlob(newimageurl));
+				})
+				.attr('src', e.target.result);	
+			};
+			
+			//begin reader read operation
+			reader.readAsDataURL(file);
+			
+			$('#err').text('');
+		} else {
+			//some message for wrong file format
+			$('#err').text('*Selected file format not supported!');
+		}
+	}
 	
 	
 	/***************************** 
@@ -331,6 +387,41 @@ $(document).ready(function() {
 		}
 	}
 	
+
+	var createPreview_multi = function(file, newURL) {	
+		//populate jQuery Template binding object
+		var imageObj = {};
+		imageObj.filePath = newURL;
+		imageObj.fileName = file.name.substr(0, file.name.lastIndexOf('.')); //subtract file extension
+		imageObj.fileOriSize = convertToKBytes(file.size);
+		imageObj.fileUploadSize = convertToKBytes(dataURItoBlob(newURL).size); //convert new image URL to blob to get file.size
+					
+		//extend filename
+		var effect = $('input[name=effect]:checked').val();			
+		if(effect == 'grayscale') {
+			imageObj.fileName += " (Grayscale)";
+		} else if(effect == 'blurry') {
+			imageObj.fileName += " (Blurry)";
+		} 			
+					
+		//append new image through jQuery Template
+		var randvalue = Math.floor(Math.random()*31)-15;  //random number
+		var img = $("#imageTemplate_multi").tmpl(imageObj).prependTo("#results")
+		.hide()
+		/*.css({
+			'Transform': 'scale(1) rotate('+randvalue+'deg)',
+			'msTransform': 'scale(1) rotate('+randvalue+'deg)',
+			'MozTransform': 'scale(1) rotate('+randvalue+'deg)',
+			'webkitTransform': 'scale(1) rotate('+randvalue+'deg)',
+			'OTransform': 'scale(1) rotate('+randvalue+'deg)',
+			'z-index': zindex++
+		})*/
+		.show();
+		
+		if(isNaN(imageObj.fileUploadSize)) {
+			$('.imageholder span').last().hide();
+		}
+	}
 	
 	
 	/****************************

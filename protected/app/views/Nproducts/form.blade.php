@@ -11,6 +11,16 @@
 	</div>
 </script>
 
+<script id="imageTemplate_multi" type="text/x-jquery-tmpl"> 
+    <div class="imageholder">
+		<figure>
+			<img width="50px" src="${filePath}" alt="${fileName}"/>
+			<figcaption>
+			</figcaption>
+		</figure>
+	</div>
+</script>
+
 {{ HTML::script('sximo/js/plugins/tinymce/jscripts/tiny_mce/jquery.tinymce.js')}}
 {{ HTML::script('sximo/js/plugins/tinymce/jscripts/tiny_mce/tiny_mce.js')}}
 {{ HTML::style('protected/app/views/blog/blog.css')}}
@@ -42,10 +52,17 @@
 		 {{ Form::open(array('url'=>'Nproducts/save/'.SiteHelpers::encryptID($row['ProductID']).'?md='.$filtermd.$trackUri, 'class'=>'form-horizontal','files' => true , 'parsley-validate'=>'','novalidate'=>' ')) }}
 				<div class="col-md-12">
 						<fieldset><legend> Products</legend>
+									<input type="hidden" name="action" value="{{$id}}" />
+								  	<input type="hidden" name="action" value="{{$row['ProductID']}}" />
 								  <div class="form-group  " >
-									<label for="ProductID" class=" control-label col-md-4 text-left"> ProductID </label>
+									<label for="Picture" class=" control-label col-md-4 text-left"> {{ Lang::get('core.product_image') }} </label>
 									<div class="col-md-6">
-									  {{ Form::text('ProductID', $row['ProductID'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
+									  <input id="upload" name="file" type="file" />
+									  <div id="result">
+											@if($row['image'] != "")
+												<img width="150px" src="/uploads/products/thumb/{{$row['image']}}">
+											@endif
+										</div>
 									 </div> 
 									 <div class="col-md-2">
 									 </div>
@@ -53,11 +70,10 @@
 								  <div class="form-group  " >
 									<label for="Picture" class=" control-label col-md-4 text-left"> {{ Lang::get('core.product_image') }} </label>
 									<div class="col-md-6">
-									  <input id="upload" name="file" type="file" />
-									  <div id="result">
-											@if($row['image'] != "")
-												<img width="150px" src="/uploads/product/thumb/{{$row['image']}}">
-											@endif
+										<span class="label label-primary" style="cursor:pointer" id="btnmultiimage">Choose images</span>
+									  <input id="uploadmt" name="multi_file" type="file" style="display: none;"/>
+									  <div id="results">
+											
 										</div>
 									 </div> 
 									 <div class="col-md-2">

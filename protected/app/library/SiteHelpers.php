@@ -799,6 +799,50 @@ public static function alphaID($in, $to_num = false, $pad_up = false, $passKey =
 		return strnatcmp($a['sortlist'], $b['sortlist']);
 	}
 
+	static function resizewidth($width, $imageold, $imagenew) {
+
+      $image_info = getimagesize($imageold);
+      $image_type = $image_info[2];
+      if( $image_type == IMAGETYPE_JPEG ) {
+ 
+         $image = imagecreatefromjpeg($imageold);
+      } elseif( $this->image_type == IMAGETYPE_GIF ) {
+ 
+         $image = imagecreatefromgif($imageold);
+      } elseif( $this->image_type == IMAGETYPE_PNG ) {
+ 
+         $image = imagecreatefrompng($imageold);
+      }
+
+      $ratio = imagesy($image) / imagesx($image);
+      $height = $width * $ratio;
+
+      //$width = imagesx($image) * $width/100;
+     // $height = imagesx($image) * $width/100;
+
+      $new_image = imagecreatetruecolor($width, $height);
+      imagecopyresampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_info[0], $image_info[1]);
+      $image = $new_image;
+
+      $compression=75; 
+      $permissions=null;
+
+      if( $image_type == IMAGETYPE_JPEG ) {
+         imagejpeg($image,$imagenew,$compression);
+      } elseif( $image_type == IMAGETYPE_GIF ) {
+ 
+         imagegif($image,$imagenew);
+      } elseif( $image_type == IMAGETYPE_PNG ) {
+ 
+         imagepng($image,$imagenew);
+      }
+      if( $permissions != null) {
+ 
+         chmod($imagenew,$permissions);
+      }
+      
+   }
+
 	
 	static public function cropImage($nw, $nh, $source, $stype, $dest) 
 	{
