@@ -345,6 +345,17 @@ class BaseController extends Controller {
 		}	
 		return $rules ;
 	}
+
+	function getDataPost($table)
+	{
+		$arrColumn = SiteHelpers::columnTable($table);
+		$arrdata = array();
+		foreach($arrColumn as $col)
+		{
+			$arrdata[$col] = (Input::get($col)) ? Input::get($col) : "";
+		}
+		return $arrdata;
+	}
 	
 	function validatePost(  $table )
 	{		

@@ -151,8 +151,28 @@ class NproductsController extends BaseController {
 		$validator = Validator::make(Input::all(), $rules);
 		SiteHelpers::globalXssClean();
 		if ($validator->passes()) {
-			$data = $this->validatePost('products');
-			$data['Content'] = Input::get('Content');
+			$data = $this->getDataPost('products');
+			if(!is_null(Input::file('file')))
+			{
+				$file = Input::file('file');
+				$destinationPath = './uploads/products/';
+				$filename = $file->getClientOriginalName();
+				$extension = $file->getClientOriginalExtension(); //if you need extension of the file
+				$newfilename = Input::get('ProductName').'_'.time().'.'.$extension;
+				$uploadSuccess = Input::file('file')->move($destinationPath, $newfilename);
+				if( $uploadSuccess ) {
+				    $data['image'] = $newfilename;
+				    $orgFile = $destinationPath.'/'.$newfilename;
+				    $thumbFile = $destinationPath.'/thumb/'.$newfilename;
+				    SiteHelpers::cropImage($this->img_width , $this->img_height , $orgFile ,  $extension,	 $thumbFile);
+				    if(Input::get('action') != "")
+				    {
+				    	$data_old = $this->model->getRow(Input::get('action'));
+				    	@unlink(ROOT .'/uploads/categories/'.$data_old->Picture);
+				    	@unlink(ROOT .'/uploads/categories/thumb/'.$data_old->Picture);
+				    }
+				}
+			}
 			$ID = $this->model->insertRow($data , Input::get('ProductID'));
 			// Input logs
 			if( Input::get('ProductID') =='')
@@ -172,7 +192,7 @@ class NproductsController extends BaseController {
 		}	
 	
 	}
-	
+
 	public function postDestroy()
 	{
 		
