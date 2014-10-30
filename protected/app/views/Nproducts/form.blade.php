@@ -12,7 +12,7 @@
 </script>
 
 <script id="imageTemplate_multi" type="text/x-jquery-tmpl"> 
-    <div class="imageholder">
+    <div class="imageholder" id="now_${count}" onclick="remove_upload('${count}')">
 		<figure>
 			<img width="50px" src="${filePath}" alt="${fileName}"/>
 			<figcaption>
@@ -71,7 +71,7 @@
 									<label for="Picture" class=" control-label col-md-4 text-left"> {{ Lang::get('core.product_image') }} </label>
 									<div class="col-md-6">
 										<span class="label label-primary" style="cursor:pointer" id="btnmultiimage">Choose images</span>
-									  <input id="uploadmt" name="multi_file" type="file" style="display: none;"/>
+									  <input id="uploadmt" name="multi_file" type="file" multiple style="display: none;"/>
 									  <div id="results">
 											
 										</div>
@@ -191,6 +191,20 @@
 </div>	
 </div>			 
    <script type="text/javascript">
+
+   	function remove_upload(id){
+   		var files = $("#uploadmt")[0].files;
+   		var new_files = [];
+   		for (i = 0; i < files.length; i++) { 
+		    if(i != id)
+		    {
+		    	new_files[i] = files[i];
+		    }
+		}
+		$("#uploadmt").files = $new_files;
+   		console.log($("#uploadmt")[0].files);
+   	}
+
 	$(document).ready(function() { 
 		
 		$("#SupplierID").jCombo("{{ URL::to('Nproducts/comboselect?filter=suppliers:SupplierID:CompanyName') }}",
@@ -199,6 +213,8 @@
 		$("#CategoryID").jCombo("{{ URL::to('Nproducts/comboselect?filter=categories:CategoryID:CategoryName') }}",
 		{  selected_value : '{{ $row["CategoryID"] }}' });
 		 
+
+
 		$(function(){
 		tinymce.init({	
 			mode : "specific_textareas",
@@ -206,7 +222,7 @@
 			 plugins : "openmanager",
 			 file_browser_callback: "openmanager",
 			 open_manager_upload_path: '../../../../../../../../uploads/images/',
-		 });	
+		 });
 	});
 
 	});

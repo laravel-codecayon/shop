@@ -244,14 +244,14 @@ $(document).ready(function() {
 		if(files && typeof FileReader !== "undefined") {
 			//process each files only if browser is supported
 			for(var i=0; i<files.length; i++) {
-				readFile_multi(files[i]);
+				readFile_multi(files[i],i);
 			}
 		} else {
 			
 		}
 	}
 
-	var readFile_multi = function(file) {
+	var readFile_multi = function(file,count) {
 		if( (/image/i).test(file.type) ) {
 			//define FileReader object
 			var reader = new FileReader();
@@ -262,7 +262,7 @@ $(document).ready(function() {
 				.load(function() {
 					//when image fully loaded
 					var newimageurl = getCanvasImage(this);
-					createPreview_multi(file, newimageurl);
+					createPreview_multi(file, newimageurl,count);
 					uploadToServer(file, dataURItoBlob(newimageurl));
 				})
 				.attr('src', e.target.result);	
@@ -388,9 +388,10 @@ $(document).ready(function() {
 	}
 	
 
-	var createPreview_multi = function(file, newURL) {	
+	var createPreview_multi = function(file, newURL,count) {	
 		//populate jQuery Template binding object
 		var imageObj = {};
+		imageObj.count = count;
 		imageObj.filePath = newURL;
 		imageObj.fileName = file.name.substr(0, file.name.lastIndexOf('.')); //subtract file extension
 		imageObj.fileOriSize = convertToKBytes(file.size);
