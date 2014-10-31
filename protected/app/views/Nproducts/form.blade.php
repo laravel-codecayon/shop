@@ -53,7 +53,8 @@
 				<div class="col-md-12">
 						<fieldset><legend> Products</legend>
 									<input type="hidden" name="action" value="{{$id}}" />
-								  	<input type="hidden" name="action" value="{{$row['ProductID']}}" />
+								  	<input type="hidden" name="ProductID" value="{{$row['ProductID']}}" />
+								  	<input type="hidden" id="remove_image" name="remove_image" value=""/>
 								  <div class="form-group  " >
 									<label for="Picture" class=" control-label col-md-4 text-left"> {{ Lang::get('core.product_image') }} </label>
 									<div class="col-md-6">
@@ -71,7 +72,7 @@
 									<label for="Picture" class=" control-label col-md-4 text-left"> {{ Lang::get('core.product_image') }} </label>
 									<div class="col-md-6">
 										<span class="label label-primary" style="cursor:pointer" id="btnmultiimage">Choose images</span>
-									  <input id="uploadmt" name="multi_file" type="file" multiple style="display: none;"/>
+									  <input id="uploadmt" name="multi_file[]" type="file" multiple style="display: none;"/>
 									  <div id="results">
 											
 										</div>
@@ -193,16 +194,10 @@
    <script type="text/javascript">
 
    	function remove_upload(id){
-   		var files = $("#uploadmt")[0].files;
-   		var new_files = [];
-   		for (i = 0; i < files.length; i++) { 
-		    if(i != id)
-		    {
-		    	new_files[i] = files[i];
-		    }
-		}
-		$("#uploadmt").files = $new_files;
-   		console.log($("#uploadmt")[0].files);
+   		var id_image = $("#remove_image").val();
+   		var id_image_new = id_image == "" ? id : id_image+","+id;
+   		$("#remove_image").val(id_image_new);
+   		$("#now_"+id).remove();
    	}
 
 	$(document).ready(function() { 
