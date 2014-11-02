@@ -54,7 +54,6 @@
 						<fieldset><legend> Products</legend>
 									<input type="hidden" name="action" value="{{$id}}" />
 								  	<input type="hidden" name="ProductID" value="{{$row['ProductID']}}" />
-								  	<input type="hidden" id="remove_image" name="remove_image" value=""/>
 								  <div class="form-group  " >
 									<label for="Picture" class=" control-label col-md-4 text-left"> {{ Lang::get('core.product_image') }} </label>
 									<div class="col-md-6">
@@ -194,14 +193,12 @@
    <script type="text/javascript">
 
    	function remove_upload(id){
-   		var id_image = $("#remove_image").val();
-   		var id_image_new = id_image == "" ? id : id_image+","+id;
-   		$("#remove_image").val(id_image_new);
+   		var file = $("#uploadmt")[0].files;
+   		$("#uploadmt").after('<input type="hidden" name="remove_image[]" value="'+file[id].name+'" />');
    		$("#now_"+id).remove();
    	}
 
 	$(document).ready(function() { 
-		
 		$("#SupplierID").jCombo("{{ URL::to('Nproducts/comboselect?filter=suppliers:SupplierID:CompanyName') }}",
 		{  selected_value : '{{ $row["SupplierID"] }}' });
 		

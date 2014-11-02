@@ -145,6 +145,7 @@ class NproductsController extends BaseController {
 	
 	function postSave( $id =0)
 	{
+
 		$trackUri = $this->data['trackUri'];
 		$rules = Nproducts::$rules;
 		//print_r(Input::all());die;
@@ -173,7 +174,34 @@ class NproductsController extends BaseController {
 				    }
 				}
 			}
+
+
+
 			$ID = $this->model->insertRow($data , Input::get('ProductID'));
+
+			if(!is_null(Input::file('multi_file')))
+			{
+				$model_img_pro = new Imageproduct();
+				$rm_image = Input::get('remove_image');
+				$arr_img_rm = $rm_image != "" ? $rm_image : array();
+				foreach($_FILES['multi_file']['tmp_name'] as $key => $tmp_name ){
+					$file_name = $_FILES['multi_file']['name'][$key];
+
+					if(!in_array($file_name,$arr_img_rm)){
+						$file_size =$_FILES['multi_file']['size'][$key];
+					    $file_tmp =$_FILES['multi_file']['tmp_name'][$key];
+					    $file_type=$_FILES['multi_file']['type'][$key];
+					    $explode_name = explode(".", $file_name) ;
+					    $path_image = './uploads/images_product/';
+					    $newname = "image_".$key.time().'.'.$explode_name[1];
+					    if(move_uploaded_file($file_tmp,$path_image.$newname)){
+					    	$model_img_pro->insertRow(array("name"=>$newname,"id_product"=>"1"),"");
+					    	SiteHelpers::resizewidth("180",$path_image.$newname,$path_image."thumb/".$newname);
+					    }
+					}
+				}
+			}
+
 			// Input logs
 			if( Input::get('ProductID') =='')
 			{
