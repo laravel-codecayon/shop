@@ -115,7 +115,12 @@ class NproductsController extends BaseController {
 			$filters = explode(" ", Input::get('md') );
 			$this->data['row'][$filters[3]] = SiteHelpers::encryptID($filters[4],true); 	
 		}
+
+		$MD_imagesproduct = new Imagesproduct();
+		$list_image = $MD_imagesproduct->getImagesOfProduct($id);
+
 		/* End Master detail lock key and value */
+		$this->data['list_image'] = $list_image;
 		$this->data['masterdetail']  = $this->masterDetailParam(); 
 		$this->data['filtermd'] = str_replace(" ","+",Input::get('md')); 		
 		$this->data['id'] = $id;
@@ -181,7 +186,7 @@ class NproductsController extends BaseController {
 
 			if(!is_null(Input::file('multi_file')))
 			{
-				$model_img_pro = new Imageproduct();
+				$model_img_pro = new Imagesproduct();
 				$rm_image = Input::get('remove_image');
 				$arr_img_rm = $rm_image != "" ? $rm_image : array();
 				foreach($_FILES['multi_file']['tmp_name'] as $key => $tmp_name ){
@@ -195,7 +200,7 @@ class NproductsController extends BaseController {
 					    $path_image = './uploads/images_product/';
 					    $newname = "image_".$key.time().'.'.$explode_name[1];
 					    if(move_uploaded_file($file_tmp,$path_image.$newname)){
-					    	$model_img_pro->insertRow(array("name"=>$newname,"id_product"=>"1"),"");
+					    	$model_img_pro->insertRow(array("name"=>$newname,"id_product"=>$ID),"");
 					    	SiteHelpers::resizewidth("180",$path_image.$newname,$path_image."thumb/".$newname);
 					    }
 					}
