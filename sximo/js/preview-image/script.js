@@ -64,6 +64,7 @@ $(document).ready(function() {
 	defaultUploadBtn_multi.on('change', function() {
 		//retrieve selected uploaded files data
 		var files = $(this)[0].files;
+		$("#results").html('');
 		processFiles_multi(files);
 		
 		return false;

@@ -228,7 +228,7 @@ class NproductsController extends BaseController {
 
 	public function postDestroy()
 	{
-		
+		print_r(Input::get('id'));die;
 		if($this->access['is_remove'] ==0) 
 			return Redirect::to('')
 				->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));		
@@ -238,6 +238,21 @@ class NproductsController extends BaseController {
 		// redirect
 		Session::flash('message', SiteHelpers::alert('success',Lang::get('core.note_success_delete')));
 		return Redirect::to('Nproducts?md='.Input::get('md'));
-	}			
+	}
+
+	public function getDelimage(){
+		$idimg = Input::get('idimg');
+		if($idimg == "")
+			die;
+
+		$model_img_pro = new Imagesproduct();
+		$img = $model_img_pro->find($idimg);
+		if(count($img) <= 0)
+			die;
+		@unlink(ROOT .'/uploads/images_product/'.$img->name);
+		@unlink(ROOT .'/uploads/images_product/thumb/'.$img->name);
+		$model_img_pro->destroy($idimg);
+		die;
+	}
 		
 }

@@ -11,13 +11,16 @@
 	</div>
 </script>
 
-<script id="imageTemplate_multi" type="text/x-jquery-tmpl"> 
-    <div class="imageholder" id="now_${count}" onclick="remove_upload('${count}')">
-		<figure>
-			<img width="50px" src="${filePath}" alt="${fileName}"/>
-			<figcaption>
-			</figcaption>
-		</figure>
+<script id="imageTemplate_multi" type="text/x-jquery-tmpl">
+	<div  class="alert alert-warning fade in block-inner">
+	    <button class="close" type="button" data-dismiss="alert" onclick="remove_upload('${count}')">
+	        ×
+	    </button>
+			<figure>
+				<img width="100px" src="${filePath}"/>
+				<figcaption>
+				</figcaption>
+			</figure>
 	</div>
 </script>
 
@@ -58,7 +61,7 @@
 									<label for="Picture" class=" control-label col-md-4 text-left"> {{ Lang::get('core.product_image') }} </label>
 									<div class="col-md-6">
 									  <input id="upload" name="file" type="file" />
-									  <div id="result">
+									  	<div id="result">
 											@if($row['image'] != "")
 												<img width="150px" src="/uploads/products/thumb/{{$row['image']}}">
 											@endif
@@ -72,8 +75,21 @@
 									<div class="col-md-6">
 										<span class="label label-primary" style="cursor:pointer" id="btnmultiimage">Choose images</span>
 									  <input id="uploadmt" name="multi_file[]" type="file" multiple style="display: none;"/>
+									  @if(count($list_image) > 0)
+									  		@foreach($list_image as $image)
+												<div class="alert alert-warning fade in block-inner">
+												    <button class="close" type="button" data-dismiss="alert" onclick="remove_image('{{$image->id}}')">
+												        ×
+												    </button>
+														<figure>
+															<img width="100px" src="{{URL::to('/uploads/images_product/thumb')}}/{{$image->name}}"/>
+															<figcaption>
+															</figcaption>
+														</figure>
+												</div>
+											@endforeach
+										@endif
 									  <div id="results">
-											
 										</div>
 									 </div> 
 									 <div class="col-md-2">
@@ -195,7 +211,13 @@
    	function remove_upload(id){
    		var file = $("#uploadmt")[0].files;
    		$("#uploadmt").after('<input type="hidden" name="remove_image[]" value="'+file[id].name+'" />');
-   		$("#now_"+id).remove();
+   		//$("#now_"+id).remove();
+   	}
+
+   	function remove_image(id){
+   		var link = "{{ URL::to('Nproducts/delimage?idimg=') }}"+id;
+   		$.get(link,function(data,status){
+	  });
    	}
 
 	$(document).ready(function() { 
