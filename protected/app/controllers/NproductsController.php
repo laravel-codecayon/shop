@@ -115,9 +115,12 @@ class NproductsController extends BaseController {
 			$filters = explode(" ", Input::get('md') );
 			$this->data['row'][$filters[3]] = SiteHelpers::encryptID($filters[4],true); 	
 		}
-
-		$MD_imagesproduct = new Imagesproduct();
-		$list_image = $MD_imagesproduct->getImagesOfProduct($id);
+		$list_image = array();
+		if($id != ""){
+			$MD_imagesproduct = new Imagesproduct();
+			$list_image = $MD_imagesproduct->getImagesOfProduct($id);
+		}
+		
 
 		/* End Master detail lock key and value */
 		$this->data['list_image'] = $list_image;
@@ -183,8 +186,7 @@ class NproductsController extends BaseController {
 
 
 			$ID = $this->model->insertRow($data , Input::get('ProductID'));
-
-			if(!is_null(Input::file('multi_file')))
+			if(Input::file('multi_file')[0] != "")
 			{
 				$model_img_pro = new Imagesproduct();
 				$rm_image = Input::get('remove_image');
@@ -228,13 +230,26 @@ class NproductsController extends BaseController {
 
 	public function postDestroy()
 	{
-		print_r(Input::get('id'));die;
 		if($this->access['is_remove'] ==0) 
 			return Redirect::to('')
 				->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));		
 		// delete multipe rows 
+		$data_pro = $this->model->find(Input::get('id'));
 		$this->model->destroy(Input::get('id'));
+		@unlink(ROOT .'/uploads/products/'.$data_pro->Picture);
+		@unlink(ROOT .'/uploads/products/thumb/'.$data_pro->Picture);
 		$this->inputLogs("ID : ".implode(",",Input::get('id'))."  , Has Been Removed Successfull");
+
+		foreach(Input::get('id') as $idpro){
+			$images = DB::table('images_product')->where('id_product',$idpro)->get();
+			foreach($images as $image){
+				@unlink(ROOT .'/uploads/images_product/'.$image->Picture);
+				@unlink(ROOT .'/uploads/images_product/thumb/'.$image->Picture);
+			}
+			
+			$images = DB::table('images_product')->where('id_product',$idpro)->delete();
+		}
+
 		// redirect
 		Session::flash('message', SiteHelpers::alert('success',Lang::get('core.note_success_delete')));
 		return Redirect::to('Nproducts?md='.Input::get('md'));
