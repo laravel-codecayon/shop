@@ -25,6 +25,8 @@ class Nproducts extends BaseModel  {
 
 	public static $rules=array(
 			"ProductName" => "required",
+			"SupplierID" => "required",
+			"CategoryID" => "required",
 			"UnitPrice" => "numeric",
 			"file" => "mimes:gif,png,jpg,jpeg|image|max:20000",
 		);

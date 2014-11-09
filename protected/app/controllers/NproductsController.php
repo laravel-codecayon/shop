@@ -234,17 +234,17 @@ class NproductsController extends BaseController {
 			return Redirect::to('')
 				->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));		
 		// delete multipe rows 
-		$data_pro = $this->model->find(Input::get('id'));
-		$this->model->destroy(Input::get('id'));
-		@unlink(ROOT .'/uploads/products/'.$data_pro->Picture);
-		@unlink(ROOT .'/uploads/products/thumb/'.$data_pro->Picture);
+		//$this->model->destroy(Input::get('id'));
 		$this->inputLogs("ID : ".implode(",",Input::get('id'))."  , Has Been Removed Successfull");
 
 		foreach(Input::get('id') as $idpro){
+			$data_pro = $this->model->getRow($idpro);
 			$images = DB::table('images_product')->where('id_product',$idpro)->get();
+			@unlink(ROOT .'/uploads/products/'.$data_pro->image);
+			@unlink(ROOT .'/uploads/products/thumb/'.$data_pro->image);
 			foreach($images as $image){
-				@unlink(ROOT .'/uploads/images_product/'.$image->Picture);
-				@unlink(ROOT .'/uploads/images_product/thumb/'.$image->Picture);
+				@unlink(ROOT .'/uploads/images_product/'.$image->name);
+				@unlink(ROOT .'/uploads/images_product/thumb/'.$image->name);
 			}
 			
 			$images = DB::table('images_product')->where('id_product',$idpro)->delete();
