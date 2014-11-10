@@ -31,5 +31,10 @@ class Nproducts extends BaseModel  {
 			"file" => "mimes:gif,png,jpg,jpeg|image|max:20000",
 		);
 	
+	public static $columnTable=array(
+			"ProductID" => array("label"=>"ID", "type"=>"text", "name"=>"ProductID"),
+			"ProductName" => array("label"=>"Name", "type"=>"text", "name"=>"ProductName"),
+			"UnitPrice" => array("label"=>"ID", "type"=>"text", "name"=>"UnitPrice"),
+		);
 
 }

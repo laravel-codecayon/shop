@@ -32,7 +32,7 @@ class NproductsController extends BaseController {
 				
 		// Filter sort and order for query 
 		$sort = (!is_null(Input::get('sort')) ? Input::get('sort') : 'ProductID'); 
-		$order = (!is_null(Input::get('order')) ? Input::get('order') : 'asc');
+		$order = (!is_null(Input::get('order')) ? Input::get('order') : 'desc');
 		// End Filter sort and order for query 
 		// Filter Search for query		
 		$filter = (!is_null(Input::get('search')) ? $this->buildSearch() : '');
@@ -71,7 +71,8 @@ class NproductsController extends BaseController {
 		// Grid Configuration 
 		$this->data['tableGrid'] 	= $this->info['config']['grid'];
 		$this->data['tableForm'] 	= $this->info['config']['forms'];
-		$this->data['colspan'] 		= SiteHelpers::viewColSpan($this->info['config']['grid']);		
+		$this->data['colspan'] 		= SiteHelpers::viewColSpan($this->info['config']['grid']);
+		$this->data['test'] = Nproducts::$columnTable;
 		// Group users permission
 		$this->data['access']		= $this->access;
 		// Detail from master if any
