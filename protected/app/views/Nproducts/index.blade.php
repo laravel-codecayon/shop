@@ -49,10 +49,8 @@
 				<th> No </th>
 				<th> <input type="checkbox" class="checkall" /></th>
 				
-				@foreach ($tableGrid as $t)
-					@if($t['view'] =='1')
+				@foreach ($test as $t)
 						<th>{{ $t['label'] }}</th>
-					@endif
 				@endforeach
 				<th>{{ Lang::get('core.btn_action') }}</th>
 			  </tr>
@@ -62,12 +60,10 @@
 			<tr id="sximo-quick-search" >
 				<td> # </td>
 				<td> </td>
-				@foreach ($tableGrid as $t)
-					@if($t['view'] =='1')
+				@foreach ($test as $t)
 					<td>						
-						{{ SiteHelpers::transForm($t['field'] , $tableForm) }}								
+						{{ SiteHelpers::transFormsearch($t) }}								
 					</td>
-					@endif
 				@endforeach
 				<td style="width:130px;">
 				<input type="hidden"  value="Search">
@@ -77,17 +73,10 @@
                 <tr>
 					<td width="50"> {{ ++$i }} </td>
 					<td width="50"><input type="checkbox" class="ids" name="id[]" value="{{ $row->ProductID }}" />  </td>									
-				 @foreach ($tableGrid as $field)
-					 @if($field['view'] =='1')
+				 @foreach ($test as $field)
 					 <td>					 
-					 	@if($field['attribute']['image']['active'] =='1')
-							{{ SiteHelpers::showUploadedFile($row->$field['field'],$field['attribute']['image']['path']) }}
-						@else	
-							{{--*/ $conn = (isset($field['conn']) ? $field['conn'] : array() ) /*--}}
-							{{ SiteHelpers::gridDisplay($row->$field['field'],$field['field'],$conn) }}	
-						@endif						 
+					 	{{$row->$field['name']}}
 					 </td>
-					 @endif					 
 				 @endforeach
 				 <td>
 				 	

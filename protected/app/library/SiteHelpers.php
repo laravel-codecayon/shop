@@ -581,6 +581,78 @@ public static function alphaID($in, $to_num = false, $pad_up = false, $passKey =
 		}
 		return $f;
 	}
+
+	public static function arraySearch($s){
+		$output = array();
+		if($s != ""){
+			$arr_first = explode("|", $s);
+			foreach($arr_first as $item){
+				$arr = explode(":", $item);
+				$output["$arr[0]"] = $arr[1];
+			}
+		}
+		return $output;
+	}
+
+	public static function transFormsearch($field){
+
+		switch($field['type'])
+		{
+			default;
+				$form ='';
+				break;
+			
+			case 'text';			
+				$form = "<input  type='text' name='".$field['name']."' class='form-control input-sm'  value='".$field['value']."'/>";
+				break;
+
+			case 'text_date';
+				$form = "<input  type='text' name='".$field['name']."' class='date form-control input-sm'  value='".$field['value']."'/> ";
+				break;
+
+			case 'text_datetime';
+				$form = "<input  type='text' name='".$field['name']."'  class='date form-control input-sm'   value='".$field['value']."'/> ";
+				break;				
+
+			case 'select';
+
+				$data = DB::table($db)->get();
+				$opts = '';
+				foreach($data as $row):
+					$selected = '';
+					if($value == $row->$option['lookup_key']) $selected ='selected="selected"';
+					$fields = explode("|",$option['lookup_value']);
+					//print_r($fields);exit;
+					$val = "";
+					foreach($fields as $item=>$v)
+					{
+						if($v !="") $val .= $row->$v." " ;
+					}
+					$opts .= "<option $selected value='".$row->$option['lookup_key']."' $mandatory > ".$val." </option> ";
+					endforeach;
+				$form = "<select name='$field{$bulk}'  class='form-control' $mandatory >
+							<option value=''> -- Select  -- </option>
+							$opts
+						</select>";
+				break;	
+
+			case 'radio';
+			
+				$opt = explode("|",$option['lookup_query']);
+				$opts = '';
+				for($i=0; $i<count($opt);$i++) 
+				{
+					$checked = '';
+					$row =  explode(":",$opt[$i]);
+					$opts .= "<option value ='".$row[0]."' > ".$row[1]." </option> ";
+				}
+				$form = "<select name='$field{$bulk}' class='form-control' $mandatory ><option value=''> -- Select  -- </option>$opts</select>";
+				break;												
+			
+		}
+		
+		return $form;	
+	}
 	
 	public static  function transForm( $field, $forms = array(),$bulk=false , $value ='')
 	{

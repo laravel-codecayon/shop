@@ -25,7 +25,7 @@ class NproductsController extends BaseController {
 
 	
 	public function getIndex()
-	{
+	{	SiteHelpers::arraySearch(Input::get('search'));
 		if($this->access['is_view'] ==0) 
 			return Redirect::to('')
 				->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));
@@ -72,7 +72,14 @@ class NproductsController extends BaseController {
 		$this->data['tableGrid'] 	= $this->info['config']['grid'];
 		$this->data['tableForm'] 	= $this->info['config']['forms'];
 		$this->data['colspan'] 		= SiteHelpers::viewColSpan($this->info['config']['grid']);
-		$this->data['test'] = Nproducts::$columnTable;
+
+		$test 						= Nproducts::$columnTable;
+		$arr_search 				= SiteHelpers::arraySearch(Input::get('search'));
+		foreach($arr_search as $key=>$val){
+			$test[$key]['value'] = $val;
+		}
+		print_r($test);die;
+		$this->data['test'] = $test;
 		// Group users permission
 		$this->data['access']		= $this->access;
 		// Detail from master if any

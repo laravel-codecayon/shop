@@ -32,9 +32,9 @@ class Nproducts extends BaseModel  {
 		);
 	
 	public static $columnTable=array(
-			"ProductID" => array("label"=>"ID", "type"=>"text", "name"=>"ProductID"),
-			"ProductName" => array("label"=>"Name", "type"=>"text", "name"=>"ProductName"),
-			"UnitPrice" => array("label"=>"ID", "type"=>"text", "name"=>"UnitPrice"),
+			"ProductID" => array("label"=>"ID", "type"=>"text", "name"=>"ProductID", "value" => ""),
+			"ProductName" => array("label"=>"Name", "type"=>"text", "name"=>"ProductName", "value" => ""),
+			"UnitPrice" => array("label"=>"ID", "type"=>"text", "name"=>"UnitPrice", "value" => ""),
 		);
 
 }
