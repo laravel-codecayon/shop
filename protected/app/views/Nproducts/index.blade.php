@@ -48,7 +48,6 @@
 			<tr>
 				<th> No </th>
 				<th> <input type="checkbox" class="checkall" /></th>
-				
 				@foreach ($test as $t)
 						<th>{{ $t['label'] }}</th>
 				@endforeach
@@ -75,7 +74,7 @@
 					<td width="50"><input type="checkbox" class="ids" name="id[]" value="{{ $row->ProductID }}" />  </td>									
 				 @foreach ($test as $field)
 					 <td>					 
-					 	{{$row->$field['name']}}
+					 	{{ SiteHelpers::transSelect($field,$row) }}
 					 </td>
 				 @endforeach
 				 <td>
@@ -104,8 +103,9 @@
     </table>
 	<input type="hidden" name="md" value="{{ $masterdetail['filtermd']}}" />
 	</div>
+	@include('footer_new')
 	{{ Form::close() }}
-	@include('footer')
+	
 	
 	</div>	  
 </div>	
@@ -113,6 +113,10 @@
 $(document).ready(function(){
 
 	$('.do-quick-search').click(function(){
+		$('#SximoTable').attr('action','{{ URL::to("nproducts/multisearch")}}');
+		$('#SximoTable').submit();
+	});
+	$("#filter_footer").click(function(){
 		$('#SximoTable').attr('action','{{ URL::to("nproducts/multisearch")}}');
 		$('#SximoTable').submit();
 	});

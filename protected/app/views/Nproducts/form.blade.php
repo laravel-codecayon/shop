@@ -104,7 +104,7 @@
 									 </div>
 								  </div>
 								  <div class="form-group  " >
-									<label for="SupplierID" class=" control-label col-md-4 text-left"> SupplierID </label>
+									<label for="SupplierID" class=" control-label col-md-4 text-left"> Sale </label>
 									<div class="col-md-6">
 									  <select name='SupplierID' rows='5' id='SupplierID' code='{$SupplierID}' 
 							class='select2 '    ></select> 
@@ -114,19 +114,10 @@
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="CategoryID" class=" control-label col-md-4 text-left"> CategoryID </label>
+									<label for="CategoryID" class=" control-label col-md-4 text-left"> Category </label>
 									<div class="col-md-6">
 									  <select name='CategoryID' rows='5' id='CategoryID' code='{$CategoryID}' 
 							class='select2 '    ></select> 
-									 </div> 
-									 <div class="col-md-2">
-									 	
-									 </div>
-								  </div> 					
-								  <div class="form-group  " >
-									<label for="QuantityPerUnit" class=" control-label col-md-4 text-left"> QuantityPerUnit </label>
-									<div class="col-md-6">
-									  {{ Form::text('QuantityPerUnit', $row['QuantityPerUnit'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 									 </div> 
 									 <div class="col-md-2">
 									 	
@@ -151,31 +142,6 @@
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="UnitsOnOrder" class=" control-label col-md-4 text-left"> UnitsOnOrder </label>
-									<div class="col-md-6">
-									  {{ Form::text('UnitsOnOrder', $row['UnitsOnOrder'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
-									 </div> 
-									 <div class="col-md-2">
-									 	
-									 </div>
-								  </div> 					
-								  <div class="form-group  " >
-									<label for="ReorderLevel" class=" control-label col-md-4 text-left"> ReorderLevel </label>
-									<div class="col-md-6">
-									  {{ Form::text('ReorderLevel', $row['ReorderLevel'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
-									 </div> 
-									 <div class="col-md-2">
-									 	
-									 </div>
-								  </div> 					
-								  <div class="form-group  " >
-									<label for="Discontinued" class=" control-label col-md-4 text-left"> Discontinued </label>
-									<div class="col-md-6">
-									  {{ Form::text('Discontinued', $row['Discontinued'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
-									 </div> 
-									 <div class="col-md-2">
-									 	
-									 </div>
 									 <div class="form-group  " >
 									<label for="Discontinued" class=" control-label col-md-4 text-left"> Content </label>
 									<div class="col-md-6">

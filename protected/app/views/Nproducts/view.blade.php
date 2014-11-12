@@ -36,23 +36,16 @@
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>SupplierID</td>
-						<td>{{ $row->SupplierID }} </td>
+						<td width='30%' class='label-view text-right'>Sale</td>
+						<td>{{ SiteHelpers::transNameOfId("suppliers",$row->SupplierID,"SupplierID","CompanyName") }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>CategoryID</td>
+						<td width='30%' class='label-view text-right'>Category</td>
 						<td>{{ $row->CategoryID }} </td>
 						
 					</tr>
-				
-					<tr>
-						<td width='30%' class='label-view text-right'>QuantityPerUnit</td>
-						<td>{{ $row->QuantityPerUnit }} </td>
-						
-					</tr>
-				
 					<tr>
 						<td width='30%' class='label-view text-right'>UnitPrice</td>
 						<td>{{ $row->UnitPrice }} </td>
@@ -64,19 +57,6 @@
 						<td>{{ $row->UnitsInStock }} </td>
 						
 					</tr>
-				
-					<tr>
-						<td width='30%' class='label-view text-right'>UnitsOnOrder</td>
-						<td>{{ $row->UnitsOnOrder }} </td>
-						
-					</tr>
-				
-					<tr>
-						<td width='30%' class='label-view text-right'>ReorderLevel</td>
-						<td>{{ $row->ReorderLevel }} </td>
-						
-					</tr>
-				
 					<tr>
 						<td width='30%' class='label-view text-right'>Discontinued</td>
 						<td>{{ $row->Discontinued }} </td>

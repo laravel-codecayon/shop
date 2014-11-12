@@ -594,6 +594,31 @@ public static function alphaID($in, $to_num = false, $pad_up = false, $passKey =
 		return $output;
 	}
 
+	public static function transNameOfId($model, $id, $key, $value){
+		$data = DB::table($model)->where("$key",'=', $id)->get();
+		return $data[0]->$value;
+	}
+
+	public static function transSelect($field,$data){
+		switch($field['type'])
+		{
+			default;
+				$form ='';
+				break;
+			
+			case 'text';			
+				$form = $data->$field['name'];
+				break;
+			case 'select';
+				$item = $data->$field['id'];
+				$id = $field['id'];
+				$datas = DB::table($field['model'])->where("$id",'=', $item)->get();
+				$form = $datas[0]->CategoryName;
+				break;
+		}
+		return $form;
+	}
+
 	public static function transFormsearch($field){
 
 		switch($field['type'])
@@ -615,22 +640,16 @@ public static function alphaID($in, $to_num = false, $pad_up = false, $passKey =
 				break;				
 
 			case 'select';
-
-				$data = DB::table($db)->get();
+				$value = $field['value'];
+				$data = DB::table($field['model'])->get();
 				$opts = '';
 				foreach($data as $row):
 					$selected = '';
-					if($value == $row->$option['lookup_key']) $selected ='selected="selected"';
-					$fields = explode("|",$option['lookup_value']);
-					//print_r($fields);exit;
-					$val = "";
-					foreach($fields as $item=>$v)
-					{
-						if($v !="") $val .= $row->$v." " ;
-					}
-					$opts .= "<option $selected value='".$row->$option['lookup_key']."' $mandatory > ".$val." </option> ";
+					if($value == $row->CategoryID) $selected ='selected="selected"';
+
+					$opts .= "<option $selected value='".$row->$field['id']."'  > ".$row->$field['show']." </option> ";
 					endforeach;
-				$form = "<select name='$field{$bulk}'  class='form-control' $mandatory >
+				$form = "<select name='".$field['name']."'  class='form-control'  >
 							<option value=''> -- Select  -- </option>
 							$opts
 						</select>";

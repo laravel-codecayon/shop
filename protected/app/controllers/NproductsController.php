@@ -76,9 +76,10 @@ class NproductsController extends BaseController {
 		$test 						= Nproducts::$columnTable;
 		$arr_search 				= SiteHelpers::arraySearch(Input::get('search'));
 		foreach($arr_search as $key=>$val){
-			$test[$key]['value'] = $val;
+			if($key != "sort" && $key != "order" && $key != "rows"){
+				$test[$key]['value'] = $val;
+			}
 		}
-		print_r($test);die;
 		$this->data['test'] = $test;
 		// Group users permission
 		$this->data['access']		= $this->access;

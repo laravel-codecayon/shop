@@ -116,7 +116,20 @@ class BaseController extends Controller {
 			endif;	
 		
 		endforeach;
-		return Redirect::to($this->module.'?search='.substr($items,0,strlen($items)-1).'&md='.Input::get('md'));
+
+		$module = $this->module;
+		$sort 	= (!is_null(Input::get('sort')) ? Input::get('sort') : '');
+		$order 	= (!is_null(Input::get('order')) ? Input::get('order') : '');
+		$rows 	= (!is_null(Input::get('rows')) ? Input::get('rows') : '');
+		$md 	= (!is_null(Input::get('md')) ? Input::get('md') : '');
+		
+		$filter = '';
+		if($sort!='') $filter .= '&sort='.$sort; 
+		if($order!='') $filter .= '&order='.$order; 
+		if($rows!='') $filter .= '&rows='.$rows; 
+		if($md !='') $filter .= '&md='.$md;
+
+		return Redirect::to($this->module.'?search='.substr($items,0,strlen($items)-1).'&md='.Input::get('md').$filter);
 	}
 	
 	function postFilter()
@@ -205,7 +218,7 @@ class BaseController extends Controller {
 		// check if url contain $_GET['md'] , that mean master detail
 		if(!is_null(Input::get('md')) and Input::get('md') != '' )
 		{
-			
+			echo Input::get('md') ;die;
 			$values 				= array();
 			$data 					= explode(" ", Input::get('md') );
 			// Split all param get 
