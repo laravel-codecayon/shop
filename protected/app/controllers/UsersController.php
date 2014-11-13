@@ -52,6 +52,15 @@ class UsersController extends BaseController {
 		
 		$page = $page >= 1 && filter_var($page, FILTER_VALIDATE_INT) !== false ? $page : 1;	
 		$pagination = Paginator::make($results['rows'], $results['total'],$params['limit']);		
+
+		$test 						= Users::$columnTable;
+		$arr_search 				= SiteHelpers::arraySearch(Input::get('search'));
+		foreach($arr_search as $key=>$val){
+			if($key != "sort" && $key != "order" && $key != "rows"){
+				$test[$key]['value'] = $val;
+			}
+		}
+		$this->data['test'] = $test;
 		
 		
 		$this->data['rowData']		= $results['rows'];

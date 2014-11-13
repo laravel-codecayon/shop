@@ -95,7 +95,12 @@ class BaseModel extends Eloquent  {
 			$row =  DB::table($table)->where($params[3],$params[4])->get();
 		}else{
 			$table = $params[0]; 
-			$row =  DB::table($table)->get();
+			if($table == "tb_groups"){
+				$row =  DB::table($table)->where("group_id","!=","1")->get();
+			}else{
+				$row =  DB::table($table)->get();
+			}
+			
 		}
 		return $row;
 			

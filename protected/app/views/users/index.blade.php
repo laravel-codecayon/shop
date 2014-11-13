@@ -70,12 +70,10 @@
 			<tr id="sximo-quick-search" >
 				@if($access['is_detail'] ==1)<td> </td>@endif
 				<td> </td>
-				@foreach ($tableGrid as $t)
-					@if($t['view'] =='1')
+				@foreach ($test as $t)
 					<td>						
-						{{ SiteHelpers::transForm($t['field'] , $tableForm) }}								
+						{{ SiteHelpers::transFormsearch($t) }}								
 					</td>
-					@endif
 				@endforeach
 				<td style="width:100px;">
 				<input type="hidden"  value="Search">
@@ -85,26 +83,10 @@
                 <tr>
 					<td width="50"> {{ ++$i }} </td>
 					<td width="50"><input type="checkbox" class="ids" name="id[]" value="{{ $row->id }}" />  </td>								
-				 @foreach ($tableGrid as $field)
-					 @if($field['view'] =='1')
+				 @foreach ($test as $field)
 					 <td>					 
-					 	
-						@if($field['field'] == 'avatar')
-							<?php if( file_exists( './uploads/users/'.$row->avatar) && $row->avatar !='') { ?>
-							<img src="{{ URL::to('uploads/users').'/'.$row->avatar }} " border="0" width="40" class="img-circle" />
-							<?php  } else { ?> 
-							<img alt="" src="http://www.gravatar.com/avatar/{{ md5($row->email) }}" width="40" class="img-circle" />
-							<?php } ?>					
-							
-						@elseif($field['field'] =='active')
-							{{ ($row->active ==1 ? '<lable class="label label-success">Active</label>' : '<lable class="label label-danger">Inactive</label>')  }}
-								
-						@else	
-							{{--*/ $conn = (isset($field['conn']) ? $field['conn'] : array() ) /*--}}
-							{{ SiteHelpers::gridDisplay($row->$field['field'],$field['field'],$conn) }}	
-						@endif						 
+					 	{{ SiteHelpers::transSelect($field,$row) }}
 					 </td>
-					 @endif					 
 				 @endforeach
 				 <td>
 				
@@ -126,9 +108,10 @@
       
     </table>
 	</div>
+	@include('footer_new')
 	{{ Form::close() }}
 	
-	@include('footer')
+	
 	
 	
 	

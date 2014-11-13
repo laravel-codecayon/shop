@@ -140,7 +140,15 @@
 									 <div class="col-md-2">
 									 	
 									 </div>
-								  </div> 					
+								  </div>
+								  <div class="form-group  " >
+									<label for="description" class=" control-label col-md-4 text-left"> Description </label>
+									<div class="col-md-6">
+									  <textarea name='description' rows='5' style="width:100%;"  >{{ $row['description'] }}</textarea>
+									 </div> 
+									 <div class="col-md-2">
+									 </div>
+								  </div>
 								  <div class="form-group  " >
 									 <div class="form-group  " >
 									<label for="Discontinued" class=" control-label col-md-4 text-left"> Content </label>

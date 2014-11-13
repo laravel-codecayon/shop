@@ -36,7 +36,10 @@ Route::group(array('before' => 'auth'), function()
 	{
 		Route::controller('module', 'ModuleController');
 		Route::controller('config', 'ConfigController');
-	}		
+	}
+	if(Session::get('gid') == '1' || Session::get('gid') == '2'){
+		Route::controller('permission', 'PermissionController');
+	}
 	Route::controller('logs', 'LogsController');
 	Route::controller('blogadmin', 'BlogadminController');
 	Route::controller('blogcategories', 'BlogcategoriesController');

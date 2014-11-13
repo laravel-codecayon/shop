@@ -43,7 +43,7 @@
 				
 					<tr>
 						<td width='30%' class='label-view text-right'>Category</td>
-						<td>{{ $row->CategoryID }} </td>
+						<td>{{ SiteHelpers::transNameOfId("categories",$row->CategoryID,"CategoryID","CategoryName") }} </td>
 						
 					</tr>
 					<tr>
@@ -58,8 +58,8 @@
 						
 					</tr>
 					<tr>
-						<td width='30%' class='label-view text-right'>Discontinued</td>
-						<td>{{ $row->Discontinued }} </td>
+						<td width='30%' class='label-view text-right'>Description</td>
+						<td>{{ $row->description }} </td>
 						
 					</tr>
 				

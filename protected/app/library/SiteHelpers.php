@@ -613,7 +613,8 @@ public static function alphaID($in, $to_num = false, $pad_up = false, $passKey =
 				$item = $data->$field['id'];
 				$id = $field['id'];
 				$datas = DB::table($field['model'])->where("$id",'=', $item)->get();
-				$form = $datas[0]->CategoryName;
+				$datas = $datas[0];
+				$form = $datas->$field['show'];
 				break;
 		}
 		return $form;
@@ -645,7 +646,7 @@ public static function alphaID($in, $to_num = false, $pad_up = false, $passKey =
 				$opts = '';
 				foreach($data as $row):
 					$selected = '';
-					if($value == $row->CategoryID) $selected ='selected="selected"';
+					if($value == $row->$field['id']) $selected ='selected="selected"';
 
 					$opts .= "<option $selected value='".$row->$field['id']."'  > ".$row->$field['show']." </option> ";
 					endforeach;

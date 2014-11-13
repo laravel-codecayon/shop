@@ -23,7 +23,7 @@
 			</div>
 			<div class="photo-header "> {{ SiteHelpers::avatar( 50 )}} </div>
 		</li> 
-		@foreach ($sidebar as $menu)
+		<!--@foreach ($sidebar as $menu)
 			 <li @if(Request::is($menu['module'])) class="active" @endif>
 			 	<a 
 					@if($menu['menu_type'] =='external')
@@ -71,7 +71,24 @@
 					</ul>
 				@endif
 			</li>
-		@endforeach
+		@endforeach-->
+		<li @if(Request::is('nproducts')) class="active" @endif>
+			<a href="{{ URL::to('nproducts')}}"><i class="icon-drawer3"></i> <span class="nav-label">Products</span><span class="fa arrow"></span></a>
+		</li>
+		<li @if(Request::is('ncategories')) class="active" @endif>
+			<a href="{{ URL::to('ncategories')}}"><i class="icon-drawer2"></i> <span class="nav-label">Category</span><span class="fa arrow"></span></a>
+		</li>
+		@if(Session::get('gid') ==1)
+			<li @if(Request::is('permission')) class="active" @endif>
+				<a href="{{ URL::to('permission')}}"><i class="icon-drawer2"></i> <span class="nav-label">Permission</span><span class="fa arrow"></span></a>
+			</li>
+			<li @if(Request::is('users')) class="active" @endif>
+				<a href="{{ URL::to('users')}}"><i class="fa fa-user"></i> <span class="nav-label">Users</span><span class="fa arrow"></span></a>
+			</li>
+			<li @if(Request::is('groups')) class="active" @endif>
+				<a href="{{ URL::to('groups')}}"><i class="fa fa-users"></i> <span class="nav-label">Groups</span><span class="fa arrow"></span></a>
+			</li>
+		@endif
       </ul>
 	</div>
 </nav>	  
