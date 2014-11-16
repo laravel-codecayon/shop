@@ -36,7 +36,7 @@
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Sale</td>
+						<td width='30%' class='label-view text-right'>Promotion</td>
 						<td>{{ SiteHelpers::transNameOfId("suppliers",$row->SupplierID,"SupplierID","CompanyName") }} </td>
 						
 					</tr>
@@ -60,6 +60,11 @@
 					<tr>
 						<td width='30%' class='label-view text-right'>Description</td>
 						<td>{{ $row->description }} </td>
+						
+					</tr>
+					<tr>
+						<td width='30%' class='label-view text-right'>Created</td>
+						<td>{{date('Y-m-d',$row->created)}} </td>
 						
 					</tr>
 				

@@ -17,7 +17,7 @@
 	<div class="page-content-wrapper">
     <div class="toolbar-line ">
 			@if($access['is_add'] ==1)
-	   		<a href="{{ URL::to('Ncategories/add?md='.$masterdetail["filtermd"].$trackUri) }}" class="tips btn btn-xs btn-info"  title="{{ Lang::get('core.btn_create') }}">
+	   		<a href="{{ URL::to('News/add?md='.$masterdetail["filtermd"].$trackUri) }}" class="tips btn btn-xs btn-info"  title="{{ Lang::get('core.btn_create') }}">
 			<i class="icon-plus-circle2"></i>&nbsp;{{ Lang::get('core.btn_create') }}</a>
 			@endif  
 			@if($access['is_remove'] ==1)
@@ -25,11 +25,11 @@
 			<i class="icon-bubble-trash"></i>&nbsp;{{ Lang::get('core.btn_remove') }}</a>
 			@endif 		
 			@if($access['is_excel'] ==1)
-			<a href="{{ URL::to('Ncategories/download?md='.$masterdetail["filtermd"]) }}" class="tips btn btn-xs btn-default" title="{{ Lang::get('core.btn_download') }}">
+			<a href="{{ URL::to('News/download?md='.$masterdetail["filtermd"]) }}" class="tips btn btn-xs btn-default" title="{{ Lang::get('core.btn_download') }}">
 			<i class="icon-folder-download2"></i>&nbsp;{{ Lang::get('core.btn_download') }} </a>
 			@endif		
 		 	@if(Session::get('gid') ==1)
-			<a href="{{ URL::to('module/config/Ncategories') }}" class="tips btn btn-xs btn-default"  title="{{ Lang::get('core.btn_config') }}">
+			<a href="{{ URL::to('module/config/News') }}" class="tips btn btn-xs btn-default"  title="{{ Lang::get('core.btn_config') }}">
 			<i class="icon-cog"></i>&nbsp;{{ Lang::get('core.btn_config') }} </a>	
 			@endif  			
 	 
@@ -41,7 +41,7 @@
 	@endif	
 	{{ $details }}
 	
-	 {{ Form::open(array('url'=>'Ncategories/destroy/', 'class'=>'form-horizontal' ,'id' =>'SximoTable' )) }}
+	 {{ Form::open(array('url'=>'News/destroy/', 'class'=>'form-horizontal' ,'id' =>'SximoTable' )) }}
 	 <div class="table-responsive">
     <table class="table table-striped ">
         <thead>
@@ -72,7 +72,7 @@
             @foreach ($rowData as $row)
                 <tr>
 					<td width="50"> {{ ++$i }} </td>
-					<td width="50"><input type="checkbox" class="ids" name="id[]" value="{{ $row->CategoryID }}" />  </td>									
+					<td width="50"><input type="checkbox" class="ids" name="id[]" value="{{ $row->news_id }}" />  </td>									
 				 @foreach ($test as $field)
 					 <td>					 
 					 	{{ SiteHelpers::transSelect($field,$row) }}
@@ -80,12 +80,12 @@
 				 @endforeach
 				 <td>
 				 	
-					{{--*/ $id = SiteHelpers::encryptID($row->CategoryID) /*--}}
+					{{--*/ $id = SiteHelpers::encryptID($row->news_id) /*--}}
 				 	@if($access['is_detail'] ==1)
-					<a href="{{ URL::to('Ncategories/show/'.$id.'?md='.$masterdetail["filtermd"].$trackUri)}}"  class="tips btn btn-xs btn-primary"  title="{{ Lang::get('core.btn_view') }}"><i class="fa  fa-search"></i> </a>
+					<a href="{{ URL::to('News/show/'.$id.'?md='.$masterdetail["filtermd"].$trackUri)}}"  class="tips btn btn-xs btn-primary"  title="{{ Lang::get('core.btn_view') }}"><i class="fa  fa-search"></i> </a>
 					@endif
 					@if($access['is_edit'] ==1)
-					<a  href="{{ URL::to('Ncategories/add/'.$id.'?md='.$masterdetail["filtermd"].$trackUri)}}"  class="tips btn btn-xs btn-success"  title="{{ Lang::get('core.btn_edit') }}"> <i class="fa fa-edit"></i></a>
+					<a  href="{{ URL::to('News/add/'.$id.'?md='.$masterdetail["filtermd"].$trackUri)}}"  class="tips btn btn-xs btn-success"  title="{{ Lang::get('core.btn_edit') }}"> <i class="fa fa-edit"></i></a>
 					@endif
 					@foreach($subgrid as $md)
 					<a href="{{ URL::to($md['module'].'?md='.$md['master'].'+'.$md['master_key'].'+'.$md['module'].'+'.$md['key'].'+'.$id) }}"  class="tips btn btn-xs btn-info"  title=" {{ $md['title'] }}">
@@ -112,12 +112,12 @@
 $(document).ready(function(){
 
 	$('.do-quick-search').click(function(){
-		$('#SximoTable').attr('action','{{ URL::to("Ncategories/multisearch")}}');
+		$('#SximoTable').attr('action','{{ URL::to("News/multisearch")}}');
 		$('#SximoTable').submit();
 	});
 
 	$("#filter_footer").click(function(){
-		$('#SximoTable').attr('action','{{ URL::to("Ncategories/multisearch")}}');
+		$('#SximoTable').attr('action','{{ URL::to("nproducts/multisearch")}}');
 		$('#SximoTable').submit();
 	});
 	

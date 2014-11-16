@@ -104,9 +104,9 @@
 									 </div>
 								  </div>
 								  <div class="form-group  " >
-									<label for="SupplierID" class=" control-label col-md-4 text-left"> Sale </label>
+									<label for="id_promotion" class=" control-label col-md-4 text-left"> Promotion </label>
 									<div class="col-md-6">
-									  <select name='SupplierID' rows='5' id='SupplierID' code='{$SupplierID}' 
+									  <select name='id_promotion' rows='5' id='id_promotion' code='{$id_promotion}' 
 							class='select2 '    ></select> 
 									 </div> 
 									 <div class="col-md-2">
@@ -195,8 +195,8 @@
    	}
 
 	$(document).ready(function() { 
-		$("#SupplierID").jCombo("{{ URL::to('Nproducts/comboselect?filter=suppliers:SupplierID:CompanyName') }}",
-		{  selected_value : '{{ $row["SupplierID"] }}' });
+		$("#id_promotion").jCombo("{{ URL::to('Nproducts/comboselect?filter=promotion:id_promotion:name') }}",
+		{  selected_value : '{{ $row["id_promotion"] }}' });
 		
 		$("#CategoryID").jCombo("{{ URL::to('Nproducts/comboselect?filter=categories:CategoryID:CategoryName') }}",
 		{  selected_value : '{{ $row["CategoryID"] }}' });

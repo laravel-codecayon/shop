@@ -25,8 +25,6 @@ class Nproducts extends BaseModel  {
 
 	public static $rules=array(
 			"ProductName" => "required",
-			"SupplierID" => "required",
-			"CategoryID" => "required",
 			"UnitPrice" => "numeric",
 			"file" => "mimes:gif,png,jpg,jpeg|image|max:20000",
 		);
@@ -36,6 +34,8 @@ class Nproducts extends BaseModel  {
 			"ProductName" => array("label"=>"Name", "type"=>"text", "name"=>"ProductName", "value" => ""),
 			"UnitPrice" => array("label"=>"Price", "type"=>"text", "name"=>"UnitPrice", "value" => ""),
 			"CategoryID" => array("label"=>"Category", "type"=>"select", "name"=>"CategoryID", "value" => "", "model"=>"categories", "id"=>"CategoryID", "show" =>"CategoryName"),
+			"id_promotion" => array("label"=>"Promotion", "type"=>"select", "name"=>"id_promotion", "value" => "", "model"=>"promotion", "id"=>"id_promotion", "show" =>"name"),
+			"created" => array("label"=>"Created", "type"=>"date", "name"=>"created", "value" => ""),
 		);
 
 }

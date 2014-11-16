@@ -55,13 +55,9 @@
 			<tr>
 				<th> No </th>
 				<th> <input type="checkbox" class="checkall" /></th>
-				<th>Avatar</th>
-				<th>{{ Lang::get('core.group') }}</th>
-				<th>{{ Lang::get('core.username') }}</th>
-				<th>{{ Lang::get('core.firstname') }}</th>
-				<th>{{ Lang::get('core.lastname') }}</th>
-				<th>{{ Lang::get('core.email') }}</th>
-				<th>Status</th>
+				@foreach ($test as $t)
+						<th>{{ $t['label'] }}</th>
+				@endforeach
 				<th>{{ Lang::get('core.btn_action') }}</th>
 			  </tr>
         </thead>
@@ -121,6 +117,11 @@
 $(document).ready(function(){
 
 	$('.do-quick-search').click(function(){
+		$('#SximoTable').attr('action','{{ URL::to("users/multisearch")}}');
+		$('#SximoTable').submit();
+	});
+
+	$("#filter_footer").click(function(){
 		$('#SximoTable').attr('action','{{ URL::to("users/multisearch")}}');
 		$('#SximoTable').submit();
 	});

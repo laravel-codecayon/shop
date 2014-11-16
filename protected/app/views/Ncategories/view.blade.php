@@ -41,12 +41,6 @@
 						
 					</tr>
 				
-					<tr>
-						<td width='30%' class='label-view text-right'>Picture</td>
-						<td>{{ $row->Picture }} </td>
-						
-					</tr>
-				
 		</tbody>	
 	</table>    
 	</div>

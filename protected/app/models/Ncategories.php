@@ -28,4 +28,10 @@ class Ncategories extends BaseModel  {
 			"Description" => "required",
 			"file" => "mimes:gif,png,jpg,jpeg|image|max:20000",
 		);
+	public static $columnTable=array(
+			"CategoryID" => array("label"=>"ID", "type"=>"text", "name"=>"CategoryID", "value" => ""),
+			"CategoryName" => array("label"=>"Name", "type"=>"text", "name"=>"CategoryName", "value" => ""),
+			//"UnitPrice" => array("label"=>"Price", "type"=>"text", "name"=>"UnitPrice", "value" => ""),
+			//"CategoryID" => array("label"=>"Category", "type"=>"select", "name"=>"CategoryID", "value" => "", "model"=>"categories", "id"=>"CategoryID", "show" =>"CategoryName"),
+		);
 }

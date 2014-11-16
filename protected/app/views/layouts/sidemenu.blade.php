@@ -78,6 +78,9 @@
 		<li @if(Request::is('ncategories')) class="active" @endif>
 			<a href="{{ URL::to('ncategories')}}"><i class="icon-drawer2"></i> <span class="nav-label">Category</span><span class="fa arrow"></span></a>
 		</li>
+		<li @if(Request::is('Promotion')) class="active" @endif>
+			<a href="{{ URL::to('Promotion')}}"><i class="icon-drawer2"></i> <span class="nav-label">Promotion</span><span class="fa arrow"></span></a>
+		</li>
 		@if(Session::get('gid') ==1)
 			<li @if(Request::is('permission')) class="active" @endif>
 				<a href="{{ URL::to('permission')}}"><i class="icon-drawer2"></i> <span class="nav-label">Permission</span><span class="fa arrow"></span></a>

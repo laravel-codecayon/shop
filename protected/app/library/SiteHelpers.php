@@ -609,12 +609,18 @@ public static function alphaID($in, $to_num = false, $pad_up = false, $passKey =
 			case 'text';			
 				$form = $data->$field['name'];
 				break;
+			case 'date';			
+				$form = date('Y-m-d',$data->$field['name']);
+				break;
+			case 'radio';
+				$key =  $field['option'];
+				$form =$key[$data->$field['name']];
+				break;
 			case 'select';
 				$item = $data->$field['id'];
 				$id = $field['id'];
-				$datas = DB::table($field['model'])->where("$id",'=', $item)->get();
-				$datas = $datas[0];
-				$form = $datas->$field['show'];
+				$datas = DB::table($field['model'])->where("$id",'=', $item)->first();
+				$form =$datas != "" ? $datas->$field['show'] : "NULL";
 				break;
 		}
 		return $form;
@@ -657,16 +663,15 @@ public static function alphaID($in, $to_num = false, $pad_up = false, $passKey =
 				break;	
 
 			case 'radio';
-			
-				$opt = explode("|",$option['lookup_query']);
+				$value = $field['value'];
+				$opt = $field['option'];
 				$opts = '';
-				for($i=0; $i<count($opt);$i++) 
-				{
-					$checked = '';
-					$row =  explode(":",$opt[$i]);
-					$opts .= "<option value ='".$row[0]."' > ".$row[1]." </option> ";
+				foreach($opt as $key=>$val){
+					$selected = '';
+					if($value == $key) $selected ='selected="selected"';
+					$opts .= "<option $selected  value='".$key."'  > ".$val." </option> ";
 				}
-				$form = "<select name='$field{$bulk}' class='form-control' $mandatory ><option value=''> -- Select  -- </option>$opts</select>";
+				$form = "<select name='".$field['name']."' class='form-control' ><option value=''> -- Select  -- </option>$opts</select>";
 				break;												
 			
 		}

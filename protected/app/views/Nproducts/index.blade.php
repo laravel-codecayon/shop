@@ -90,8 +90,7 @@
 					<a href="{{ URL::to($md['module'].'?md='.$md['master'].'+'.$md['master_key'].'+'.$md['module'].'+'.$md['key'].'+'.$id) }}"  class="tips btn btn-xs btn-info"  title=" {{ $md['title'] }}">
 						<i class="icon-eye2"></i></a>
 					@endforeach							
-					<a href="#"  class="tips btn btn-xs btn-info"  title="Danh sách hình ảnh" onclick="upload_images('{{$id}}')">
-						<i class="icon-eye2"></i></a>
+					
 					
 				</td>				 
                 </tr>
@@ -122,7 +121,5 @@ $(document).ready(function(){
 	});
 
 });
-function upload_images(id){
-		window.open('{{ URL::to("uploadimagesproduct/multiimages")}}' ,"popupWindow", "width=600,height=600,scrollbars=yes");
-	}
+
 </script>		
