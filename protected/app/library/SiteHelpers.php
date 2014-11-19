@@ -668,7 +668,7 @@ public static function alphaID($in, $to_num = false, $pad_up = false, $passKey =
 				$opts = '';
 				foreach($opt as $key=>$val){
 					$selected = '';
-					if($value == $key) $selected ='selected="selected"';
+					if($value == $key && $value != '') {$selected ='selected="selected"';}
 					$opts .= "<option $selected  value='".$key."'  > ".$val." </option> ";
 				}
 				$form = "<select name='".$field['name']."' class='form-control' ><option value=''> -- Select  -- </option>$opts</select>";

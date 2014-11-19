@@ -1,22 +1,23 @@
 <?php
-class NewsController extends BaseController {
+class ArticlesController extends BaseController {
 
 	protected $layout = "layouts.main";
 	protected $data = array();	
-	public $module = 'News';
+	public $module = 'articles';
 	static $per_page	= '10';
 	
 	public function __construct() {
 		parent::__construct();
+		//echo Session::get('lang');die;
 		$this->beforeFilter('csrf', array('on'=>'post'));
-		$this->model = new News();
+		$this->model = new Articles();
 		$this->info = $this->model->makeInfo( $this->module);
 		$this->access = $this->model->validAccess($this->info['id']);
 	
 		$this->data = array(
 			'pageTitle'	=> 	$this->info['title'],
 			'pageNote'	=>  $this->info['note'],
-			'pageModule'=> 'News',
+			'pageModule'=> 'articles',
 			'trackUri' 	=> ''
 		);
 			
@@ -31,13 +32,13 @@ class NewsController extends BaseController {
 				->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));
 				
 		// Filter sort and order for query 
-		$sort = (!is_null(Input::get('sort')) ? Input::get('sort') : 'news_id'); 
+		$sort = (!is_null(Input::get('sort')) ? Input::get('sort') : 'article_id'); 
 		$order = (!is_null(Input::get('order')) ? Input::get('order') : 'asc');
 		// End Filter sort and order for query 
 		// Filter Search for query		
 		$filter = (!is_null(Input::get('search')) ? $this->buildSearch() : '');
 		// End Filter Search for query 
-		
+
 		// Take param master detail if any
 		$master  = $this->buildMasterDetail(); 
 		// append to current $filter
@@ -60,7 +61,7 @@ class NewsController extends BaseController {
 		$page = $page >= 1 && filter_var($page, FILTER_VALIDATE_INT) !== false ? $page : 1;	
 		$pagination = Paginator::make($results['rows'], $results['total'],$params['limit']);		
 		
-		$test 						= News::$columnTable;
+		$test 						= Articles::$columnTable;
 		$arr_search 				= SiteHelpers::arraySearch(Input::get('search'));
 		foreach($arr_search as $key=>$val){
 			if($key != "sort" && $key != "order" && $key != "rows"){
@@ -88,7 +89,7 @@ class NewsController extends BaseController {
 		// Master detail link if any 
 		$this->data['subgrid']	= (isset($this->info['config']['subgrid']) ? $this->info['config']['subgrid'] : array()); 
 		// Render into template
-		$this->layout->nest('content','News.index',$this->data)
+		$this->layout->nest('content','articles.index',$this->data)
 						->with('menus', SiteHelpers::menus());
 	}		
 	
@@ -115,7 +116,7 @@ class NewsController extends BaseController {
 		{
 			$this->data['row'] =  $row;
 		} else {
-			$this->data['row'] = $this->model->getColumnTable('news'); 
+			$this->data['row'] = $this->model->getColumnTable('article'); 
 		}
 		/* Master detail lock key and value */
 		if(!is_null(Input::get('md')) && Input::get('md') !='')
@@ -127,7 +128,7 @@ class NewsController extends BaseController {
 		$this->data['masterdetail']  = $this->masterDetailParam(); 
 		$this->data['filtermd'] = str_replace(" ","+",Input::get('md')); 		
 		$this->data['id'] = $id;
-		$this->layout->nest('content','News.form',$this->data)->with('menus', $this->menus );	
+		$this->layout->nest('content','articles.form',$this->data)->with('menus', $this->menus );	
 	}
 	
 	function getShow( $id = null)
@@ -143,48 +144,48 @@ class NewsController extends BaseController {
 		{
 			$this->data['row'] =  $row;
 		} else {
-			$this->data['row'] = $this->model->getColumnTable('news'); 
+			$this->data['row'] = $this->model->getColumnTable('article'); 
 		}
 		$this->data['masterdetail']  = $this->masterDetailParam(); 
 		$this->data['id'] = $id;
 		$this->data['access']		= $this->access;
-		$this->layout->nest('content','News.view',$this->data)->with('menus', $this->menus );	
+		$this->layout->nest('content','articles.view',$this->data)->with('menus', $this->menus );	
 	}	
 	
 	function postSave( $id =0)
 	{
 		$trackUri = $this->data['trackUri'];
-		$rules = News::$rules;
+		$rules = Articles::$rules;
 		//$rules = $this->validateForm();
 		$validator = Validator::make(Input::all(), $rules);	
 		if ($validator->passes()) {
-			$data = $this->getDataPost('news');
+			$data = $this->getDataPost('article');
 			if(!is_null(Input::file('file')))
 			{
 				$file = Input::file('file');
-				$destinationPath = './uploads/news/';
+				$destinationPath = './uploads/articles/';
 				$filename = $file->getClientOriginalName();
 				$extension = $file->getClientOriginalExtension(); //if you need extension of the file
-				$newfilename = SiteHelpers::seoUrl( trim(Input::get('news_name'))).'_'.time().'.'.$extension;
+				$newfilename = SiteHelpers::seoUrl( trim(Input::get('article_name'))).'_'.time().'.'.$extension;
 				$uploadSuccess = Input::file('file')->move($destinationPath, $newfilename);
 				if( $uploadSuccess ) {
-				    $data['news_picture'] = $newfilename;
+				    $data['article_image'] = $newfilename;
 				    $orgFile = $destinationPath.'/'.$newfilename;
 				    $thumbFile = $destinationPath.'/thumb/'.$newfilename;
 				    SiteHelpers::resizewidth("180",$orgFile,$thumbFile);
-				    if(Input::get('news_id') != "")
+				    if(Input::get('article_id') != "")
 				    {
-				    	$data_old = $this->model->getRow(Input::get('news_id'));
-				    	@unlink(ROOT .'/uploads/news/'.$data_old->news_picture);
-				    	@unlink(ROOT .'/uploads/news/thumb/'.$data_old->news_picture);
+				    	$data_old = $this->model->getRow(Input::get('article_id'));
+				    	@unlink(ROOT .'/uploads/articles/'.$data_old->article_image);
+				    	@unlink(ROOT .'/uploads/articles/thumb/'.$data_old->article_image);
 				    }
 				}
 			}
-			$data['news_alias'] =  SiteHelpers::seoUrl( trim($data['news_name']));
+			$data['article_alias'] =  SiteHelpers::seoUrl( trim($data['article_name']));
 			$data['created'] = time();
-			$ID = $this->model->insertRow($data , Input::get('news_id'));
+			$ID = $this->model->insertRow($data , Input::get('article_id'));
 			// Input logs
-			if( Input::get('news_id') =='')
+			if( Input::get('article_id') =='')
 			{
 				$this->inputLogs("New Entry row with ID : $ID  , Has Been Save Successfull");
 				$id = SiteHelpers::encryptID($ID);
@@ -193,10 +194,10 @@ class NewsController extends BaseController {
 			}
 			// Redirect after save	
 			$md = str_replace(" ","+",Input::get('md'));
-			$redirect = (!is_null(Input::get('apply')) ? 'News/add/'.$id.'?md=' :  'News?md=');
+			$redirect = (!is_null(Input::get('apply')) ? 'articles/add/'.$id.'?md=' :  'articles?md=' );
 			return Redirect::to($redirect)->with('message', SiteHelpers::alert('success',Lang::get('core.note_success')));
 		} else {
-			return Redirect::to('News/add/'.$id.'?md=')->with('message', SiteHelpers::alert('error',Lang::get('core.note_error')))
+			return Redirect::to('articles/add/'.$id.'?md=')->with('message', SiteHelpers::alert('error',Lang::get('core.note_error')))
 			->withErrors($validator)->withInput();
 		}	
 	
@@ -209,16 +210,11 @@ class NewsController extends BaseController {
 			return Redirect::to('')
 				->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));		
 		// delete multipe rows 
-		foreach(Input::get('id') as $id){
-			$data = $this->model->getRow($id);
-			@unlink(ROOT .'/uploads/news/'.$data->news_picture);
-			@unlink(ROOT .'/uploads/news/thumb/'.$data->news_picture);
-		}
 		$this->model->destroy(Input::get('id'));
 		$this->inputLogs("ID : ".implode(",",Input::get('id'))."  , Has Been Removed Successfull");
 		// redirect
 		Session::flash('message', SiteHelpers::alert('success',Lang::get('core.note_success_delete')));
-		return Redirect::to('News?md='.Input::get('md'));
+		return Redirect::to('articles?md='.Input::get('md'));
 	}			
 		
 }

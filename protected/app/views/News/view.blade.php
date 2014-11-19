@@ -49,25 +49,25 @@
 				
 					<tr>
 						<td width='30%' class='label-view text-right'>News Status</td>
-						<td>{{ $row->news_status }} </td>
+						<td>@if($row->news_status == 1) Enable @else Disable @endif </td>
 						
 					</tr>
 				
 					<tr>
 						<td width='30%' class='label-view text-right'>News Picture</td>
-						<td>{{ $row->news_picture }} </td>
+						<td><img src="/uploads/news/thumb/{{ $row->news_picture }}" /> </td>
 						
 					</tr>
 				
-					<tr>
+					<!--<tr>
 						<td width='30%' class='label-view text-right'>Cat Id</td>
 						<td>{{ $row->cat_id }} </td>
 						
-					</tr>
+					</tr>-->
 				
 					<tr>
 						<td width='30%' class='label-view text-right'>Created</td>
-						<td>{{ $row->created }} </td>
+						<td>{{date('Y-m-d',$row->created)}}</td>
 						
 					</tr>
 				

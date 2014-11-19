@@ -207,8 +207,9 @@ class BaseController extends Controller {
 					endif;	
 				}
 			} 
-		}		
-		return $param;
+		}
+		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+		return $param . " AND lang = '$lang'";
 	
 	}
 

@@ -1,22 +1,22 @@
 <?php
-class NewsController extends BaseController {
+class SlideshowController extends BaseController {
 
 	protected $layout = "layouts.main";
 	protected $data = array();	
-	public $module = 'News';
+	public $module = 'Slideshow';
 	static $per_page	= '10';
 	
 	public function __construct() {
 		parent::__construct();
 		$this->beforeFilter('csrf', array('on'=>'post'));
-		$this->model = new News();
+		$this->model = new Slideshow();
 		$this->info = $this->model->makeInfo( $this->module);
 		$this->access = $this->model->validAccess($this->info['id']);
 	
 		$this->data = array(
 			'pageTitle'	=> 	$this->info['title'],
 			'pageNote'	=>  $this->info['note'],
-			'pageModule'=> 'News',
+			'pageModule'=> 'Slideshow',
 			'trackUri' 	=> ''
 		);
 			
@@ -31,7 +31,7 @@ class NewsController extends BaseController {
 				->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));
 				
 		// Filter sort and order for query 
-		$sort = (!is_null(Input::get('sort')) ? Input::get('sort') : 'news_id'); 
+		$sort = (!is_null(Input::get('sort')) ? Input::get('sort') : 'slideshow_id'); 
 		$order = (!is_null(Input::get('order')) ? Input::get('order') : 'asc');
 		// End Filter sort and order for query 
 		// Filter Search for query		
@@ -60,7 +60,7 @@ class NewsController extends BaseController {
 		$page = $page >= 1 && filter_var($page, FILTER_VALIDATE_INT) !== false ? $page : 1;	
 		$pagination = Paginator::make($results['rows'], $results['total'],$params['limit']);		
 		
-		$test 						= News::$columnTable;
+		$test 						= Slideshow::$columnTable;
 		$arr_search 				= SiteHelpers::arraySearch(Input::get('search'));
 		foreach($arr_search as $key=>$val){
 			if($key != "sort" && $key != "order" && $key != "rows"){
@@ -88,7 +88,7 @@ class NewsController extends BaseController {
 		// Master detail link if any 
 		$this->data['subgrid']	= (isset($this->info['config']['subgrid']) ? $this->info['config']['subgrid'] : array()); 
 		// Render into template
-		$this->layout->nest('content','News.index',$this->data)
+		$this->layout->nest('content','Slideshow.index',$this->data)
 						->with('menus', SiteHelpers::menus());
 	}		
 	
@@ -115,7 +115,7 @@ class NewsController extends BaseController {
 		{
 			$this->data['row'] =  $row;
 		} else {
-			$this->data['row'] = $this->model->getColumnTable('news'); 
+			$this->data['row'] = $this->model->getColumnTable('slideshow'); 
 		}
 		/* Master detail lock key and value */
 		if(!is_null(Input::get('md')) && Input::get('md') !='')
@@ -127,7 +127,7 @@ class NewsController extends BaseController {
 		$this->data['masterdetail']  = $this->masterDetailParam(); 
 		$this->data['filtermd'] = str_replace(" ","+",Input::get('md')); 		
 		$this->data['id'] = $id;
-		$this->layout->nest('content','News.form',$this->data)->with('menus', $this->menus );	
+		$this->layout->nest('content','Slideshow.form',$this->data)->with('menus', $this->menus );	
 	}
 	
 	function getShow( $id = null)
@@ -143,48 +143,48 @@ class NewsController extends BaseController {
 		{
 			$this->data['row'] =  $row;
 		} else {
-			$this->data['row'] = $this->model->getColumnTable('news'); 
+			$this->data['row'] = $this->model->getColumnTable('slideshow'); 
 		}
 		$this->data['masterdetail']  = $this->masterDetailParam(); 
 		$this->data['id'] = $id;
 		$this->data['access']		= $this->access;
-		$this->layout->nest('content','News.view',$this->data)->with('menus', $this->menus );	
+		$this->layout->nest('content','Slideshow.view',$this->data)->with('menus', SiteHelpers::menus() );	
 	}	
 	
 	function postSave( $id =0)
 	{
 		$trackUri = $this->data['trackUri'];
-		$rules = News::$rules;
 		//$rules = $this->validateForm();
+		$rules = Slideshow::$rules;
 		$validator = Validator::make(Input::all(), $rules);	
 		if ($validator->passes()) {
-			$data = $this->getDataPost('news');
+			$data = $this->getDataPost('slideshow');
 			if(!is_null(Input::file('file')))
 			{
 				$file = Input::file('file');
-				$destinationPath = './uploads/news/';
+				$destinationPath = './uploads/slideshow/';
 				$filename = $file->getClientOriginalName();
 				$extension = $file->getClientOriginalExtension(); //if you need extension of the file
-				$newfilename = SiteHelpers::seoUrl( trim(Input::get('news_name'))).'_'.time().'.'.$extension;
+				$newfilename = SiteHelpers::seoUrl( trim(Input::get('slideshow_name'))).'_'.time().'.'.$extension;
 				$uploadSuccess = Input::file('file')->move($destinationPath, $newfilename);
 				if( $uploadSuccess ) {
-				    $data['news_picture'] = $newfilename;
+				    $data['slideshow_image'] = $newfilename;
 				    $orgFile = $destinationPath.'/'.$newfilename;
 				    $thumbFile = $destinationPath.'/thumb/'.$newfilename;
 				    SiteHelpers::resizewidth("180",$orgFile,$thumbFile);
-				    if(Input::get('news_id') != "")
+				    if(Input::get('slideshow_id') != "")
 				    {
-				    	$data_old = $this->model->getRow(Input::get('news_id'));
-				    	@unlink(ROOT .'/uploads/news/'.$data_old->news_picture);
-				    	@unlink(ROOT .'/uploads/news/thumb/'.$data_old->news_picture);
+				    	$data_old = $this->model->getRow(Input::get('slideshow_id'));
+				    	@unlink(ROOT .'/uploads/slideshow/'.$data_old->slideshow_image);
+				    	@unlink(ROOT .'/uploads/slideshow/thumb/'.$data_old->slideshow_image);
 				    }
 				}
 			}
-			$data['news_alias'] =  SiteHelpers::seoUrl( trim($data['news_name']));
+			$data['slideshow_alias'] =  SiteHelpers::seoUrl( trim($data['slideshow_name']));
 			$data['created'] = time();
-			$ID = $this->model->insertRow($data , Input::get('news_id'));
+			$ID = $this->model->insertRow($data , Input::get('slideshow_id'));
 			// Input logs
-			if( Input::get('news_id') =='')
+			if( Input::get('slideshow_id') =='')
 			{
 				$this->inputLogs("New Entry row with ID : $ID  , Has Been Save Successfull");
 				$id = SiteHelpers::encryptID($ID);
@@ -193,10 +193,10 @@ class NewsController extends BaseController {
 			}
 			// Redirect after save	
 			$md = str_replace(" ","+",Input::get('md'));
-			$redirect = (!is_null(Input::get('apply')) ? 'News/add/'.$id.'?md=' :  'News?md=');
+			$redirect = (!is_null(Input::get('apply')) ? 'Slideshow/add/'.$id.'?md=' :  'Slideshow?md=' );
 			return Redirect::to($redirect)->with('message', SiteHelpers::alert('success',Lang::get('core.note_success')));
 		} else {
-			return Redirect::to('News/add/'.$id.'?md=')->with('message', SiteHelpers::alert('error',Lang::get('core.note_error')))
+			return Redirect::to('Slideshow/add/'.$id.'?md=')->with('message', SiteHelpers::alert('error',Lang::get('core.note_error')))
 			->withErrors($validator)->withInput();
 		}	
 	
@@ -211,14 +211,14 @@ class NewsController extends BaseController {
 		// delete multipe rows 
 		foreach(Input::get('id') as $id){
 			$data = $this->model->getRow($id);
-			@unlink(ROOT .'/uploads/news/'.$data->news_picture);
-			@unlink(ROOT .'/uploads/news/thumb/'.$data->news_picture);
+			@unlink(ROOT .'/uploads/slideshow/'.$data->slideshow_image);
+			@unlink(ROOT .'/uploads/slideshow/thumb/'.$data->slideshow_image);
 		}
 		$this->model->destroy(Input::get('id'));
 		$this->inputLogs("ID : ".implode(",",Input::get('id'))."  , Has Been Removed Successfull");
 		// redirect
 		Session::flash('message', SiteHelpers::alert('success',Lang::get('core.note_success_delete')));
-		return Redirect::to('News?md='.Input::get('md'));
+		return Redirect::to('Slideshow?md='.Input::get('md'));
 	}			
 		
 }
