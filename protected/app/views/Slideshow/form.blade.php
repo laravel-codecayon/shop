@@ -40,6 +40,7 @@
 						<fieldset><legend> Slide shows</legend>
 									
 									  {{ Form::hidden('slideshow_id', $row['slideshow_id'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
+									  {{ Form::hidden('slideshow_image', $row['slideshow_image'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 								  <div class="form-group  " >
 									<label for="Slideshow Name" class=" control-label col-md-4 text-left"> Slideshow Name </label>
 									<div class="col-md-6">

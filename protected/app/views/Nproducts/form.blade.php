@@ -57,6 +57,7 @@
 						<fieldset><legend> Products</legend>
 									<input type="hidden" name="action" value="{{$id}}" />
 								  	<input type="hidden" name="ProductID" value="{{$row['ProductID']}}" />
+								  	<input type="hidden" name="image" value="{{$row['image']}}" />
 								  <div class="form-group  " >
 									<label for="Picture" class=" control-label col-md-4 text-left"> {{ Lang::get('core.product_image') }} </label>
 									<div class="col-md-6">

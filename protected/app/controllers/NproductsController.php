@@ -12,7 +12,7 @@ class NproductsController extends BaseController {
 		$this->model = new Nproducts();
 		$this->info = $this->model->makeInfo( $this->module);
 		$this->access = $this->model->validAccess($this->info['id']);
-	
+		$this->lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
 		$this->data = array(
 			'pageTitle'	=> 	$this->info['title'],
 			'pageNote'	=>  $this->info['note'],
@@ -25,7 +25,7 @@ class NproductsController extends BaseController {
 
 	
 	public function getIndex()
-	{	SiteHelpers::arraySearch(Input::get('search'));
+	{	
 		if($this->access['is_view'] ==0) 
 			return Redirect::to('')
 				->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));
@@ -36,6 +36,7 @@ class NproductsController extends BaseController {
 		// End Filter sort and order for query 
 		// Filter Search for query		
 		$filter = (!is_null(Input::get('search')) ? $this->buildSearch() : '');
+		$filter .=  " AND lang = '$this->lang'";
 		// End Filter Search for query 
 		
 		// Take param master detail if any

@@ -12,7 +12,7 @@ class NewsController extends BaseController {
 		$this->model = new News();
 		$this->info = $this->model->makeInfo( $this->module);
 		$this->access = $this->model->validAccess($this->info['id']);
-	
+		$this->lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
 		$this->data = array(
 			'pageTitle'	=> 	$this->info['title'],
 			'pageNote'	=>  $this->info['note'],
@@ -36,6 +36,7 @@ class NewsController extends BaseController {
 		// End Filter sort and order for query 
 		// Filter Search for query		
 		$filter = (!is_null(Input::get('search')) ? $this->buildSearch() : '');
+		$filter .=  " AND lang = '$this->lang'";
 		// End Filter Search for query 
 		
 		// Take param master detail if any

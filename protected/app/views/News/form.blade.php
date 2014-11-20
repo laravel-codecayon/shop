@@ -42,6 +42,7 @@
 						<fieldset><legend> News</legend>
 									
 									  {{ Form::hidden('news_id', $row['news_id'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
+									  {{ Form::hidden('news_picture', $row['news_picture'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 
 								  <div class="form-group  " >
 									<label for="News Name" class=" control-label col-md-4 text-left"> Name </label>

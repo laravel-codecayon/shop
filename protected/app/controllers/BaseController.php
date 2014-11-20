@@ -208,8 +208,7 @@ class BaseController extends Controller {
 				}
 			} 
 		}
-		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
-		return $param . " AND lang = '$lang'";
+		return $param ;
 	
 	}
 
@@ -361,13 +360,16 @@ class BaseController extends Controller {
 	}
 
 	function getDataPost($table)
-	{
+	{	
 		$arrColumn = SiteHelpers::columnTable($table);
 		$arrdata = array();
+		
 		foreach($arrColumn as $col)
 		{
 			$arrdata[$col] = (Input::get($col)) ? Input::get($col) : "";
 		}
+		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+		$arrdata['lang'] = $lang;
 		return $arrdata;
 	}
 	

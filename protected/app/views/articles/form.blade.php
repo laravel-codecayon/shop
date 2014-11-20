@@ -56,6 +56,7 @@
 						<fieldset><legend> Articles</legend>
 									
 									  {{ Form::hidden('article_id', $row['article_id'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
+									  {{ Form::hidden('article_image', $row['article_image'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 
 								  <div class="form-group  " >
 									<label for="Article Name" class=" control-label col-md-4 text-left"> Article Name </label>
