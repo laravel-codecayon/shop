@@ -106,18 +106,18 @@ class MenuController extends BaseController {
 							foreach($l['children'] as $l2)
 							{
 								$level3[] = $l2['id'];
-							//	DB::table('tb_menu')->where('menu_id','=',$l2['id'])
-							//		->update(array('parent_id'=> $l['id'],'ordering'=>$c));
+								DB::table('tb_menu')->where('menu_id','=',$l2['id'])
+									->update(array('parent_id'=> $l['id'],'ordering'=>$c));
 								$c++;	
 							}		
 						}
-						//DB::table('tb_menu')->where('menu_id','=', $l['id'])
-						//	->update(array('parent_id'=> $m['id'],'ordering'=>$b));	
+						DB::table('tb_menu')->where('menu_id','=', $l['id'])
+							->update(array('parent_id'=> $m['id'],'ordering'=>$b));	
 						$b++;
 					}							
 				}
-			//	DB::table('tb_menu')->where('menu_id','=', $m['id'])
-				//	->update(array('parent_id'=>'0','ordering'=>$a));
+				DB::table('tb_menu')->where('menu_id','=', $m['id'])
+					->update(array('parent_id'=>'0','ordering'=>$a));
 				$a++;		
 			}
 

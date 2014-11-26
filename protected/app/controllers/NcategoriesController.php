@@ -14,7 +14,7 @@ class NcategoriesController extends BaseController {
 		$this->model = new Ncategories();
 		$this->info = $this->model->makeInfo( $this->module);
 		$this->access = $this->model->validAccess($this->info['id']);
-	
+		$this->lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
 		$this->data = array(
 			'pageTitle'	=> 	$this->info['title'],
 			'pageNote'	=>  $this->info['note'],
@@ -38,6 +38,7 @@ class NcategoriesController extends BaseController {
 		// End Filter sort and order for query 
 		// Filter Search for query		
 		$filter = (!is_null(Input::get('search')) ? $this->buildSearch() : '');
+		$filter .=  " AND lang = '$this->lang'";
 		// End Filter Search for query 
 		
 		// Take param master detail if any
@@ -185,6 +186,10 @@ class NcategoriesController extends BaseController {
 			}
 			$data['CategoryName'] = Input::get('CategoryName');
 			$data['Description'] = Input::get('Description');
+			$data['lang'] = $this->lang;
+			$data['created'] = time();
+			$data['status'] = Input::get('status');
+			$data['alias'] = SiteHelpers::seoUrl( trim($data['CategoryName']));
 			//$data = $this->validatePost('categories');
 			$ID = $this->model->insertRow($data , Input::get('CategoryID'));
 			// Input logs

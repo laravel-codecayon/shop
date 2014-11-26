@@ -197,6 +197,7 @@ class NproductsController extends BaseController {
 			$data['SupplierID'] = "1";
 			$data['created'] = time();
 			$data['slug'] =  SiteHelpers::seoUrl( trim($data['ProductName']));
+			$data['created'] =  time();
 			$ID = $this->model->insertRow($data , Input::get('ProductID'));
 			if(Input::file('multi_file')[0] != "")
 			{

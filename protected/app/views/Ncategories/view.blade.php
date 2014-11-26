@@ -26,21 +26,36 @@
 					<tr>
 						<td width='30%' class='label-view text-right'>CategoryID</td>
 						<td>{{ $row->CategoryID }} </td>
-						
+
 					</tr>
-				
+
 					<tr>
 						<td width='30%' class='label-view text-right'>CategoryName</td>
 						<td>{{ $row->CategoryName }} </td>
-						
+
 					</tr>
-				
+
 					<tr>
 						<td width='30%' class='label-view text-right'>Description</td>
 						<td>{{ $row->Description }} </td>
+
+					</tr>
+
+					<tr>
+						<td width='30%' class='label-view text-right'>Image</td>
+						<td><img src="/uploads/categories/thumb/{{ $row->Picture }}" /> </td>
+
+					</tr>
+					<tr>
+						<td width='30%' class='label-view text-right'>Status</td>
+						<td>@if($row->status == 1) Enable @else Disable @endif </td>
 						
 					</tr>
-				
+					<tr>
+						<td width='30%' class='label-view text-right'>Created</td>
+						<td>{{date('Y-m-d',$row->created)}}</td>
+						
+					</tr>
 		</tbody>	
 	</table>    
 	</div>

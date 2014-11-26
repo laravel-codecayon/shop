@@ -1,4 +1,5 @@
-
+{{ HTML::script('sximo/js/plugins/tinymce/jscripts/tiny_mce/jquery.tinymce.js')}}
+{{ HTML::script('sximo/js/plugins/tinymce/jscripts/tiny_mce/tiny_mce.js')}}
   <div class="page-content row">
     <!-- Page header -->
     <div class="page-header">
@@ -36,7 +37,7 @@
 					  <div class="form-group  " >
 						
 						<div class="" style="background:#fff;">
-						  <textarea name='content' rows='35' id='content'    class='form-control markItUp'  
+						  <textarea name='content' rows='35' id='content'    class='form-control mceEditor'  
 							 >{{ $content }}</textarea> 
 						 </div> 
 					  </div> 	
@@ -51,7 +52,7 @@
 				  <div class="form-group hidethis " style="display:none;">
 					<label for="ipt" class=""> PageID </label>
 					
-					  {{ Form::text('pageID', $row['pageID'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
+					  {{ Form::hidden('pageID', $row['pageID'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 					
 				  </div> 					
 				  <div class="form-group  " >
@@ -159,3 +160,14 @@
 <style type="text/css">
 .note-editor .note-editable { height:500px;}
 </style>			 	 
+<script type="text/javascript">
+	$(function(){
+		tinymce.init({	
+			mode : "specific_textareas",
+			editor_selector : "mceEditor",
+			 plugins : "openmanager",
+			 file_browser_callback: "openmanager",
+			 open_manager_upload_path: '../../../../../../../../uploads/images/',
+		 });
+	});
+</script>

@@ -1121,6 +1121,13 @@ public static function alphaID($in, $to_num = false, $pad_up = false, $passKey =
 		}	
 		return $t;
 	}
+
+	public static function langShow(){
+		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+		$fp = file_get_contents(app_path().'/lang/'.$lang.'/info.json');
+		$fp = json_decode($fp,true);
+		return $fp['name'];
+	}
 	
 	
 	public static function themeOption()

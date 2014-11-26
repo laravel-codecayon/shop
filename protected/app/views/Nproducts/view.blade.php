@@ -34,6 +34,12 @@
 						<td>{{ $row->ProductName }} </td>
 						
 					</tr>
+
+					<tr>
+						<td width='30%' class='label-view text-right'>Image</td>
+						<td><img src="/uploads/products/thumb/{{ $row->image }}" /> </td>
+						
+					</tr>
 				
 					<tr>
 						<td width='30%' class='label-view text-right'>Promotion</td>
@@ -60,6 +66,11 @@
 					<tr>
 						<td width='30%' class='label-view text-right'>Description</td>
 						<td>{{ $row->description }} </td>
+						
+					</tr>
+					<tr>
+						<td width='30%' class='label-view text-right'>Status</td>
+						<td>@if($row->status == 1) Enable @else Disable @endif </td>
 						
 					</tr>
 					<tr>

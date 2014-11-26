@@ -332,6 +332,38 @@ class ModuleController extends BaseController {
 		}
 		rmdir($dir);
 	}	
+
+	function getRebuildform($id = null){
+		$table = $id;
+		$primary = self::findPrimarykey($id);
+		$columns = DB::select("SHOW COLUMNS FROM ".$id);
+		$row = DB::table('tb_module')->where('module_db', '=',$id )->get();
+		$config = SiteHelpers::CF_decode_json($row[0]->module_config);
+		$i = 0; $rowGrid = array();$rowForm = array();
+			foreach($columns as $column)
+			{
+				if(!isset($column->Table)) $column->Table = $table;
+				if($column->Key =='PRI') $column->Type ='hidden';
+				if($column->Table == $table) 
+				{				
+					$form_creator = self::configForm($column->Field,$column->Table,$column->Type,$i);
+					$relation = self::buildRelation($table ,$column->Field);
+					foreach($relation as $row) 
+					{
+						$array = array('external',$row['table'],$row['column']);
+						$form_creator = self::configForm($column->Field,$table,'select',$i,$array);
+						
+					}
+					$rowForm[] = $form_creator;
+				}	
+				
+				$rowGrid[] = self::configGrid($column->Field,$column->Table,$column->Type,$i);				
+				$i++;
+			}	
+		$config['forms'] = $rowForm;
+		DB::table('tb_module')->where('module_db', '=',$id )->update(array('module_config' => SiteHelpers::CF_encode_json($config)));
+		die('ok');
+	}
 	
 	function postCreate()
 	{

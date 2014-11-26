@@ -160,6 +160,18 @@
 									 	
 									 </div>
 								  </div>
+								  </div>
+								  <div class="form-group  " >
+									<label for="Status" class=" control-label col-md-4 text-left"> Status </label>
+									<div class="col-md-6">
+									  <label class='checked'>
+										<input type='radio' name='status' value ='0' required @if($row['status'] == '0' || $row['status'] == '') checked="checked" @endif > Disable </label>
+										<label class='checked'>
+										<input type='radio' name='status' value ='1' required @if($row['status'] == '1') checked="checked" @endif > Enable </label> 
+									 </div> 
+									 <div class="col-md-2">
+									 	
+									 </div>
 								  </div> </fieldset>
 			</div>
 			

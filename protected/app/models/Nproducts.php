@@ -35,6 +35,7 @@ class Nproducts extends BaseModel  {
 			"UnitPrice" => array("label"=>"Price", "type"=>"text", "name"=>"UnitPrice", "value" => ""),
 			"CategoryID" => array("label"=>"Category", "type"=>"select", "name"=>"CategoryID", "value" => "", "model"=>"categories", "id"=>"CategoryID", "show" =>"CategoryName"),
 			"id_promotion" => array("label"=>"Promotion", "type"=>"select", "name"=>"id_promotion", "value" => "", "model"=>"promotion", "id"=>"id_promotion", "show" =>"name"),
+			"status" => array("label"=>"Status", "type"=>"radio", "name"=>"status", "value" => "","option"=>array("0"=>"Disable","1"=>"Enable")),
 			"created" => array("label"=>"Created", "type"=>"date", "name"=>"created", "value" => ""),
 		);
 

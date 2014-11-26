@@ -6,7 +6,7 @@
         </div>
             <ul class="nav navbar-top-links navbar-right">
 		@if(CNF_MULTILANG ==1)
-		<li  class="user dropdown"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-flag2"></i><i class="caret"></i></a>
+		<li  class="user dropdown"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><?php print_r(SiteHelpers::langShow())?> <i class="icon-flag2"></i><i class="caret"></i></a>
 			 <ul class="dropdown-menu dropdown-menu-right icons-right">
 				@foreach(SiteHelpers::langOption() as $lang)
 					<li><a href="{{ URL::to('home/lang/'.$lang['folder'])}}"><i class="icon-flag2"></i> {{  $lang['name'] }}</a></li>

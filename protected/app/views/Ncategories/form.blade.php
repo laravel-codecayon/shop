@@ -39,15 +39,7 @@
 				<div class="col-md-12">
 						<fieldset><legend> {{ Lang::get('core.category') }}</legend>
 									<input type="hidden" name="action" value="{{$id}}" />
-								  <div class="form-group  " >
-									<label for="CategoryID" class=" control-label col-md-4 text-left"> {{ Lang::get('core.category_id') }} </label>
-									<div class="col-md-6">
-									  {{ Form::text('CategoryID', $row['CategoryID'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
-									 </div> 
-									 <div class="col-md-2">
-									 	
-									 </div>
-								  </div> 					
+									  {{ Form::hidden('CategoryID', $row['CategoryID'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 								  <div class="form-group  " >
 									<label for="CategoryName" class=" control-label col-md-4 text-left"> {{ Lang::get('core.category_name') }} </label>
 									<div class="col-md-6">
@@ -75,6 +67,18 @@
 												<img width="150px" src="/uploads/categories/thumb/{{$row['Picture']}}">
 											@endif
 										</div>
+									 </div> 
+									 <div class="col-md-2">
+									 	
+									 </div>
+								  </div>
+								  <div class="form-group  " >
+									<label for="Status" class=" control-label col-md-4 text-left"> Status </label>
+									<div class="col-md-6">
+									  <label class='checked'>
+										<input type='radio' name='status' value ='0' required @if($row['status'] == '0' || $row['status'] == '') checked="checked" @endif > Disable </label>
+										<label class='checked'>
+										<input type='radio' name='status' value ='1' required @if($row['status'] == '1') checked="checked" @endif > Enable </label> 
 									 </div> 
 									 <div class="col-md-2">
 									 	
