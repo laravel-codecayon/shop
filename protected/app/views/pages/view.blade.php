@@ -45,25 +45,20 @@
 				
 					<tr>
 						<td width='30%' class='label-view text-right'>Created</td>
-						<td>{{ $row->created }} </td>
+						<td>{{date('Y-m-d',$row->created)}} </td>
 						
 					</tr>
-				
-					<tr>
-						<td width='30%' class='label-view text-right'>Updated</td>
-						<td>{{ $row->updated }} </td>
-						
-					</tr>
-				
-					<tr>
-						<td width='30%' class='label-view text-right'>Filename</td>
-						<td>{{ $row->filename }} </td>
-						
-					</tr>
+
 				
 					<tr>
 						<td width='30%' class='label-view text-right'>Status</td>
-						<td>{{ $row->status }} </td>
+						<td>@if($row->status == 1) Enable @else Disable @endif  </td>
+						
+					</tr>
+
+					<tr>
+						<td width='30%' class='label-view text-right'>Content</td>
+						<td>{{ $row->content }} </td>
 						
 					</tr>
 

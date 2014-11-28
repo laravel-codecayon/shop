@@ -33,6 +33,7 @@ public static $rules=array(
 			"name" => array("label"=>"Name", "type"=>"text", "name"=>"name", "value" => ""),
 			"status" => array("label"=>"Status", "type"=>"radio", "name"=>"status", "value" => "","option"=>array("0"=>"Disable","1"=>"Enable")),
 			"promotion" => array("label"=>"Promotion", "type"=>"text", "name"=>"promotion", "value" => ""),
+			"created" => array("label"=>"Created", "type"=>"date", "name"=>"created", "value" => ""),
 		);
 
 }

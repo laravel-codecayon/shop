@@ -26,7 +26,7 @@
 			@if($access['is_remove'] ==1)
 			<a href="javascript://ajax"  onclick="SximoDelete();" class="tips btn btn-xs btn-danger" title="{{ Lang::get('core.btn_remove') }}"><i class="icon-bubble-trash"></i> {{ Lang::get('core.btn_remove') }}</a>
 			@endif 	
-			@if(Session::get('gid') ==1)
+			@if(Session::get('gid') ==1 && 1==2)
 			<a href="{{ URL::to('module/config/pages') }}" class="tips btn btn-xs btn-default" title="{{ Lang::get('core.btn_config') }}"><i class="icon-cog"></i> {{ Lang::get('core.btn_config') }} </a>
 			@endif 				
 	</div>		
@@ -41,11 +41,9 @@
 		<tr>
 			<th> No </th>
 			<th> <input type="checkbox" class="checkall i-checks-all " /></th>
-		 @foreach ($tableGrid as $t)
-		 	@if($t['view'] =='1')
-			 <th>{{ $t['label'] }}</th>
-			 @endif
-		  @endforeach
+		 @foreach ($test as $t)
+						<th>{{ $t['label'] }}</th>
+				@endforeach
 		  	<th> Url </th>
 			<th> {{ Lang::get('core.btn_action') }} </th>
            </tr>
@@ -60,17 +58,10 @@
 					<input type="checkbox" class="ids  i-checks" name="id[]" value="{{ $row->pageID }}" />  
 					@endif
 					</td>				
-				 @foreach ($tableGrid as $field)
-					 @if($field['view'] =='1')
+				 @foreach ($test as $field)
 					 <td>					 
-					 	@if($field['attribute']['image']['active'] =='1')
-							<img src="{{ asset($field['attribute']['image']['path'].'/'.$row->$field['field'])}}" width="50" />
-						@else	
-							{{ $row->$field['field'] }}	
-						@endif						 
+					 	{{ SiteHelpers::transSelect($field,$row) }}
 					 </td>
-					 @endif
-					 			 
 				 @endforeach
 				 <td > <a href="{{ ($row->alias =='home' ? URL::to('') : URL::to('/'.$row->alias)) }}" target="_blank"> <small class="text-mute">
 				 {{ ($row->alias =='home' ? URL::to('') : URL::to($row->alias)) }}</small> </a> </td>	
@@ -95,12 +86,23 @@
       
     </table>
 	</div>
+	@include('footer_new')
 	{{ Form::close() }}
 	
-	@include('footer')
 	
 	
 	</div>
 	
 	</div>
 </div>
+<script>
+$(document).ready(function(){
+
+
+	$("#filter_footer").click(function(){
+		$('#SximoTable').attr('action','{{ URL::to("pages/multisearch")}}');
+		$('#SximoTable').submit();
+	});
+	
+});	
+</script>		

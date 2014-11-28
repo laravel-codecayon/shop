@@ -627,7 +627,7 @@ public static function alphaID($in, $to_num = false, $pad_up = false, $passKey =
 	}
 
 	public static function transFormsearch($field){
-
+		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
 		switch($field['type'])
 		{
 			default;
@@ -648,6 +648,21 @@ public static function alphaID($in, $to_num = false, $pad_up = false, $passKey =
 
 			case 'select';
 				$value = $field['value'];
+				$data = DB::table($field['model'])->where("lang","=",$lang)->get();
+				$opts = '';
+				foreach($data as $row):
+					$selected = '';
+					if($value == $row->$field['id']) $selected ='selected="selected"';
+
+					$opts .= "<option $selected value='".$row->$field['id']."'  > ".$row->$field['show']." </option> ";
+					endforeach;
+				$form = "<select name='".$field['name']."'  class='form-control'  >
+							<option value=''> -- Select  -- </option>
+							$opts
+						</select>";
+				break;
+			case 'select_nola';
+				$value = $field['value'];
 				$data = DB::table($field['model'])->get();
 				$opts = '';
 				foreach($data as $row):
@@ -660,7 +675,7 @@ public static function alphaID($in, $to_num = false, $pad_up = false, $passKey =
 							<option value=''> -- Select  -- </option>
 							$opts
 						</select>";
-				break;	
+				break;
 
 			case 'radio';
 				$value = $field['value'];

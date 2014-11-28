@@ -12,7 +12,6 @@ class PromotionController extends BaseController {
 		$this->model = new Promotion();
 		$this->info = $this->model->makeInfo( $this->module);
 		$this->access = $this->model->validAccess($this->info['id']);
-	
 		$this->data = array(
 			'pageTitle'	=> 	$this->info['title'],
 			'pageNote'	=>  $this->info['note'],
@@ -158,10 +157,12 @@ class PromotionController extends BaseController {
 		//$rules = $this->validateForm();
 		$validator = Validator::make(Input::all(), $rules);	
 		if ($validator->passes()) {
-			$data = $this->validatePost('promotion');
-			$ID = $this->model->insertRow($data , Input::get('id'));
+			$data = $this->getDataPost('promotion');
+			$data['created'] = time();
+			unset($data['lang']);
+			$ID = $this->model->insertRow($data , Input::get('id_promotion'));
 			// Input logs
-			if( Input::get('id') =='')
+			if( Input::get('id_promotion') =='')
 			{
 				$this->inputLogs("New Entry row with ID : $ID  , Has Been Save Successfull");
 				$id = SiteHelpers::encryptID($ID);
@@ -186,8 +187,8 @@ class PromotionController extends BaseController {
 			return Redirect::to('')
 				->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));		
 		// delete multipe rows 
-		$this->model->destroy(Input::get('id'));
-		$this->inputLogs("ID : ".implode(",",Input::get('id'))."  , Has Been Removed Successfull");
+		$this->model->destroy(Input::get('id_promotion'));
+		$this->inputLogs("ID : ".implode(",",Input::get('id_promotion'))."  , Has Been Removed Successfull");
 		// redirect
 		Session::flash('message', SiteHelpers::alert('success',Lang::get('core.note_success_delete')));
 		return Redirect::to('Promotion?md='.Input::get('md'));

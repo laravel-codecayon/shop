@@ -12,7 +12,7 @@ class PagesController extends BaseController {
 		$this->model = new Pages();
 		$this->info = $this->model->makeInfo( $this->module);
 		$this->access = $this->model->validAccess($this->info['id']);
-	
+		$this->lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
 		$this->data = array(
 			'pageTitle'	=> 	$this->info['title'],
 			'pageNote'	=>  $this->info['note'],
@@ -35,6 +35,7 @@ class PagesController extends BaseController {
 		// End Filter sort and order for query 
 		// Filter Search for query		
 		$filter = (!is_null(Input::get('search')) ? $this->buildSearch() : '');
+		$filter .=  " AND lang = '$this->lang'";
 		// End Filter Search for query 
 		
 		// Take param master detail if any
@@ -59,6 +60,14 @@ class PagesController extends BaseController {
 		$page = $page >= 1 && filter_var($page, FILTER_VALIDATE_INT) !== false ? $page : 1;	
 		$pagination = Paginator::make($results['rows'], $results['total'],$params['limit']);		
 		
+		$test 						= Pages::$columnTable;
+		$arr_search 				= SiteHelpers::arraySearch(Input::get('search'));
+		foreach($arr_search as $key=>$val){
+			if($key != "sort" && $key != "order" && $key != "rows"){
+				$test[$key]['value'] = $val;
+			}
+		}
+		$this->data['test'] = $test;
 		
 		$this->data['rowData']		= $results['rows'];
 		// Build Pagination 
@@ -91,7 +100,8 @@ class PagesController extends BaseController {
 		$id = ($id == null ? '' : SiteHelpers::encryptID($id,true)) ;
 		
 		$row = $this->model->find($id);
-		if($row)
+		$this->data['row'] = $row;
+		/*if($row)
 		{
 			$this->data['row'] =  $row;
 		} else {
@@ -133,7 +143,7 @@ class PagesController extends BaseController {
 			$group[] = array('id'=>$g->group_id ,'name'=>$g->name,'access'=> $a); 			
 		}		
 
-		$this->data['groups'] = $group;	
+		$this->data['groups'] = $group;	*/
 		
 		
 		$this->data['id'] = $id;
@@ -166,39 +176,41 @@ class PagesController extends BaseController {
 
 		$rules = array(
 				'title'=>'required',
-				'alias'=>'required|alpha_dash',
-				'filename'=>'required|alpha',
-				'status'=>'required',
+				'content'=>'required',
 
 				
 		);
 		$validator = Validator::make(Input::all(), $rules);	
 		if ($validator->passes()) {
-			$content = 	Input::get('content');
-			$data = $this->validatePost('tb_pages');
+			//$content = 	Input::get('content');
+			$data = $this->getDataPost('tb_pages');
 			
-				if(Input::get('pageID') ==1)
+				/*if(Input::get('pageID') ==1)
 				{	
 					$filename = public_path() ."protected/app/views/pages/template/home.blade.php";
 				} else {
 					$filename = public_path() ."protected/app/views/pages/template/".Input::get('filename').".blade.php";
-				}	
+				}	*/
 /*				$fp=fopen($filename,"w+"); 				
 				fwrite($fp,$content); 
 				fclose($fp);	*/
 				
-			 $groups = Groups::all();
-			 $access = array();				
-			 foreach($groups as $group) {		 	
+			// $groups = Groups::all();
+			 //$access = array();				
+			 /*foreach($groups as $group) {		 	
 				$access[$group->group_id]	= (isset($_POST['group_id'][$group->group_id]) ? '1' : '0');
-			 }
+			 }*/
 		 						
-			$data['access'] = json_encode($access);
+			//$data['access'] = json_encode($access);
 			
-			$data['allow_guest'] = Input::get('allow_guest');
-			$data['template'] = Input::get('template');	
-		//	$this->model->insertRow($data , Input::get('pageID'));
-		//	self::createRouters();
+			//$data['allow_guest'] = Input::get('allow_guest');
+			//$data['template'] = Input::get('template');	
+			 $data['alias'] = "pages/".SiteHelpers::seoUrl( trim($data['title']))."-";
+			 $data['created'] = time();
+			$id = $this->model->insertRow($data , Input::get('pageID'));
+			$alias= $data['alias'].$id.".html";
+			DB::table('tb_pages')->where('pageID', '=',$id )->update(array('alias' => $alias));
+			self::createRouters();
 			return Redirect::to('pages')->with('message', SiteHelpers::alert('success','Data Has Been Save Successfull'));
 		} else {
 			return Redirect::to('pages/add/'.$id)->with('message', SiteHelpers::alert('error','The following errors occurred'))
@@ -215,7 +227,7 @@ class PagesController extends BaseController {
 				->with('message', SiteHelpers::alert('error',' Your are not allowed to access the page '));	
 		
 		$ids = Input::get('id')	;	
-		for($i=0; $i<count($ids);$i++)
+		/*for($i=0; $i<count($ids);$i++)
 		{
 			$row = Pages::find( $ids[$i]);	
 			$filename = public_path() ."protected/app/views/pages/template/".$row->filename.".blade.php";
@@ -223,12 +235,12 @@ class PagesController extends BaseController {
 			{
 			//	unlink( public_path() ."protected/app/views/pages/template/".$row->filename.".blade.php");
 			}				
-		} 
+		} */
 				
 					
 		// delete multipe rows 
-		//$data = $this->model->destroy(Input::get('id'));
-	//	self::createRouters();
+		$data = $this->model->destroy(Input::get('id'));
+		self::createRouters();
 		Session::flash('message', SiteHelpers::alert('success','Successfully deleted row!'));
 		return Redirect::to('pages');
 	}	
@@ -241,7 +253,8 @@ class PagesController extends BaseController {
 		{
 			
 			$slug = $row->alias;
-			$val .= "Route::get('{$slug}', 'HomeController@index');\n";		
+			$slug = str_replace($row->pageID, '{id}', $slug);
+			$val .= "Route::get('{$slug}', 'HomeController@page')->where(array('id'=>'[0-9]+'));\n";		
 		}
 		$val .= 	"?>";
 		$filename = app_path().'/pageroutes.php';

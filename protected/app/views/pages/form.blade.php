@@ -38,7 +38,7 @@
 						
 						<div class="" style="background:#fff;">
 						  <textarea name='content' rows='35' id='content'    class='form-control mceEditor'  
-							 >{{ $content }}</textarea> 
+							 >{{ $row['content'] }}</textarea> 
 						 </div> 
 					  </div> 	
 					 </div>
@@ -61,40 +61,8 @@
 					  {{ Form::text('title', $row['title'],array('class'=>'form-control', 'placeholder'=>'', 'required'=>'true'  )) }} 
 					
 				  </div> 					
-				  <div class="form-group  " >
-					<label for="ipt" > Alias </label>
-					
-					  {{ Form::text('alias', $row['alias'],array('class'=>'form-control', 'placeholder'=>'', 'required'=>'true'   )) }} 
-					 
-				  </div> 					
-				  <div class="form-group  " >
-					<label for="ipt" > Filename </label>
-					
-					  <input name="filename" type="text" class="form-control" value="{{ $row['filename']}}" 
-					  @if($row['pageID'] !='') readonly="1" @endif required
-					  />
-					
-				  </div> 
-				  <div class="form-group  " >
-				  <label for="ipt"> Who can view this page ? </label>
-					@foreach($groups as $group) 
-					<label class="checkbox">					
-					  <input  type='checkbox' name='group_id[{{ $group['id'] }}]'    value="{{ $group['id'] }}"
-					  @if($group['access'] ==1 or $group['id'] ==1)
-					  	checked
-					  @endif				 
-					   /> 
-					  {{ $group['name'] }}
-					</label>  
-					@endforeach	
-						  
-				  </div> 
-				  <div class="form-group  " >
-					<label> Show for Guest ? unlogged  </label>
-					<label class="checkbox"><input  type='checkbox' name='allow_guest' 
- 						@if($row['allow_guest'] ==1 ) checked  @endif	
-					   value="1"	/> Allow Guest ?  </lable>
-				  </div>
+
+
 
 
 				  <div class="form-group hidethis " style="display:none;">
@@ -103,44 +71,23 @@
 					  {{ Form::text('created', $row['created'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 					 </div> 
 				  </div> 					
-				  <div class="form-group hidethis " style="display:none;">
-					<label for="ipt" > Updated </label>
-			
-					  {{ Form::text('updated', $row['updated'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
-					
-				  </div>	
 	
 				  <div class="form-group  " >
 					<label> Status </label>
 					<label class="radio">					
-					  <input  type='radio' name='status'  value="enable" required
-					  @if( $row['status'] =='enable')  	checked	  @endif				  
+					  <input  type='radio' name='status'  value="1" required
+					  @if( $row['status'] =='1')  	checked	  @endif				  
 					   /> 
 					  Enable
 					</label> 
 					<label class="radio">					
-					  <input  type='radio' name='status'  value="disabled" required
-					   @if( $row['status'] =='disabled')  	checked	  @endif				  
+					  <input  type='radio' name='status'  value="0" required
+					   @if( $row['status'] =='0')  	checked	  @endif				  
 					   /> 
 					  Disabled
 					</label> 					 
 				  </div> 
 
-				  <div class="form-group  " >
-					<label> Template </label>
-					<label class="radio">					
-					  <input  type='radio' name='template'  value="frontend" required
-					  @if( $row['template'] =='frontend')  	checked	  @endif				  
-					   /> 
-					  Frontend
-					</label> 
-					<label class="radio">					
-					  <input  type='radio' name='template'  value="backend" required
-					   @if( $row['template'] =='backend')  	checked	  @endif				  
-					   /> 
-					  Backend
-					</label> 					 
-				  </div> 				  
 				  
 			  <div class="form-group">
 				

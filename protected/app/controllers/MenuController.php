@@ -12,7 +12,7 @@ class MenuController extends BaseController {
 		$this->model = new Menu();
 		$this->info = $this->model->makeInfo( $this->module);
 		$this->access = $this->model->validAccess($this->info['id']);
-	
+		$this->lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
 		$this->data = array(
 			'pageTitle'	=> 	$this->info['title'],
 			'pageNote'	=>  $this->info['note'],
@@ -35,8 +35,8 @@ class MenuController extends BaseController {
 		}
 		$this->data['menus']		= SiteHelpers::menus( $pos ,'all');
 		$this->data['modules'] 		= DB::table('tb_module')->where('module_type','!=','core')->get();
-		$this->data['groups'] = DB::select(" SELECT * FROM tb_groups ");
-		$this->data['pages'] = DB::select(" SELECT * FROM tb_pages ");
+		//$this->data['groups'] = DB::select(" SELECT * FROM tb_groups ");
+		$this->data['pages'] = DB::select(" SELECT * FROM tb_pages where lang = '$this->lang'");
 		$this->data['active'] = $pos;	
 		$this->layout->nest('content','menu.index',$this->data)
 						->with('menus', SiteHelpers::menus());
@@ -135,24 +135,27 @@ class MenuController extends BaseController {
 		$rules = array(
 			'menu_name'	=> 'required',	
 			'active'	=> 'required',	
-			'menu_type'	=> 'required',
-			'position'	=> 'required',	
+			//'menu_type'	=> 'required',
+			//'position'	=> 'required',	
 		);
 		$validator = Validator::make(Input::all(), $rules);	
 		if ($validator->passes()) {
-			$pos = Input::get('position');	
+			//$pos = Input::get('position');	
 			$data = $this->validatePost('tb_menu');
+			$data['position'] = "top";
+			$data['allow_guest'] = "1";
+			$data['menu_type'] = "internal";
 			$arr = array();
-			$groups = DB::table('tb_groups')->get();
-			foreach($groups as $g)
-			{
-				$arr[$g->group_id] = (isset($_POST['groups'][$g->group_id]) ? "1" : "0" );	
-			}
-			$data['access_data'] = json_encode($arr);		
-			$data['allow_guest'] = Input::get('allow_guest');
+			//$groups = DB::table('tb_groups')->get();
+			//foreach($groups as $g)
+			//{
+			//	$arr[$g->group_id] = (isset($_POST['groups'][$g->group_id]) ? "1" : "0" );	
+			//}
+			//$data['access_data'] = json_encode($arr);		
+			//$data['allow_guest'] = Input::get('allow_guest');
 			$this->model->insertRow($data , Input::get('menu_id'));
 			
-			return Redirect::to('menu?pos='.$pos)->with('message', SiteHelpers::alert('success','Data Has Been Save Successfull'));
+			return Redirect::to('menu')->with('message', SiteHelpers::alert('success','Data Has Been Save Successfull'));
 			
 		} else {
 			return Redirect::to('menu')->with('message', SiteHelpers::alert('error','The following errors occurred'))
@@ -168,10 +171,10 @@ class MenuController extends BaseController {
 		$menus = DB::table('tb_menu')->where('parent_id','=',$id)->get();
 		foreach($menus as $row)
 		{
-		//	$this->model->destroy($row->menu_id);
+			$this->model->destroy($row->menu_id);
 		}
 		
-		//$this->model->destroy($id);
+		$this->model->destroy($id);
 		// redirect
 		Session::flash('message', SiteHelpers::alert('success','Successfully deleted row!'));
 		return Redirect::to('menu');

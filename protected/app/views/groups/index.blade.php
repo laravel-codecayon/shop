@@ -28,7 +28,7 @@
 				<a href="{{ URL::to('groups/download') }}" class="tips btn btn-xs btn-default" title="{{ Lang::get('core.btn_download') }}">
 				<i class="icon-folder-download2"></i>&nbsp;{{ Lang::get('core.btn_download') }} </a>
 				@endif		
-				@if(Session::get('gid') ==1)
+				@if(Session::get('gid') ==1 1==2)
 				<a href="{{ URL::to('module/config/groups') }}" class="tips btn btn-xs btn-default"  title="{{ Lang::get('core.btn_config') }}">
 				<i class="icon-cog"></i>&nbsp; {{ Lang::get('core.btn_config') }}</a>
 				@endif  	  

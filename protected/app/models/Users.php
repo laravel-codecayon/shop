@@ -47,7 +47,7 @@ FROM tb_users LEFT JOIN tb_groups ON tb_groups.group_id = tb_users.group_id ";
 			"id" => array("label"=>"ID", "type"=>"text", "name"=>"id", "value" => ""),
 			"username" => array("label"=>"User name", "type"=>"text", "name"=>"username", "value" => ""),
 			"email" => array("label"=>"Email", "type"=>"text", "name"=>"email", "value" => ""),
-			"group_id" => array("label"=>"Group", "type"=>"select", "name"=>"group_id", "value" => "", "model"=>"tb_groups", "id"=>"group_id", "show" =>"name"),
+			"group_id" => array("label"=>"Group", "type"=>"select_nola", "name"=>"group_id", "value" => "", "model"=>"tb_groups", "id"=>"group_id", "show" =>"name"),
 		);
 		
 	

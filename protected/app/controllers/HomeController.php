@@ -22,6 +22,18 @@ class HomeController extends BaseController {
 		
 		
 	} 	
+
+	public function page($id){
+		$data['id'] = $id;
+		$this->data['pageTitle'] = 'Home';
+		$this->data['pageNote'] = 'Welcome To Our Site';
+		$this->data['breadcrumb'] = 'inactive';
+		$page = 'pages.template.index';
+
+
+		$page = SiteHelpers::renderHtml($page);
+		$this->layout->nest('content',$page,$data)->with('page', $this->data);
+	}
 	
 
 	public function index()

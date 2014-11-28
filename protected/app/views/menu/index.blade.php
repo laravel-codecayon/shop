@@ -14,7 +14,7 @@
 	<div class="page-content-wrapper">  
 	<ul class="nav nav-tabs" style="margin:10px 0;">
 		<li @if($active == 'top') class="active" @endif ><a href="{{ URL::to('menu?pos=top')}}"><i class="icon-paragraph-justify2"></i> {{ Lang::get('core.tab_topmenu') }} </a></li>
-		<li @if($active == 'sidebar') class="active" @endif><a href="{{ URL::to('menu?pos=sidebar')}}"><i class="icon-paragraph-justify2"></i> {{ Lang::get('core.tab_sidemenu') }}</a></li>	
+		<!--<li @if($active == 'sidebar') class="active" @endif><a href="{{ URL::to('menu?pos=sidebar')}}"><i class="icon-paragraph-justify2"></i> {{ Lang::get('core.tab_sidemenu') }}</a></li>	-->
 	</ul>  	
 	
 	
@@ -102,30 +102,14 @@
 					<div class="col-md-8">
 					  {{ Form::text('menu_name', $row['menu_name'],array('class'=>'form-control', 'placeholder'=>'')) }} 
 					 </div> 
-				  </div> 
-				  <div class="form-group   " >
-					<label for="ipt" class=" control-label col-md-4 text-right"> {{ Lang::get('core.fr_mtype') }}  </label> 
-					<div class="col-md-8 menutype">
-					<label class="radio-inline  ">
-						
-					<input type="radio" name="menu_type" value="internal" class=""  
-					@if($row['menu_type']=='internal' || $row['menu_type']=='') checked="checked" @endif />
-					
-					Internal
-					</label>
-					<label class="radio-inline">
-					<input type="radio" name="menu_type" value="external"  class="" 
-					@if($row['menu_type']=='external' ) checked="checked" @endif  /> External 
-					</label>	  
-					 </div> 
-				  </div> 	
+				  </div>
 				  			  					
-				  <div class="form-group  ext-link" >
+				  <!--<div class="form-group  ext-link" >
 					<label for="ipt" class=" control-label col-md-4 text-right"> Url  </label>
 					<div class="col-md-8">
 					   {{ Form::text('url', $row['url'],array('class'=>'form-control', 'placeholder'=>' Type External Url')) }} 
 					 </div> 
-				  </div> 	
+				  </div> 	-->
 								  					
 				  <div class="form-group  int-link" >
 					<label for="ipt" class=" control-label col-md-4 text-right"> Module </label>
@@ -133,13 +117,13 @@
 					  <select name='module' rows='5' id='module'  style="width:100%" 
 							class='select-liquid '    >
 							<option value=""> -- Select Module or Page -- </option>
-							<optgroup label="Module ">
+							<!--<optgroup label="Module ">
 							@foreach($modules as $mod)
 								<option value="{{ $mod->module_name}}"
 								@if($row['module']== $mod->module_name ) selected="selected" @endif
 								>{{ $mod->module_title}}</option>
 							@endforeach
-							</optgroup>
+							</optgroup>-->
 							<optgroup label="Page CMS ">
 							@foreach($pages as $page)
 								<option value="{{ $page->alias}}"
@@ -152,24 +136,8 @@
 				  </div> 										
 					
 
-				  <div class="form-group  " >
-					<label for="ipt" class=" control-label col-md-4 text-right"> {{ Lang::get('core.fr_mposition') }}  </label>
-					<div class="col-md-8">
-						<input type="radio" name="position"  value="top" required 
-						@if($row['position']=='top' ) checked="checked" @endif /> {{ Lang::get('core.tab_topmenu') }} 
-						<input type="radio" name="position"  value="sidebar"  required
-						@if($row['position']=='sidebar' ) checked="checked" @endif  /> {{ Lang::get('core.tab_sidemenu') }} 
-					 </div> 
-				  </div> 	 				
-				  <div class="form-group  " >
-					<label for="ipt" class=" control-label col-md-4 text-right">{{ Lang::get('core.fr_miconclass') }}  </label>
-					<div class="col-md-8">
-					  {{ Form::text('menu_icons', $row['menu_icons'],array('class'=>'form-control', 'placeholder'=>'')) }}
-					  <p> {{ Lang::get('core.fr_mexample') }} : <span class="label label-info"> icon-windows8 </span>  , <span class="label label-info"> fa fa-cloud-upload </span> </p>
-					  <p> {{ Lang::get('core.fr_musage') }} 
-					  <a href="{{ URL::to('config/template/icons')}}" target="_blank"> Font Awesome </a>  and <a href="{{ URL::to('config/template/icon-moon')}}" target="_blank"> Icomoon </a> class name</p>
-					 </div> 
-				  </div> 					
+
+
 				  <div class="form-group  " >
 					<label for="ipt" class=" control-label col-md-4 text-right"> {{ Lang::get('core.fr_mactive') }}  </label>
 					<div class="col-md-8">
@@ -182,28 +150,9 @@
 					 </div> 
 				  </div> 
 
-			  <div class="form-group">
-				<label for="ipt" class=" control-label col-md-4">{{ Lang::get('core.fr_maccess') }}  <code>*</code></label>
-				<div class="col-md-8">
-						<?php 
-					$pers = json_decode($row['access_data'],true);
-					foreach($groups as $group) {
-						$checked = '';
-						if(isset($pers[$group->group_id]) && $pers[$group->group_id]=='1')
-						{
-							$checked= ' checked="checked"';
-						}						
-							?>		
-				  <label class="checkbox">
-				  <input type="checkbox" name="groups[<?php echo $group->group_id;?>]" value="<?php echo $group->group_id;?>" <?php echo $checked;?>  />   
-				  <?php echo $group->name;?>  
-				  </label>
-			
-				  <?php } ?>
-						 </div> 
-			  </div> 
 
-				  <div class="form-group  " >
+
+				  <!--<div class="form-group  " >
 					<label for="ipt" class=" control-label col-md-4">{{ Lang::get('core.fr_mpublic') }}   </label>
 					<div class="col-md-8">
 					<label class="checkbox"><input  type='checkbox' name='allow_guest' 
@@ -211,7 +160,7 @@
 					   value="1"	/> Yes  </lable>
 					</label>   
 				  </div>
-				</div>
+				</div>-->
 				  
 			  <div class="form-group">
 				<label class="col-sm-4 text-right">&nbsp;</label>

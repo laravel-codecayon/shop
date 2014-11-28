@@ -38,7 +38,7 @@ class PermissionController extends BaseController {
 				$this->layout->nest('content','admin.module.Login',$this->data); 
 			 }	 else {*/
 
-				$rowData = DB::table('tb_module')->where('module_type','=','addon')
+				$rowData = DB::table('tb_module')->where('module_type','=','addon')->where("status",'=',0)
 								->orderby('module_title','asc')->get();
 				$type = 'addon';
 

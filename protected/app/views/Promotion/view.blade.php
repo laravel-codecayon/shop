@@ -36,14 +36,8 @@
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Alias</td>
-						<td>{{ $row->alias }} </td>
-						
-					</tr>
-				
-					<tr>
 						<td width='30%' class='label-view text-right'>Status</td>
-						<td>{{ $row->status }} </td>
+						<td>@if($row->status == 1) Enable @else Disable @endif </td>
 						
 					</tr>
 				
@@ -55,7 +49,13 @@
 				
 					<tr>
 						<td width='30%' class='label-view text-right'>Type</td>
-						<td>{{ $row->type }} </td>
+						<td>@if($row->type == 1) Money @else Percent @endif </td>
+						
+					</tr>
+
+					<tr>
+						<td width='30%' class='label-view text-right'>Created</td>
+						<td>{{date('Y-m-d',$row->created)}}</td>
 						
 					</tr>
 				

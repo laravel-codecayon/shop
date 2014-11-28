@@ -90,15 +90,19 @@ class BaseModel extends Eloquent  {
 
 	static function getComboselect( $params , $nested = array())
 	{	
+		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+
 	   if(isset($params[3]) AND !empty($params[4]) ){
 			$table = $params[0]; 
 			$row =  DB::table($table)->where($params[3],$params[4])->get();
 		}else{
 			$table = $params[0]; 
 			if($table == "tb_groups"){
-				$row =  DB::table($table)->where("group_id","!=","1")->get();
-			}else{
+				$row =  DB::table($table)->where("group_id","!=","1")->where("lang","=",$lang)->get();
+			}elseif($table == "promotion"){
 				$row =  DB::table($table)->get();
+			}else{
+				$row =  DB::table($table)->where("lang","=",$lang)->get();
 			}
 			
 		}
