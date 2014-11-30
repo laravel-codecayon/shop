@@ -144,7 +144,15 @@ class MenuController extends BaseController {
 			$data = $this->validatePost('tb_menu');
 			$data['position'] = "top";
 			$data['allow_guest'] = "1";
-			$data['menu_type'] = "internal";
+			if(Input::get('module') == '')
+			{
+				$data['menu_type'] = "external";
+			}
+			else
+			{
+				$data['menu_type'] = "internal";
+			}
+			$data['lang'] = $this->lang;
 			$arr = array();
 			//$groups = DB::table('tb_groups')->get();
 			//foreach($groups as $g)

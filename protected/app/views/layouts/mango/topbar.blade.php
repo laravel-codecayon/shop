@@ -6,7 +6,7 @@
 			 <li class="@if(Request::is($menu['module'])) active @endif" >
 			 	<a 
 				@if($menu['menu_type'] =='external')
-					href="{{ URL::to($menu['url'])}}" 
+					href="{{ URL::to($menu['url']."/#")}}" 
 				@else
 					href="{{ URL::to($menu['module'])}}" 
 				@endif

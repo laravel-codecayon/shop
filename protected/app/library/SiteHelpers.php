@@ -104,15 +104,28 @@ class SiteHelpers
 	
 	public static function nestedMenu($parent=0,$position ='top',$active = '1')
 	{
+		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
 		$group_sql = " AND tb_menu_access.group_id ='".Session::get('gid')."' ";
 		$active 	=  ($active =='all' ? "" : "AND active ='1' ");
 		$Q = DB::select("
 		SELECT 
 			tb_menu.*
-		FROM tb_menu WHERE parent_id ='". $parent ."' ".$active." AND position ='{$position}'
-		GROUP BY tb_menu.menu_id ORDER BY ordering			
+		FROM tb_menu WHERE parent_id ='". $parent ."' ".$active." AND position ='{$position}' AND lang ='$lang'
+		GROUP BY tb_menu.menu_id ORDER BY ordering
 		");					
 		return $Q;					
+	}
+
+	public static function GetSlideshow(){
+		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+		$slide = DB::table('slideshow')->where("lang",'=', $lang)->where("slideshow_status",'=', '1')->get();
+		return $slide;
+	}
+
+	public static function GetCategories(){
+		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+		$cat = DB::table('categories')->where("lang",'=', $lang)->where("status",'=', '1')->get();
+		return $cat;
 	}
 	
 	public static function CF_encode_json($arr) {
