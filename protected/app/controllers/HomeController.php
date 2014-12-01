@@ -28,7 +28,7 @@ class HomeController extends BaseController {
 		$data['id'] = $id;
 		$this->data['pageTitle'] = 'Home';
 		$this->data['pageNote'] = 'Welcome To Our Site';
-		$this->data['breadcrumb'] = 'inactive';
+		//$this->data['breadcrumb'] = 'inactive';
 		$page = 'pages.template.index';
 
 
@@ -42,7 +42,7 @@ class HomeController extends BaseController {
 		if(CNF_FRONT =='false' && Session::get('uid') !=1) :
 			if(!Auth::check())  return Redirect::to('user/login');
 		endif; 
-		$data['items'] = DB::table('products')->where('lang','=',$this->lang)->where('status','=','1')->orderby('created','desc')->limit('10')->get();
+		$data['items'] = DB::table('products')->where('lang','=',$this->lang)->where('status','=','1')->orderby('created','desc')->limit('20')->get();
 		$this->data['pageTitle'] = 'Home';
 		$this->data['pageNote'] = 'Welcome To Our Site';
 		//$this->data['breadcrumb'] = 'inactive';			
@@ -55,8 +55,23 @@ class HomeController extends BaseController {
 			
 	}
 
-	public function categorydetail($alias,$id){
-		echo $alias;die;
+	public function categorydetail($alias = '',$id = '', $page = ''){
+		$filter = " AND status = 1 AND CategoryID = $id AND lang = '$this->lang'";
+		$page = $page != '' ? $page : 1;
+		$params = array(
+			'page'		=> $page ,
+			'limit'		=> (!is_null(Input::get('rows')) ? filter_var(Input::get('rows'),FILTER_VALIDATE_INT) : 16 ) ,
+			'sort'		=> 'ProductID' ,
+			'order'		=> 'DESC',
+			'params'	=> $filter,
+			//'global'	=> (isset($this->access['is_global']) ? $this->access['is_global'] : 0 )
+		);
+		$model = new Nproducts();
+		$results = $model->getRows( $params );		
+		print_r($results);die;
+		// Build pagination setting
+		$page = $page >= 1 && filter_var($page, FILTER_VALIDATE_INT) !== false ? $page : 1;	
+		$pagination = Paginator::make($results['rows'], $results['total'],$params['limit']);
 	}
 	
 	public function  postContactform()

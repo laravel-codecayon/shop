@@ -160,7 +160,11 @@ class PromotionController extends BaseController {
 			$data = $this->getDataPost('promotion');
 			$data['created'] = time();
 			unset($data['lang']);
+
 			$ID = $this->model->insertRow($data , Input::get('id_promotion'));
+			if($data['status'] == 0){
+				DB::table('products')->where('id_promotion','=',$ID)->update(array('id_promotion'=>'0'));
+			}
 			// Input logs
 			if( Input::get('id_promotion') =='')
 			{
@@ -188,6 +192,9 @@ class PromotionController extends BaseController {
 				->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));		
 		// delete multipe rows 
 		$this->model->destroy(Input::get('id_promotion'));
+		foreach(Input::get('id_promotion') as $id_pro){
+			DB::table('products')->where('id_promotion','=',$id_pro)->update(array('id_promotion'=>'0'));
+		}
 		$this->inputLogs("ID : ".implode(",",Input::get('id_promotion'))."  , Has Been Removed Successfull");
 		// redirect
 		Session::flash('message', SiteHelpers::alert('success',Lang::get('core.note_success_delete')));

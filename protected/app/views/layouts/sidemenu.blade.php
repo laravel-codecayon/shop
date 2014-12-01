@@ -101,7 +101,7 @@
 				<a href="{{ URL::to('groups')}}"><i class="fa fa-users"></i> <span class="nav-label">Groups</span><span class="fa arrow"></span></a>
 			</li>
 			<li @if(Request::is('menu')) class="active" @endif>
-				<a href="{{ URL::to('menu')}}"><i class="fa fa-users"></i> <span class="nav-label">Menus</span><span class="fa arrow"></span></a>
+				<a href="{{ URL::to('menu')}}"><i class="fa fa-users"></i> <span class="nav-label">Menu</span><span class="fa arrow"></span></a>
 			</li>
 		@endif
       </ul>

@@ -101,6 +101,77 @@ class SiteHelpers
 		//echo '<pre>';print_r($data); echo '</pre>'; exit;
 		return $data;
 	}
+
+	public static function templateProduct($data = "")
+	{
+		$image = $data->image == '' ? URL::to('').'/sximo/images/no_pic.png' : URL::to('').'/uploads/products/thumb/'.$data->image;
+		if($data->id_promotion == 0)
+		{
+			$price = '<span class="price-new">'.number_format($data->UnitPrice,0,',','.') . 'VNĐ</span>';
+		}
+		else
+		{
+			$promotion = DB::table('promotion')->where('status','=',1)->where('id_promotion','=',$data->id_promotion)->first();
+			if(count($promotion) >= 1){
+				$pri = $promotion->type == 1 ? $data->UnitPrice - $promotion->promotion : $data->UnitPrice - ($data->UnitPrice * $promotion->promotion/100);
+				$price = '<span class="price-old">'.number_format($data->UnitPrice,0,',','.') . 'VNĐ</span><br/>';
+				$price .= '<span class="price-new">'.number_format($pri,0,',','.') . 'VNĐ</span>';
+			}
+			else{
+				$price = '<span class="price-new">'.number_format($data->UnitPrice,0,',','.') . 'VNĐ</span>';
+			}
+		}
+		$output = '';
+		$output .=	'<div>';
+        $output .=   '<div class="image"><a title="'.$data->ProductName.'" href="'.URL::to('').'/'.$data->slug.'-'.$data->ProductID.'.html"><img src="'.$image.'" alt="'.$data->ProductName.'" /></a></div>';
+        $output .=   '<div class="name"><a title="'.$data->ProductName.'" href="'.URL::to('').'/'.$data->slug.'-'.$data->ProductID.'.html">'.$data->ProductName.'</a></div>';
+        $output .=   '<div class="price"> '.$price.' </div>';
+        $output .=   '<div class="cart">';
+        $output .=   '<input type="button" value="Add to Cart" onClick="addToCart("'.$data->ProductID.'");" class="button" />';
+        $output .=   '</div>';
+        $output .=   '</div>';
+        return $output;
+	}
+
+	public static function templateProductSide($data = "")
+	{
+		$image = $data->image == '' ? URL::to('').'/sximo/images/no_pic.png' : URL::to('').'/uploads/products/thumb/'.$data->image;
+		if($data->id_promotion == 0)
+		{
+			$price = '<span class="price-new">'.number_format($data->UnitPrice,0,',','.') . 'VNĐ</span>';
+		}
+		else
+		{
+			$promotion = DB::table('promotion')->where('status','=',1)->where('id_promotion','=',$data->id_promotion)->first();
+			if(count($promotion) >= 1){
+				$pri = $promotion->type == 1 ? $data->UnitPrice - $promotion->promotion : $data->UnitPrice - ($data->UnitPrice * $promotion->promotion/100);
+				$price = '<span class="price-old">'.number_format($data->UnitPrice,0,',','.') . 'VNĐ</span><br/>';
+				$price .= '<span class="price-new">'.number_format($pri,0,',','.') . 'VNĐ</span>';
+			}
+			else{
+				$price = '<span class="price-new">'.number_format($data->UnitPrice,0,',','.') . 'VNĐ</span>';
+			}
+		}
+		$output = '';
+		$output .=	'<div>';
+        $output .=   '<div class="image"><a title="'.$data->ProductName.'" href="'.URL::to('').'/'.$data->slug.'-'.$data->ProductID.'.html"><img width="60px" src="'.$image.'" alt="'.$data->ProductName.'" /></a></div>';
+        $output .=   '<div class="name"><a title="'.$data->ProductName.'" href="'.URL::to('').'/'.$data->slug.'-'.$data->ProductID.'.html">'.$data->ProductName.'</a></div>';
+        $output .=   '<div class="price"> '.$price.' </div>';
+        $output .=   '</div>';
+        return $output;
+	}
+
+	public static function saleProducts(){
+		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+		$data = DB::table('products')->where('status','=','1')->where('lang','=',$lang)->where('id_promotion','!=','0')->orderBy(DB::raw('RAND()'))->limit(5)->get();
+		return $data;
+	}
+
+	public static function randomProduct(){
+		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+		$data = DB::table('products')->where('status','=','1')->where('lang','=',$lang)->orderBy(DB::raw('RAND()'))->limit(5)->get();
+		return $data;
+	}
 	
 	public static function nestedMenu($parent=0,$position ='top',$active = '1')
 	{
@@ -635,6 +706,12 @@ public static function alphaID($in, $to_num = false, $pad_up = false, $passKey =
 				$datas = DB::table($field['model'])->where("$id",'=', $item)->first();
 				$form =$datas != "" ? $datas->$field['show'] : "NULL";
 				break;
+			case 'select_nola';
+				$item = $data->$field['id'];
+				$id = $field['id'];
+				$datas = DB::table($field['model'])->where("$id",'=', $item)->first();
+				$form =$datas != "" ? $datas->$field['show'] : "NULL";
+				break;
 		}
 		return $form;
 	}
@@ -931,10 +1008,10 @@ public static function alphaID($in, $to_num = false, $pad_up = false, $passKey =
       if( $image_type == IMAGETYPE_JPEG ) {
  
          $image = imagecreatefromjpeg($imageold);
-      } elseif( $this->image_type == IMAGETYPE_GIF ) {
+      } elseif( $image_type == IMAGETYPE_GIF ) {
  
          $image = imagecreatefromgif($imageold);
-      } elseif( $this->image_type == IMAGETYPE_PNG ) {
+      } elseif( $image_type == IMAGETYPE_PNG ) {
  
          $image = imagecreatefrompng($imageold);
       }

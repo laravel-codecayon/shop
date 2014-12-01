@@ -183,7 +183,7 @@ class NproductsController extends BaseController {
 				    $data['image'] = $newfilename;
 				    $orgFile = $destinationPath.'/'.$newfilename;
 				    $thumbFile = $destinationPath.'/thumb/'.$newfilename;
-				    SiteHelpers::resizewidth("180",$orgFile,$thumbFile);
+				    SiteHelpers::resizewidth("152",$orgFile,$thumbFile);
 				    if(Input::get('action') != "")
 				    {
 				    	$data_old = $this->model->getRow(Input::get('action'));
