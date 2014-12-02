@@ -22,6 +22,10 @@ class Ncategories extends BaseModel  {
 	public static function queryGroup(){
 		return "  ";
 	}
+
+	public static function detail($id = ''){
+		return DB::table('categories')->where('CategoryID','=',$id)->first();
+	}
 	
 	public static $rules=array(
 			"CategoryName" => "required",

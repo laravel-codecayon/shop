@@ -14,7 +14,8 @@ class HomeController extends BaseController {
 	|	Route::get('/', 'HomeController@showWelcome');
 	|
 	*/
-	
+	protected  $perpage = 12;
+
 	public function __construct() {
 		
 		parent::__construct();
@@ -55,23 +56,38 @@ class HomeController extends BaseController {
 			
 	}
 
-	public function categorydetail($alias = '',$id = '', $page = ''){
+	public function categorydetail($alias = '',$id = ''){
+		
+		$cat = Ncategories::detail($id);
+		$sortget = ( Input::get('sort') != '') ? Input::get('sort') : 'ProductID-desc';
+		list($sort,$order) = explode('-', $sortget);
 		$filter = " AND status = 1 AND CategoryID = $id AND lang = '$this->lang'";
-		$page = $page != '' ? $page : 1;
+		$page = (!is_null(Input::get('page') && Input::get('page') != '')) ? Input::get('page') : 1;
 		$params = array(
 			'page'		=> $page ,
-			'limit'		=> (!is_null(Input::get('rows')) ? filter_var(Input::get('rows'),FILTER_VALIDATE_INT) : 16 ) ,
-			'sort'		=> 'ProductID' ,
-			'order'		=> 'DESC',
+			'limit'		=> (!is_null(Input::get('numpage')) ? filter_var(Input::get('numpage'),FILTER_VALIDATE_INT) : $this->perpage ) ,
+			'sort'		=> $sort ,
+			'order'		=> $order,
 			'params'	=> $filter,
 			//'global'	=> (isset($this->access['is_global']) ? $this->access['is_global'] : 0 )
 		);
 		$model = new Nproducts();
-		$results = $model->getRows( $params );		
-		print_r($results);die;
+		$results = $model->getRows( $params );
 		// Build pagination setting
 		$page = $page >= 1 && filter_var($page, FILTER_VALIDATE_INT) !== false ? $page : 1;	
 		$pagination = Paginator::make($results['rows'], $results['total'],$params['limit']);
+		$data['cat']		=$cat;
+		$data['data']		= $results['rows'];
+		$data['page']		= $page;
+		$data['sort']		= $sortget;
+		$data['numpage']	= $params['limit'];
+		// Build Pagination 
+		$data['pagination']	= $pagination;
+		// Build pager number and append current param GET
+		$data['pager'] 		= $this->injectPaginate();
+
+		$html = SiteHelpers::renderHtml('pages.template.category');
+		$this->layout->nest('content',$html,$data);
 	}
 	
 	public function  postContactform()
