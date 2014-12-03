@@ -60,7 +60,6 @@ class HomeController extends BaseController {
 		if($_GET['id'] != '' && $_GET['quality'] != ''){
 			$id = $_GET['id'] ;
 			$quality = $_GET['quality'] ;
-			Session::start();
 			$cart = Session::get('addcart');
 			if($cart[$id] != ''){
 				$cart[$id] = $cart[$id] + $quality;
@@ -68,9 +67,21 @@ class HomeController extends BaseController {
 			else{
 				$cart[$id] =  $quality;
 			}
+			//print_r($cart);
+			Session::put('addcart',$cart);
+			Session::save();
 
-			Session::save('addcart',$cart);
-			echo 1;die;
+			$item = 0;
+			$price = 0;
+			$mdPro = new Nproducts();
+			foreach(Session::get('addcart') as $key=>$val){
+				$data = $mdPro->find($key);
+				$price_item = $data->UnitPrice * $val;
+				$price += $price_item;
+				$item += $key;
+			}
+
+			echo $item . " item(s) - " . $price;die;
 		}
 		echo 0;die;
 
