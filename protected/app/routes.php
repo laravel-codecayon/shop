@@ -21,6 +21,7 @@ if (defined('CNF_MULTILANG') && CNF_MULTILANG == 1) {
 Route::controller('user', 'UserController');
 //Route::get('category/{alias}-{id}-{page}.html', 'HomeController@categorydetail')->where(array('alias' => '(.*)','id'=>'[0-9]+','page'=>'[0-9]+'));
 Route::get('category/{alias}-{id}.html', 'HomeController@categorydetail')->where(array('alias' => '(.*)','id'=>'[0-9]+'));
+Route::get('detail/{alias}-{id}.html', 'HomeController@productdetail')->where(array('alias' => '(.*)','id'=>'[0-9]+'));
 Route::get('/', 'HomeController@index');
 Route::controller('home', 'HomeController');
 Route::controller('blog', 'BlogController');

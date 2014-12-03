@@ -100,7 +100,7 @@ class BaseModel extends Eloquent  {
 			if($table == "tb_groups"){
 				$row =  DB::table($table)->where("group_id","!=","1")->where("lang","=",$lang)->get();
 			}elseif($table == "promotion"){
-				$row =  DB::table($table)->get();
+				$row =  DB::table($table)->where('status','=','1')->get();
 			}else{
 				$row =  DB::table($table)->where("lang","=",$lang)->get();
 			}

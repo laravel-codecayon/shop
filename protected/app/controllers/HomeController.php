@@ -56,6 +56,44 @@ class HomeController extends BaseController {
 			
 	}
 
+	public function getAddtocart(){
+		if($_GET['id'] != '' && $_GET['quality'] != ''){
+			$id = $_GET['id'] ;
+			$quality = $_GET['quality'] ;
+			Session::start();
+			$cart = Session::get('addcart');
+			if($cart[$id] != ''){
+				$cart[$id] = $cart[$id] + $quality;
+			}
+			else{
+				$cart[$id] =  $quality;
+			}
+
+			Session::save('addcart',$cart);
+			echo 1;die;
+		}
+		echo 0;die;
+
+	}
+
+	public function productdetail($alias = '',$id = ''){
+		$mdPro = new Nproducts();
+		$mdCat = new Ncategories();
+		$mdImg = new Imagesproduct();
+		$product = $mdPro->find($id);
+		$cat = $mdCat->find($product->CategoryID);
+		$images = $mdImg->getImagesOfProduct($product->ProductID);
+
+		$data['cat'] = $cat;
+		$data['cat_link'] = $cat != NULL ? "» <a href='".URL::to('')."/category/".$cat->alias."-".$cat->CategoryID.".html'>".$cat->CategoryName."</a>" : '';
+		$data['images'] = $images;
+		$data['product'] = $product;
+		$seo['pageTitle'] = $product->ProductName;
+		$seo['pageNote'] = $cat != NULL ? $cat->CategoryName :'Welcome To Our Site';
+		$html = SiteHelpers::renderHtml('pages.template.productdetail');
+		$this->layout->nest('content',$html,$data)->with('page', $seo);
+	}
+
 	public function categorydetail($alias = '',$id = ''){
 		
 		$cat = Ncategories::detail($id);

@@ -217,7 +217,7 @@ class NproductsController extends BaseController {
 					    $newname = "image_".$key.time().'.'.$explode_name[1];
 					    if(move_uploaded_file($file_tmp,$path_image.$newname)){
 					    	$model_img_pro->insertRow(array("name"=>$newname,"id_product"=>$ID),"");
-					    	SiteHelpers::resizewidth("180",$path_image.$newname,$path_image."thumb/".$newname);
+					    	SiteHelpers::resizewidth("300",$path_image.$newname,$path_image."thumb/".$newname);
 					    }
 					}
 				}

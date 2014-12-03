@@ -123,9 +123,9 @@ class SiteHelpers
 		}
 		$output = '';
 		$output .=	'<div>';
-        $output .=   '<div class="image"><a title="'.$data->ProductName.'" href="'.URL::to('').'/'.$data->slug.'-'.$data->ProductID.'.html"><img src="'.$image.'" alt="'.$data->ProductName.'" /></a></div>';
+        $output .=   '<div class="image"><a title="'.$data->ProductName.'" href="'.URL::to('').'/detail/'.$data->slug.'-'.$data->ProductID.'.html"><img src="'.$image.'" alt="'.$data->ProductName.'" /></a></div>';
         $output .=   '<div class="description"> '.$data->description.' </div>';
-        $output .=   '<div class="name"><a title="'.$data->ProductName.'" href="'.URL::to('').'/'.$data->slug.'-'.$data->ProductID.'.html">'.$data->ProductName.'</a></div>';
+        $output .=   '<div class="name"><a title="'.$data->ProductName.'" href="'.URL::to('').'/detail/'.$data->slug.'-'.$data->ProductID.'.html">'.$data->ProductName.'</a></div>';
         $output .=   '<div class="price"> '.$price.' </div>';
         $output .=   '<div class="cart">';
         $output .=   '<input type="button" value="Add to Cart" onClick="addToCart("'.$data->ProductID.'");" class="button" />';
@@ -155,11 +155,16 @@ class SiteHelpers
 		}
 		$output = '';
 		$output .=	'<div>';
-        $output .=   '<div class="image"><a title="'.$data->ProductName.'" href="'.URL::to('').'/'.$data->slug.'-'.$data->ProductID.'.html"><img width="60px" src="'.$image.'" alt="'.$data->ProductName.'" /></a></div>';
-        $output .=   '<div class="name"><a title="'.$data->ProductName.'" href="'.URL::to('').'/'.$data->slug.'-'.$data->ProductID.'.html">'.$data->ProductName.'</a></div>';
+        $output .=   '<div class="image"><a title="'.$data->ProductName.'" href="'.URL::to('').'/detail/'.$data->slug.'-'.$data->ProductID.'.html"><img width="60px" src="'.$image.'" alt="'.$data->ProductName.'" /></a></div>';
+        $output .=   '<div class="name"><a title="'.$data->ProductName.'" href="'.URL::to('').'/detail/'.$data->slug.'-'.$data->ProductID.'.html">'.$data->ProductName.'</a></div>';
         $output .=   '<div class="price"> '.$price.' </div>';
         $output .=   '</div>';
         return $output;
+	}
+
+	public static function getNamePromotion($id){
+		$data = DB::table('promotion')->where('id_promotion','=',$id)->first();
+		return $data;
 	}
 
 	public static function saleProducts(){
