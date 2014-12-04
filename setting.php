@@ -12,8 +12,9 @@ define('CNF_LANG','en');
 define('CNF_REGIST','true');
 define('CNF_FRONT','true');
 define('CNF_RECAPTCHA','false');
-//define('CNF_THEME','mango');
 define('CNF_THEME','shop');
 define('CNF_RECAPTCHAPUBLICKEY','6Ldg6_ISAAAAAGn4r9WpJwL7jEameeErktf4Jjos');
 define('CNF_RECAPTCHAPRIVATEKEY','6Ldg6_ISAAAAAMsBDL9GqFq4t5kQzCAOuYFsyKhN');
+define('CNF_VAT','1');
+define('CNF_VAT_VAL','10');
 ?>

@@ -124,11 +124,11 @@ class SiteHelpers
 		$output = '';
 		$output .=	'<div>';
         $output .=   '<div class="image"><a title="'.$data->ProductName.'" href="'.URL::to('').'/detail/'.$data->slug.'-'.$data->ProductID.'.html"><img src="'.$image.'" alt="'.$data->ProductName.'" /></a></div>';
-        $output .=   '<div class="description"> '.$data->description.' </div>';
+        $output .=   '<div class="description" style="display:none;"> '.$data->description.' </div>';
         $output .=   '<div class="name"><a title="'.$data->ProductName.'" href="'.URL::to('').'/detail/'.$data->slug.'-'.$data->ProductID.'.html">'.$data->ProductName.'</a></div>';
         $output .=   '<div class="price"> '.$price.' </div>';
         $output .=   '<div class="cart">';
-        $output .=   '<input type="button" value="Add to Cart" onClick="addToCart("'.$data->ProductID.'");" class="button" />';
+        $output .=   '<input type="button" value="Add to Cart" onClick="addcart('.$data->ProductID.',1);" class="button" />';
         $output .=   '</div>';
         $output .=   '</div>';
         return $output;
@@ -162,6 +162,25 @@ class SiteHelpers
         return $output;
 	}
 
+	public static function getCart(){
+		$item = 0;
+		$price = 0;
+		if(Session::has('addcart')){
+			$cart = Session::get('addcart');
+			$item = 0;
+			$price = 0;
+			$mdPro = new Nproducts();
+			foreach(Session::get('addcart') as $key=>$val){
+				$data = $mdPro->find($key);
+				$price_convert = SiteHelpers::getPricePromotion($data);
+				$price_item = $price_convert * $val;
+				$price += $price_item;
+				$item += $val;
+			}
+		}
+		return $item . " item(s) - " . number_format($price,0,',','.') . 'VNĐ';
+	}
+
 	public static function getNamePromotion($id){
 		$data = DB::table('promotion')->where('id_promotion','=',$id)->first();
 		return $data;
@@ -177,6 +196,19 @@ class SiteHelpers
 		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
 		$data = DB::table('products')->where('status','=','1')->where('lang','=',$lang)->orderBy(DB::raw('RAND()'))->limit(5)->get();
 		return $data;
+	}
+
+	public static function getPricePromotion($product){
+		if($product->id_promotion == 0)
+		{
+			return $product->UnitPrice;
+		}
+		else
+		{
+			$promotion = DB::table('promotion')->where('id_promotion','=',$product->id_promotion)->first();
+			$price = $promotion->type == 1 ? $product->UnitPrice - $promotion->promotion : $product->UnitPrice - ($product->UnitPrice * $promotion->promotion/100);
+			return $price;
+		}
 	}
 	
 	public static function nestedMenu($parent=0,$position ='top',$active = '1')

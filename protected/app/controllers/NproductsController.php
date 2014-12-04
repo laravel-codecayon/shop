@@ -168,7 +168,7 @@ class NproductsController extends BaseController {
 		$rules = Nproducts::$rules;
 		//print_r(Input::all());die;
 		$validator = Validator::make(Input::all(), $rules);
-		SiteHelpers::globalXssClean();
+		//SiteHelpers::globalXssClean();
 		if ($validator->passes()) {
 			$data = $this->getDataPost('products');
 			if(!is_null(Input::file('file')))

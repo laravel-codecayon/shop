@@ -26,9 +26,13 @@ class HomeController extends BaseController {
 	} 	
 
 	public function page($id){
-		$data['id'] = $id;
-		$this->data['pageTitle'] = 'Home';
+		$mdPage = new Pages();
+		$item = $mdPage->find($id);
+
+		$data['page'] = $item;
+		$this->data['pageTitle'] = $item->title;
 		$this->data['pageNote'] = 'Welcome To Our Site';
+
 		//$this->data['breadcrumb'] = 'inactive';
 		$page = 'pages.template.index';
 
@@ -61,30 +65,56 @@ class HomeController extends BaseController {
 			$id = $_GET['id'] ;
 			$quality = $_GET['quality'] ;
 			$cart = Session::get('addcart');
-			if($cart[$id] != ''){
+			if(isset($cart[$id])){
 				$cart[$id] = $cart[$id] + $quality;
 			}
 			else{
 				$cart[$id] =  $quality;
 			}
-			//print_r($cart);
+			
 			Session::put('addcart',$cart);
 			Session::save();
-
-			$item = 0;
-			$price = 0;
-			$mdPro = new Nproducts();
-			foreach(Session::get('addcart') as $key=>$val){
-				$data = $mdPro->find($key);
-				$price_item = $data->UnitPrice * $val;
-				$price += $price_item;
-				$item += $key;
-			}
-
-			echo $item . " item(s) - " . $price;die;
 		}
-		echo 0;die;
+		$output = SiteHelpers::getCart();
 
+		echo $output;die;
+
+	}
+
+	public function getLoadcart(){
+		$cart = Session::get('addcart');
+		if(count($cart) > 0){
+			$mdPro = new Nproducts();
+			$datacart = array();
+			foreach($cart as $key=>$val){
+				$data = $mdPro->find($key);
+				$price_convert = SiteHelpers::getPricePromotion($data);
+				$price_item = $price_convert * $val;
+				$datacart[$key]['ProductName'] = $data->ProductName;
+				$datacart[$key]['image'] = $data->image != '' ? asset('uploads/products/thumb').'/'.$data->image : asset('sximo/images/no_pic.png');
+				$datacart[$key]['sl'] = $val;
+				$datacart[$key]['link'] = URL::to('detail').'/'.$data->slug.'-'.$data->ProductID.'.html';
+				$datacart[$key]['price'] = number_format($price_convert,0,',','.').' VNĐ';
+			}
+			$view = View::make('pages.template.loadcart')->with('datacart', $datacart);
+	    	echo $view;die;
+		}else{
+			echo '';die;
+		}
+
+	}
+
+	public function getRemovecart(){
+		if($_GET['id'] != ''){
+			$id = $_GET['id'] ;
+			$cart = Session::get('addcart');
+			unset($cart[$id]);
+			Session::put('addcart',$cart);
+			Session::save();
+		}
+		$output = SiteHelpers::getCart();
+
+		echo $output;die;
 	}
 
 	public function productdetail($alias = '',$id = ''){
@@ -95,6 +125,9 @@ class HomeController extends BaseController {
 		$cat = $mdCat->find($product->CategoryID);
 		$images = $mdImg->getImagesOfProduct($product->ProductID);
 
+		$pro_same = DB::table('products')->where('ProductID','!=',$product->ProductID)->where('status','=',1)->where('lang','=',$this->lang)->where('CategoryID','=',$product->CategoryID)->limit(10)->get();
+
+		$data['pro_same'] = $pro_same;
 		$data['cat'] = $cat;
 		$data['cat_link'] = $cat != NULL ? "» <a href='".URL::to('')."/category/".$cat->alias."-".$cat->CategoryID.".html'>".$cat->CategoryName."</a>" : '';
 		$data['images'] = $images;

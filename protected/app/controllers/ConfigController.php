@@ -52,12 +52,14 @@ class ConfigController extends BaseController  {
 			$val .= 	"define('CNF_THEME','".Input::get('cnf_theme')."');\n";		
 			$val .= 	"define('CNF_RECAPTCHAPUBLICKEY','".CNF_RECAPTCHAPUBLICKEY."');\n";
 			$val .= 	"define('CNF_RECAPTCHAPRIVATEKEY','".CNF_RECAPTCHAPRIVATEKEY."');\n";								
+			$val .= 	"define('CNF_VAT','1');\n";
+			$val .= 	"define('CNF_VAT_VAL','10');\n";
 			$val .= 	"?>";
 	
-/*			$filename = 'setting.php';
+			$filename = 'setting.php';
 			$fp=fopen($filename,"w+"); 
 			fwrite($fp,$val); 
-			fclose($fp); */
+			fclose($fp); 
 			return Redirect::to('config')->with('message',SiteHelpers::alert('success','Setting Has Been Save Successful') );
 		} else {
 			return Redirect::to('config')->with('message', SiteHelpers::alert('success','The following errors occurred'))
