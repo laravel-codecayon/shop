@@ -81,9 +81,6 @@
     <!--Left End-->
     <!--Middle Part Start-->
     <div id="content">
-      <!--Slideshow Part Start-->
-      @include('layouts/shop/slideshow')
-      <!--Slideshow Part End-->
       <!--Featured Product Part Start-->
       {{$content}}
       <!--Featured Product Part End-->

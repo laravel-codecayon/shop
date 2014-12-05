@@ -225,7 +225,7 @@ function mType( val )
 	
 function update_out(selector, sel2){
 	
-	var out = $(selector).nestable('serialize');
+	var out = $(selector).nestable('serialize');alert(JSON.stringify(out));
 	$(sel2).val(JSON.stringify(out));
 
 }
