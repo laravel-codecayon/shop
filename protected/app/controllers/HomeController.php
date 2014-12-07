@@ -40,6 +40,104 @@ class HomeController extends BaseController {
 		$page = SiteHelpers::renderHtml($page);
 		$this->layout->nest('content',$page,$data)->with('page', $this->data);
 	}
+
+	public function cart()
+	{
+		$cart = Session::get('addcart');
+		if(count($cart) <= 0){
+			return Redirect::to('')->with('message', SiteHelpers::alert('success','Thank You , Your message has been sent !'));	
+		}
+		$datacart = array();
+		$mdPro = new Nproducts();
+		$mdCat = new Ncategories();
+		//$total = 0;
+		$total_real = 0;
+		foreach ($cart as $key => $value) {
+			$data = $mdPro->find($key);
+			$category = $mdCat->find($data->CategoryID);
+			$price_convert = SiteHelpers::getPricePromotion($data);
+
+			$price_item = $price_convert * $value;
+			//$total += $data->UnitPrice * $value ;
+			$total_real += $price_item ;
+			$datacart[$key]['image'] = $data->image == '' ? URL::to('').'/sximo/images/no_pic.png' : URL::to('').'/uploads/products/thumb/'.$data->image;
+			$datacart[$key]['ProductName'] = $data->ProductName;
+			$datacart[$key]['categoryname'] = $category->CategoryName != "" ?  $category->CategoryName : 'Unknow';
+			$datacart[$key]['sl'] = $value;
+			$datacart[$key]['price'] = number_format($price_convert,0,',','.') . 'VNĐ';
+			$datacart[$key]['price_total'] = number_format($price_item,0,',','.') . 'VNĐ';
+			$datacart[$key]['price_promition'] = $data->id_promotion != 0 ? '<br/><span style="color: #f00;font-weight: normal;text-decoration: line-through;">'.number_format($data->UnitPrice,0,',','.') . 'VNĐ</span><br/>' : '';
+			$datacart[$key]['link'] = URL::to('')."/detail/".$data->slug . "-" . $data->ProductID . ".html";
+		}
+		$datas['cart'] = $datacart;
+		//$datas['total'] = $total;
+		$datas['total_real'] = number_format($total_real,0,',','.') . 'VNĐ';
+		$datas['total'] = $total_real;
+		//print_r($data);die;
+
+		$seo['pageTitle'] = 'Cart';
+		$seo['pageNote'] = 'Welcome To Our Site';
+		$html = SiteHelpers::renderHtml('pages.template.cart');
+		$this->layout->nest('content',$html,$datas)->with('page', $seo);
+	}
+
+	public function checkout()
+	{
+		$cart = Session::get('addcart');
+		if(count($cart) <= 0){
+			return Redirect::to('')->with('message', SiteHelpers::alert('success','Thank You , Your message has been sent !'));	
+		}
+		$datacart = array();
+		$mdPro = new Nproducts();
+		$mdCat = new Ncategories();
+		//$total = 0;
+		$total_real = 0;
+		foreach ($cart as $key => $value) {
+			$data = $mdPro->find($key);
+			$category = $mdCat->find($data->CategoryID);
+			$price_convert = SiteHelpers::getPricePromotion($data);
+
+			$price_item = $price_convert * $value;
+			//$total += $data->UnitPrice * $value ;
+			$total_real += $price_item ;
+			$datacart[$key]['image'] = $data->image == '' ? URL::to('').'/sximo/images/no_pic.png' : URL::to('').'/uploads/products/thumb/'.$data->image;
+			$datacart[$key]['ProductName'] = $data->ProductName;
+			$datacart[$key]['categoryname'] = $category->CategoryName != "" ?  $category->CategoryName : 'Unknow';
+			$datacart[$key]['sl'] = $value;
+			$datacart[$key]['price'] = number_format($price_convert,0,',','.') . 'VNĐ';
+			$datacart[$key]['price_total'] = number_format($price_item,0,',','.') . 'VNĐ';
+			$datacart[$key]['price_promition'] = $data->id_promotion != 0 ? '<br/><span style="color: #f00;font-weight: normal;text-decoration: line-through;">'.number_format($data->UnitPrice,0,',','.') . 'VNĐ</span><br/>' : '';
+			$datacart[$key]['link'] = URL::to('')."/detail/".$data->slug . "-" . $data->ProductID . ".html";
+		}
+		$datas['cart'] = $datacart;
+		//$datas['total'] = $total;
+		$datas['total_real'] = number_format($total_real,0,',','.') . 'VNĐ';
+		$datas['total'] = $total_real;
+
+		$this->data['pageTitle'] = 'Check out';
+		$this->data['pageNote'] = 'Welcome To Our Site';
+
+		//$this->data['breadcrumb'] = 'inactive';
+		$page = 'pages.template.checkout';
+
+
+		$page = SiteHelpers::renderHtml($page);
+		$this->layout->nest('content',$page,$datas)->with('page', $this->data);
+	}
+
+	public function getUpdatecart(){
+		if($_GET['id'] != '' && $_GET['quality'] != ''){
+			$id = $_GET['id'] ;
+			$quality = $_GET['quality'] ;
+			$cart = Session::get('addcart');
+			if(isset($cart[$id])){
+				$cart[$id] = $quality;
+				Session::put('addcart',$cart);
+				Session::save();
+			}
+		}
+		die;
+	}
 	
 
 	public function index()

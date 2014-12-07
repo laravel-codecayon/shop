@@ -57,7 +57,7 @@
         <div class="mini-cart-info">
 
         </div>
-        <div class="checkout"><a href="cart.html" class="button">View Cart</a> &nbsp; <a href="checkout.html" class="button">Checkout</a></div>
+        <div class="checkout"><a href="{{URL::to('')}}/cart.html" class="button">View Cart</a> &nbsp; <a href="checkout.html" class="button">Checkout</a></div>
       </div>
     </div>
     <!--Mini Cart End-->
@@ -164,6 +164,20 @@
           $("#cart_"+id).hide();
           $("#cart-total").html(data);
     });
+  }
+  function remove_cart(id){
+    var link = "{{ URL::to('home/removecart?id=') }}"+id;
+    $.get(link,function(data,status){
+          window.location.href = "{{URL::to('cart.html')}}";
+    });
+  }
+  function update_cart(id){
+    var qua = $("#sl_"+id).val();
+    var link = "{{ URL::to('home/updatecart?id=') }}"+id+"&quality="+qua;
+    $.get(link,function(data,status){
+      window.location.href = "{{URL::to('cart.html')}}";
+    });
+    return false;
   }
 </script>
 <!--Footer Part End-->

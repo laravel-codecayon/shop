@@ -210,6 +210,11 @@ class SiteHelpers
 			return $price;
 		}
 	}
+
+	public static function getValuePromotion($product){
+		$promotion = DB::table('promotion')->where('id_promotion','=',$product->id_promotion)->first();
+		return $promotion->type == 1 ? $promotion->promotion : ($product->UnitPrice * $promotion->promotion/100);
+	}
 	
 	public static function nestedMenu($parent=0,$position ='top',$active = '1')
 	{
