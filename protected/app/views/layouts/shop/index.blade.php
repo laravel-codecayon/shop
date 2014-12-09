@@ -26,7 +26,7 @@
 {{ HTML::script('sximo/themes/shop/js/jquery.easing-1.3.min.js') }}  
 {{ HTML::script('sximo/themes/shop/js/cloud_zoom.js') }}  
 {{ HTML::script('sximo/themes/shop/js/custom.js') }}
-{{ HTML::script('sximo/themes/shop/jsjquery.dcjqaccordion.js') }} 
+{{ HTML::script('sximo/themes/shop/js/jquery.dcjqaccordion.js') }} 
 
 <!-- JS Part End-->
 </head>

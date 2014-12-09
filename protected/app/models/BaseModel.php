@@ -101,6 +101,12 @@ class BaseModel extends Eloquent  {
 				$row =  DB::table($table)->where("group_id","!=","1")->where("lang","=",$lang)->get();
 			}elseif($table == "promotion"){
 				$row =  DB::table($table)->where('status','=','1')->get();
+			}elseif($table == "province"){
+				$row =  DB::table($table)->get();
+			}elseif($table == "ward"){
+				$row =  DB::table($table)->where('districtid','=',"$params[3]")->get();
+			}elseif($table == "district" ){
+				$row =  DB::table($table)->where('provinceid','=',"$params[3]")->get();
 			}else{
 				$row =  DB::table($table)->where("lang","=",$lang)->get();
 			}

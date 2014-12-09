@@ -81,6 +81,24 @@ class HomeController extends BaseController {
 		$this->layout->nest('content',$html,$datas)->with('page', $seo);
 	}
 
+	public function postOrder(){
+		
+	}
+
+	public function postCheckcaptcha(){
+		$rules = array(
+			'recaptcha_response_field'=>'required|recaptcha',
+			);
+		$validator = Validator::make(Input::all(), $rules);
+
+		if ($validator->passes()) {
+			echo "true";die;
+		}
+		else{
+			echo "false";die;
+		}
+	}
+
 	public function checkout()
 	{
 		$cart = Session::get('addcart');

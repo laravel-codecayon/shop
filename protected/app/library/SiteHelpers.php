@@ -739,6 +739,10 @@ public static function alphaID($in, $to_num = false, $pad_up = false, $passKey =
 			case 'date';			
 				$form = date('Y-m-d',$data->$field['name']);
 				break;
+			case 'datatime';
+				$time = strtotime($data->$field['name']);
+				$form = date('Y-m-d',$time);
+				break;
 			case 'radio';
 				$key =  $field['option'];
 				$form =$key[$data->$field['name']];
