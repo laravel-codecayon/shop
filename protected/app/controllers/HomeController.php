@@ -82,7 +82,16 @@ class HomeController extends BaseController {
 	}
 
 	public function postOrder(){
-		
+		$rules = array(
+			'recaptcha_response_field'=>'required|recaptcha',
+			);
+		$validator = Validator::make(Input::all(), $rules);
+		if ($validator->passes()) {
+			
+		}
+		else{
+			return Redirect::to('home/checkout')->with('message', SiteHelpers::alert('success','Thank You , Your message has been sent !'));
+		}
 	}
 
 	public function postCheckcaptcha(){
@@ -90,7 +99,6 @@ class HomeController extends BaseController {
 			'recaptcha_response_field'=>'required|recaptcha',
 			);
 		$validator = Validator::make(Input::all(), $rules);
-
 		if ($validator->passes()) {
 			echo "true";die;
 		}
@@ -99,7 +107,7 @@ class HomeController extends BaseController {
 		}
 	}
 
-	public function checkout()
+	public function getCheckout()
 	{
 		$cart = Session::get('addcart');
 		if(count($cart) <= 0){

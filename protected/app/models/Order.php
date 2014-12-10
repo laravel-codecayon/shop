@@ -26,7 +26,6 @@ class Order extends BaseModel  {
 	public static $rules=array(
 			"ProductName" => "required",
 			"UnitPrice" => "numeric",
-			"file" => "mimes:gif,png,jpg,jpeg|image|max:20000",
 		);
 	
 	public static $columnTable=array(

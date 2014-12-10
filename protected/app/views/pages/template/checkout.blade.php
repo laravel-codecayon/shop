@@ -1,5 +1,8 @@
 {{ HTML::script('sximo/themes/shop/js/jquery.jcombo.min.js') }}
 {{ HTML::script('sximo/themes/shop/js/jquery.validate.js') }}
+@if(Session::has('message'))
+         {{ Session::get('message') }}
+    @endif
     <div id="content">
       <!--Breadcrumb Part Start-->
       <div class="breadcrumb"> <a href="index-2.html">Home</a> » <a href="#">Shopping Cart</a></div>
@@ -122,16 +125,16 @@
     </div>
     <script>
     $(document).ready(function() { 
-      $("#city").jCombo("{{ URL::to('Nproducts/comboselect?filter=province:provinceid:name') }}",
+      $("#city").jCombo("{{ URL::to('ward/comboselect?filter=province:provinceid:name') }}",
       {  selected_value : '79' });
       $("#city").on('change', function() {
         var val = this.value ; 
-        $("#district").jCombo("{{ URL::to('Nproducts/comboselect?filter=district:districtid:name:') }}"+val,
+        $("#district").jCombo("{{ URL::to('ward/comboselect?filter=district:districtid:name:') }}"+val,
       {  selected_value : '' });
       });
       $("#district").on('change', function() {
         var val = this.value ; 
-        $("#ward").jCombo("{{ URL::to('Nproducts/comboselect?filter=ward:wardid:name:') }}"+val,
+        $("#ward").jCombo("{{ URL::to('ward/comboselect?filter=ward:wardid:name:') }}"+val,
       {  selected_value : '' });
       });
       var validator = $("#form_checkout").validate({ 
@@ -149,18 +152,18 @@
             provinceid: "required",
             districtid: "required",
             wardid: "required",
-            recaptcha_response_field: {
+            /*recaptcha_response_field: {
                 required: true,
                 remote: {
                   url: "{{URL::to('')}}/home/checkcaptcha",
                   type: "post",
                   data: {
-                    captcha: function() {
+                    recaptcha_response_field: function() {
                       return $( "#recaptcha_response_field" ).val();
                     }
                   }
                 }
-            },
+            },*/
         }, 
         messages: { 
             name: "Vui lòng nhập họ tên", 
@@ -178,7 +181,7 @@
             wardid: "Vui lòng chọn Phường/Xã",
             recaptcha_response_field: { 
                 required: '<font color="red">Vui lòng nhập mã bảo vệ</font>', 
-                remote: '<font color="red">Mã bảo vệ không đúng</font>'
+                //remote: '<font color="red">Mã bảo vệ không đúng</font>'
             }, 
         }
     }); 
