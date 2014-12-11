@@ -81,6 +81,9 @@
     <!--Left End-->
     <!--Middle Part Start-->
     <div id="content">
+      @if(Session::has('message'))
+         {{ Session::get('message') }}
+    @endif
       <!--Featured Product Part Start-->
       {{$content}}
       <!--Featured Product Part End-->

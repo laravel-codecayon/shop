@@ -22,7 +22,7 @@ Route::controller('user', 'UserController');
 //Route::get('category/{alias}-{id}-{page}.html', 'HomeController@categorydetail')->where(array('alias' => '(.*)','id'=>'[0-9]+','page'=>'[0-9]+'));
 Route::get('category/{alias}-{id}.html', 'HomeController@categorydetail')->where(array('alias' => '(.*)','id'=>'[0-9]+'));
 Route::get('detail/{alias}-{id}.html', 'HomeController@productdetail')->where(array('alias' => '(.*)','id'=>'[0-9]+'));
-//Route::get('checkout.html', 'HomeController@checkout');
+Route::get('checkout.html', 'HomeController@checkout');
 Route::get('cart.html', 'HomeController@cart');
 Route::get('/', 'HomeController@index');
 Route::controller('home', 'HomeController');

@@ -1,7 +1,7 @@
 {{ HTML::script('sximo/themes/shop/js/jquery.jcombo.min.js') }}
 {{ HTML::script('sximo/themes/shop/js/jquery.validate.js') }}
-@if(Session::has('message'))
-         {{ Session::get('message') }}
+@if(Session::has('message_checkout'))
+         {{ Session::get('message_checkout') }}
     @endif
     <div id="content">
       <!--Breadcrumb Part Start-->
@@ -16,7 +16,7 @@
             <tbody>
               <tr>
                 <td><span class="required">*</span> Name:</td>
-                <td><input type="text" class="large-field" value="" name="name" id="name"></td>
+                <td><input type="text" class="large-field" value="{{$input['name']}}" name="name" id="name"></td>
               </tr>
               <tr>
                 <td><span class="required">*</span> Sex:</td>
@@ -32,15 +32,15 @@
               </tr>
               <tr>
                 <td><span class="required">*</span> Phone number:</td>
-                <td><input type="text" class="large-field" value="" name="phone" id="phone"></td>
+                <td><input type="text" class="large-field" value="{{$input['phone']}}" name="phone" id="phone"></td>
               </tr>
               <tr>
                 <td><span class="required">*</span> Email:</td>
-                <td><input type="text" class="large-field" value="" name="email" id="email"></td>
+                <td><input type="text" class="large-field" value="{{$input['email']}}" name="email" id="email"></td>
               </tr>
               <tr>
                 <td><span class="required">*</span> Address:</td>
-                <td><input type="text" class="large-field" value="" name="address" id="address"></td>
+                <td><input type="text" class="large-field" value="{{$input['address']}}" name="address" id="address"></td>
               </tr>
               <tr>
                 <td><span class="required">*</span> City:</td>
@@ -68,7 +68,7 @@
               <tr>
                 <td>Ghi chú:</td>
                 <td>
-                  <textarea style="width: 98%;" rows="10" cols="40" name="content"></textarea>
+                  <textarea style="width: 98%;" rows="10" cols="40" name="content">{{$input['content']}}</textarea>
                 </td>
               </tr>
               @if(CNF_RECAPTCHA =='true') 
@@ -126,16 +126,16 @@
     <script>
     $(document).ready(function() { 
       $("#city").jCombo("{{ URL::to('ward/comboselect?filter=province:provinceid:name') }}",
-      {  selected_value : '79' });
+      {  selected_value : "{{$input['provinceid']}}" });
       $("#city").on('change', function() {
         var val = this.value ; 
         $("#district").jCombo("{{ URL::to('ward/comboselect?filter=district:districtid:name:') }}"+val,
-      {  selected_value : '' });
+      {  selected_value : "{{$input['districtid']}}" });
       });
       $("#district").on('change', function() {
         var val = this.value ; 
         $("#ward").jCombo("{{ URL::to('ward/comboselect?filter=ward:wardid:name:') }}"+val,
-      {  selected_value : '' });
+      {  selected_value : "{{$input['wardid']}}" });
       });
       var validator = $("#form_checkout").validate({ 
         rules: { 

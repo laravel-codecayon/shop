@@ -82,37 +82,65 @@ class HomeController extends BaseController {
 	}
 
 	public function postOrder(){
+		$cart = Session::get('addcart');
+		if(count($cart) <= 0){
+			return Redirect::to('')->with('message', SiteHelpers::alert('warning','Bạn vui lòng chọn mua sản phẩm'));	
+		}
 		$rules = array(
 			'recaptcha_response_field'=>'required|recaptcha',
 			);
 		$validator = Validator::make(Input::all(), $rules);
 		if ($validator->passes()) {
-			
+			$data = $this->getDataPost('orders');
+			$data['total'] = SiteHelpers::getTotalcart();
+			unset($data['lang']);
+			$data['OrderDate'] = date('Y-m-d H:i:s', time());
+			$mdOrderDetail = new Orderdetail();
+			$mdOrder = new Order();
+			$mdPro = new Nproducts();
+			$ID = $mdOrder->insertRow($data,'');
+			if($ID){
+				foreach($cart as $key=>$val){
+					$product = $mdPro->find($key);
+					$price = SiteHelpers::getPricePromotion($product);
+					$data_cart['UnitPrice'] = $price;
+					$data_cart['OrderID'] = $ID;
+					$data_cart['ProductID'] = $key;
+					$data_cart['Quantity'] = $val;
+					$mdOrderDetail->insertRow($data_cart,'');
+				}
+
+				Session::put('addcart',array());
+				Session::save();
+			}
+			return Redirect::to('')->with('message', SiteHelpers::alert('success','Đặt hàng thành công'));
 		}
 		else{
-			return Redirect::to('home/checkout')->with('message', SiteHelpers::alert('success','Thank You , Your message has been sent !'));
+			return Redirect::to('checkout.html')->with('message_checkout', SiteHelpers::alert('warning','Sai mã bảo mật'))->with('input_rd',Input::all());
 		}
 	}
 
-	public function postCheckcaptcha(){
-		$rules = array(
-			'recaptcha_response_field'=>'required|recaptcha',
-			);
-		$validator = Validator::make(Input::all(), $rules);
-		if ($validator->passes()) {
-			echo "true";die;
-		}
-		else{
-			echo "false";die;
-		}
-	}
-
-	public function getCheckout()
+	public function checkout()
 	{
 		$cart = Session::get('addcart');
 		if(count($cart) <= 0){
 			return Redirect::to('')->with('message', SiteHelpers::alert('success','Thank You , Your message has been sent !'));	
 		}
+		$input = array(
+				'name'	=>'',
+				'sex'	=>'1',
+				'phone'	=>'',
+				'email'	=>'',
+				'address'	=>'',
+				'provinceid'	=>'79',
+				'content'	=>'',
+				'districtid'	=>'',
+				'wardid'	=>'',
+			);
+		if(Session::has('input_rd')){
+			$input = Session::get('input_rd');
+		}
+		$datas['input'] = $input;
 		$datacart = array();
 		$mdPro = new Nproducts();
 		$mdCat = new Ncategories();

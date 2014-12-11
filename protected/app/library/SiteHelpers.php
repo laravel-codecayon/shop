@@ -162,6 +162,18 @@ class SiteHelpers
         return $output;
 	}
 
+	public static function getTotalcart(){
+		$price = 0;
+		$mdPro = new Nproducts();
+		foreach(Session::get('addcart') as $key=>$val){
+			$data = $mdPro->find($key);
+			$price_convert = SiteHelpers::getPricePromotion($data);
+			$price_item = $price_convert * $val;
+			$price += $price_item;
+		}
+		return $price;
+	}
+
 	public static function getCart(){
 		$item = 0;
 		$price = 0;
