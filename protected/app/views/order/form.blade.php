@@ -26,137 +26,118 @@
 		</ul>
 		 {{ Form::open(array('url'=>'order/save/'.SiteHelpers::encryptID($row['OrderID']).'?md='.$filtermd.$trackUri, 'class'=>'form-horizontal','files' => true , 'parsley-validate'=>'','novalidate'=>' ')) }}
 				<div class="col-md-12">
-						<fieldset><legend> Order</legend>
-									
+						<fieldset><legend> Order ({{$row['OrderID']}})</legend>
+
+
+									  {{ Form::hidden('OrderID', $row['OrderID'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
+
 								  <div class="form-group  " >
-									<label for="OrderID" class=" control-label col-md-4 text-left"> OrderID </label>
+									<label for="CustomerID" class=" control-label col-md-4 text-left"> Customer </label>
 									<div class="col-md-6">
-									  {{ Form::text('OrderID', $row['OrderID'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
+									  {{ Form::text('name', $row['name'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 									 </div> 
 									 <div class="col-md-2">
 									 	
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="CustomerID" class=" control-label col-md-4 text-left"> CustomerID </label>
+									<label for="EmployeeID" class=" control-label col-md-4 text-left"> Address </label>
 									<div class="col-md-6">
-									  {{ Form::text('CustomerID', $row['CustomerID'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
+									  {{ Form::text('address', $row['address'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 									 </div> 
 									 <div class="col-md-2">
 									 	
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="EmployeeID" class=" control-label col-md-4 text-left"> EmployeeID </label>
-									<div class="col-md-6">
-									  {{ Form::text('EmployeeID', $row['EmployeeID'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
-									 </div> 
-									 <div class="col-md-2">
-									 	
-									 </div>
-								  </div> 					
-								  <div class="form-group  " >
-									<label for="OrderDate" class=" control-label col-md-4 text-left"> OrderDate </label>
+									<label for="OrderDate" class=" control-label col-md-4 text-left"> City </label>
 									<div class="col-md-6">
 									  
-				{{ Form::text('OrderDate', $row['OrderDate'],array('class'=>'form-control datetime', 'style'=>'width:150px !important;')) }} 
+				<select name='provinceid' rows='5' id='city' code='{$provinceid}' 
+							class='select2 '    ></select>
 									 </div> 
 									 <div class="col-md-2">
 									 	
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="RequiredDate" class=" control-label col-md-4 text-left"> RequiredDate </label>
+									<label for="RequiredDate" class=" control-label col-md-4 text-left"> District </label>
 									<div class="col-md-6">
 									  
-				{{ Form::text('RequiredDate', $row['RequiredDate'],array('class'=>'form-control datetime', 'style'=>'width:150px !important;')) }} 
+				<select name='districtid' rows='5' id='district' code='{$districtid}' 
+							class='select2 '    ></select> 
 									 </div> 
 									 <div class="col-md-2">
 									 	
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="ShippedDate" class=" control-label col-md-4 text-left"> ShippedDate </label>
+									<label for="ShippedDate" class=" control-label col-md-4 text-left"> Ward </label>
 									<div class="col-md-6">
 									  
-				{{ Form::text('ShippedDate', $row['ShippedDate'],array('class'=>'form-control datetime', 'style'=>'width:150px !important;')) }} 
+				<select name='wardid' rows='5' id='ward' code='{$wardid}' 
+							class='select2 '    ></select> 
 									 </div> 
 									 <div class="col-md-2">
 									 	
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="ShipVia" class=" control-label col-md-4 text-left"> ShipVia </label>
+									<label for="ShipVia" class=" control-label col-md-4 text-left"> Email </label>
 									<div class="col-md-6">
-									  {{ Form::text('ShipVia', $row['ShipVia'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
+									  {{ Form::text('email', $row['email'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 									 </div> 
 									 <div class="col-md-2">
 									 	
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="Freight" class=" control-label col-md-4 text-left"> Freight </label>
+									<label for="Freight" class=" control-label col-md-4 text-left"> Phone </label>
 									<div class="col-md-6">
-									  {{ Form::text('Freight', $row['Freight'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
+									  {{ Form::text('phone', $row['phone'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 									 </div> 
 									 <div class="col-md-2">
 									 	
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="ShipName" class=" control-label col-md-4 text-left"> ShipName </label>
+									<label for="ShipName" class=" control-label col-md-4 text-left"> Sex </label>
 									<div class="col-md-6">
-									  {{ Form::text('ShipName', $row['ShipName'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
+									  <label class='checked'>
+										<input type='radio' name='sex' value ='0' required @if($row['sex'] == '0' || $row['sex'] == '') checked="checked" @endif > Nữ </label>
+										<label class='checked'>
+										<input type='radio' name='sex' value ='1' required @if($row['sex'] == '1') checked="checked" @endif > Nam </label> 
 									 </div> 
 									 <div class="col-md-2">
 									 	
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="ShipAddress" class=" control-label col-md-4 text-left"> ShipAddress </label>
+									<label for="ShipAddress" class=" control-label col-md-4 text-left"> Note </label>
 									<div class="col-md-6">
-									  {{ Form::text('ShipAddress', $row['ShipAddress'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
+									  {{ Form::textarea('content', $row['content'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 									 </div> 
 									 <div class="col-md-2">
 									 	
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="ShipCity" class=" control-label col-md-4 text-left"> ShipCity </label>
+									<label for="ShipCity" class=" control-label col-md-4 text-left"> Status </label>
 									<div class="col-md-6">
-									  {{ Form::text('ShipCity', $row['ShipCity'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
+									  <label class='checked'>
+										<input type='radio' name='status' value ='0' required @if($row['status'] == '0' || $row['status'] == '') checked="checked" @endif > New </label>
+										<label class='checked'>
+										<input type='radio' name='status' value ='1' required @if($row['status'] == '1') checked="checked" @endif > Waiting </label> 
+										<label class='checked'>
+										<input type='radio' name='status' value ='2' required @if($row['status'] == '2') checked="checked" @endif > Finish </label> 
+										<label class='checked'>
+										<input type='radio' name='status' value ='3' required @if($row['status'] == '3') checked="checked" @endif > Destroy </label> 
 									 </div> 
 									 <div class="col-md-2">
 									 	
 									 </div>
 								  </div> 					
-								  <div class="form-group  " >
-									<label for="ShipRegion" class=" control-label col-md-4 text-left"> ShipRegion </label>
-									<div class="col-md-6">
-									  {{ Form::text('ShipRegion', $row['ShipRegion'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
-									 </div> 
-									 <div class="col-md-2">
-									 	
-									 </div>
-								  </div> 					
-								  <div class="form-group  " >
-									<label for="ShipPostalCode" class=" control-label col-md-4 text-left"> ShipPostalCode </label>
-									<div class="col-md-6">
-									  {{ Form::text('ShipPostalCode', $row['ShipPostalCode'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
-									 </div> 
-									 <div class="col-md-2">
-									 	
-									 </div>
-								  </div> 					
-								  <div class="form-group  " >
-									<label for="ShipCountry" class=" control-label col-md-4 text-left"> ShipCountry </label>
-									<div class="col-md-6">
-									  {{ Form::text('ShipCountry', $row['ShipCountry'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
-									 </div> 
-									 <div class="col-md-2">
-									 	
-									 </div>
-								  </div> </fieldset>
+								  </fieldset>
 			</div>
 			
 			
@@ -179,6 +160,17 @@
 </div>			 
    <script type="text/javascript">
 	$(document).ready(function() { 
-		 
+		 $("#city").jCombo("{{ URL::to('Nproducts/comboselect?filter=province:provinceid:name') }}",
+      {  selected_value : "{{$row['provinceid']}}" });
+      $("#city").on('change', function() {
+        var val = this.value ;
+        $("#district").jCombo("{{ URL::to('Nproducts/comboselect?filter=district:districtid:name:') }}"+val,
+      {  selected_value : "{{$row['districtid']}}" });
+      });
+      $("#district").on('change', function() {
+        var val = this.value ; 
+        $("#ward").jCombo("{{ URL::to('Nproducts/comboselect?filter=ward:wardid:name:') }}"+val,
+      {  selected_value : "{{$row['wardid']}}" });
+      });
 	});
 	</script>		 
