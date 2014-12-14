@@ -24,6 +24,7 @@ Route::get('category/{alias}-{id}.html', 'HomeController@categorydetail')->where
 Route::get('detail/{alias}-{id}.html', 'HomeController@productdetail')->where(array('alias' => '(.*)','id'=>'[0-9]+'));
 Route::get('checkout.html', 'HomeController@checkout');
 Route::get('cart.html', 'HomeController@cart');
+Route::get('contact-us.html', 'HomeController@contactus');
 Route::get('/', 'HomeController@index');
 Route::controller('home', 'HomeController');
 Route::controller('ward', 'WardController');
@@ -38,7 +39,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::controller('groups', 'GroupsController');
 	Route::controller('menu', 'MenuController');
 	Route::controller('dashboard', 'DashboardController');
-	if(Session::get('gid') == '1')
+	if(Session::get('gid') == '1'  || Session::get('gid') == '2')
 	{
 		Route::controller('module', 'ModuleController');
 		Route::controller('config', 'ConfigController');

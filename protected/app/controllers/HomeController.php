@@ -330,31 +330,55 @@ class HomeController extends BaseController {
 		$this->beforeFilter('csrf', array('on'=>'post'));
 		$rules = array(
 				'name'		=>'required',
+				'email'	=>'required|email',
+				'phone'	=>'required|Numeric',
+				'content'	=>'required',
 				'subject'	=>'required',
-				'message'	=>'required|min:20',
-				'sender'	=>'required|email'			
+				'recaptcha_response_field'=>'required|recaptcha',
 		);
 		$validator = Validator::make(Input::all(), $rules);	
 		if ($validator->passes()) 
 		{
 			
-			$data = array('name'=>Input::get('name'),'sender'=>Input::get('sender'),'subject'=>Input::get('subject'),'notes'=>Input::get('message')); 
+			$data = array('name'=>Input::get('name'),'phone'=>Input::get('phone'),'email'=>Input::get('email'),'content'=>Input::get('content'),'subject'=>Input::get('subject')); 
 			$message = View::make('emails.contact', $data); 		
-			
 			$to 		= 	CNF_EMAIL;
 			$subject 	= Input::get('subject');
 			$headers  	= 'MIME-Version: 1.0' . "\r\n";
 			$headers 	.= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-			$headers 	.= 'From: '.Input::get('name').' <'.Input::get('sender').'>' . "\r\n";
-				//mail($to, $subject, $message, $headers);			
+			$headers 	.= 'From: '.Input::get('name').' <'.Input::get('email').'>' . "\r\n";
+			mail($to, $subject, $message, $headers);
 
-			return Redirect::to('?p='.Input::get('redirect'))->with('message', SiteHelpers::alert('success','Thank You , Your message has been sent !'));	
+			return Redirect::to(URL::to('')."/contact-us.html")->with('message', SiteHelpers::alert('success','Thank You , Your message has been sent !'));	
 				
 		} else {
-			return Redirect::to('?p='.Input::get('redirect'))->with('message', SiteHelpers::alert('error','The following errors occurred'))
+			return Redirect::to(URL::to('')."/contact-us.html")->with('message_contact', SiteHelpers::alert('error','The following errors occurred'))->with('input_rd',Input::all())
 			->withErrors($validator)->withInput();
 		}		
 	}
+
+	public function contactus(){
+		$input = array(
+				"name"=>'',
+				"phone"=>'',
+				"email"=>'',
+				"content"=>'',
+				"subject"=>''
+			);
+		if(Session::has('input_rd')){
+			$input = Session::get('input_rd');
+		}
+		$data['input'] = $input;
+
+
+		$page = 'pages.template.contactus';
+
+		$this->data['pageTitle'] = 'Contact US';
+		$this->data['pageNote'] = 'Welcome To Our Site';
+		$page = SiteHelpers::renderHtml($page);
+		$this->layout->nest('content',$page,$data)->with('page', $this->data);
+	}
+
 	public function  getLang($lang='en')
 	{
 		Session::put('lang', $lang);

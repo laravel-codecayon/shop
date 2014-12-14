@@ -93,6 +93,70 @@ class NproductsController extends BaseController {
 		$this->layout->nest('content','Nproducts.index',$this->data)
 						->with('menus', SiteHelpers::menus());
 	}		
+
+	function postDownloads()
+	{
+		if($this->access['is_excel'] ==0) 
+			return Redirect::to('')
+				->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));
+
+		$sort = (!is_null(Input::get('sort')) ? Input::get('sort') : 'ProductID'); 
+		$order = (!is_null(Input::get('order')) ? Input::get('order') : 'desc');
+		$data = DB::table('products');
+		if($_POST['ProductID'] != ''){
+			$data->where('ProductID',"LIKE","%".$_POST['ProductID']."%");
+		}
+		if($_POST['ProductName'] != ''){
+			$data->where('ProductName',"LIKE","%".$_POST['ProductName']."%");
+		}
+		if($_POST['UnitPrice'] != ''){
+			$data->where('UnitPrice',"LIKE","%".$_POST['UnitPrice']."%");
+		}
+		if($_POST['CategoryID'] != ''){
+			$data->where('CategoryID',"=",$_POST['CategoryID']);
+		}
+		if($_POST['id_promotion'] != ''){
+			$data->where('id_promotion',"=",$_POST['id_promotion']);
+		}
+		if($_POST['status'] != ''){
+			$data->where('status',"=",$_POST['status']);
+		}
+		$data = $data->get();
+		$content = $this->data['pageTitle'];
+		$content .= '<table border="1">';
+		$content .= '<tr>';
+		$content .= '<th style="background:#f9f9f9;">Product ID</th>';
+		$content .= '<th style="background:#f9f9f9;">Product Name</th>';
+		$content .= '<th style="background:#f9f9f9;">Price</th>';
+		$content .= '<th style="background:#f9f9f9;">Category</th>';
+		$content .= '<th style="background:#f9f9f9;">Promotion</th>';
+		$content .= '<th style="background:#f9f9f9;">Status</th>';
+		$content .= '<th style="background:#f9f9f9;">Created</th>';
+		$content .= '</tr>';
+		
+		foreach ($data as $item)
+		{
+			$promotion = SiteHelpers::getNamePromotion($item->id_promotion);
+			$promotion = count($promotion) > 0 ? $promotion->name : '';
+			$status = $item->status == 1 ? "Enable" : "Disable";
+			$content .= '<tr>';
+			$content .= '<td>'. $item->ProductID . '</td>';
+			$content .= '<td>'. $item->ProductName . '</td>';
+			$content .= '<td>'. $item->UnitPrice . '</td>';
+			$content .= '<td>'. SiteHelpers::getNameCat($item->CategoryID). '</td>';
+			$content .= '<td>'. $promotion . '</td>';
+			$content .= '<td>'. $status . '</td>';
+			$content .= '<td>'.date('Y-m-d',$item->created) . '</td>';
+			$content .= '</tr>';
+		}
+		$content .= '</table>';
+		@header('Content-Type: application/ms-excel');
+		@header('Content-Length: '.strlen($content));
+		@header('Content-disposition: inline; filename="'.$title.' '.date("d/m/Y").'.xls"');
+		
+		echo $content;
+		exit;
+	}
 	
 
 	function getAdd( $id = null)

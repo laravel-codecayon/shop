@@ -25,7 +25,7 @@
 			<i class="icon-bubble-trash"></i>&nbsp;{{ Lang::get('core.btn_remove') }}</a>
 			@endif 		
 			@if($access['is_excel'] ==1)
-			<a href="{{ URL::to('Nproducts/download?md='.$masterdetail["filtermd"]) }}" class="tips btn btn-xs btn-default" title="{{ Lang::get('core.btn_download') }}">
+			<a id="export-excel" href="javascript:" class="tips btn btn-xs btn-default" title="{{ Lang::get('core.btn_download') }}">
 			<i class="icon-folder-download2"></i>&nbsp;{{ Lang::get('core.btn_download') }} </a>
 			@endif		
 		 	@if(Session::get('gid') ==1 && 1 == 2)
@@ -117,6 +117,11 @@ $(document).ready(function(){
 	});
 	$("#filter_footer").click(function(){
 		$('#SximoTable').attr('action','{{ URL::to("nproducts/multisearch")}}');
+		$('#SximoTable').submit();
+	});
+
+	$("#export-excel").click(function(){
+		$('#SximoTable').attr('action','{{ URL::to("nproducts/downloads")}}');
 		$('#SximoTable').submit();
 	});
 

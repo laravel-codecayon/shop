@@ -30,82 +30,106 @@
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>CustomerID</td>
-						<td>{{ $row->CustomerID }} </td>
+						<td width='30%' class='label-view text-right'>Customer</td>
+						<td>{{ $row->name }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>EmployeeID</td>
-						<td>{{ $row->EmployeeID }} </td>
+						<td width='30%' class='label-view text-right'>Email</td>
+						<td>{{ $row->email }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>OrderDate</td>
+						<td width='30%' class='label-view text-right'>Phone</td>
+						<td>{{ $row->phone }} </td>
+						
+					</tr>
+				
+					<tr>
+						<td width='30%' class='label-view text-right'>Address</td>
+						<td>{{ $row->address }} </td>
+						
+					</tr>
+				
+					<tr>
+						<td width='30%' class='label-view text-right'>Status</td>
+						<td>
+							@if($row->status == 0) New 
+							@elseif($row->status == 1) Waiting 
+							@elseif($row->status == 2) Finish 
+							@elseif($row->status == 3) Destroy 
+							@endif 
+						</td>
+						
+					</tr>
+				
+					<tr>
+						<td width='30%' class='label-view text-right'>City</td>
+						<td>{{ SiteHelpers::getNameaddress($row->provinceid,'province','provinceid') }} </td>
+						
+					</tr>
+				
+					<tr>
+						<td width='30%' class='label-view text-right'>District</td>
+						<td>{{ SiteHelpers::getNameaddress($row->districtid,'district','districtid') }} </td>
+						
+					</tr>
+				
+					<tr>
+						<td width='30%' class='label-view text-right'>Ward</td>
+						<td>{{ SiteHelpers::getNameaddress($row->wardid,'ward','wardid') }} </td>
+						
+					</tr>
+				
+					<tr>
+						<td width='30%' class='label-view text-right'>Order Date</td>
 						<td>{{ $row->OrderDate }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>RequiredDate</td>
-						<td>{{ $row->RequiredDate }} </td>
+						<td width='30%' class='label-view text-right'>Sex</td>
+						<td>@if($row->sex == 1) Nam @else Nu @endif </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>ShippedDate</td>
-						<td>{{ $row->ShippedDate }} </td>
+						<td width='30%' class='label-view text-right'>Note</td>
+						<td>{{ $row->content }} </td>
 						
 					</tr>
-				
+					@if(count($items) > 0)
 					<tr>
-						<td width='30%' class='label-view text-right'>ShipVia</td>
-						<td>{{ $row->ShipVia }} </td>
+						<td width='30%' class='label-view text-right'>Order Detail</td>
+						<td>
+							<table class="table table-bordered table-striped">
+								          <thead class="no-border">
+								            <tr>
+								              <th style="width:50%;">Name</th>
+								              <th>SL</th>
+								              <th class="text-right">Price</th>
+								            </tr>
+								          </thead>
+								          <tbody class="no-border-y">
+								          	@foreach($items as $item)
+								          	{{--*/ $product = DB::table('products')->where("ProductID","=",$item->ProductID)->first(); /*--}}
+								            <tr>
+								              <td style="width:30%;">{{$product->ProductName}}</td>
+								              <td>
+								              	{{$item->Quantity}}
+								              	
+								              </td>
+								              <td class="text-right">{{number_format(($item->UnitPrice * $item->Quantity),0,',','.') }}</td>
+								            </tr>
+								            @endforeach
+								          </tbody>
+								        </table> 
+						</td>
 						
 					</tr>
-				
-					<tr>
-						<td width='30%' class='label-view text-right'>Freight</td>
-						<td>{{ $row->Freight }} </td>
-						
-					</tr>
-				
-					<tr>
-						<td width='30%' class='label-view text-right'>ShipName</td>
-						<td>{{ $row->ShipName }} </td>
-						
-					</tr>
-				
-					<tr>
-						<td width='30%' class='label-view text-right'>ShipAddress</td>
-						<td>{{ $row->ShipAddress }} </td>
-						
-					</tr>
-				
-					<tr>
-						<td width='30%' class='label-view text-right'>ShipCity</td>
-						<td>{{ $row->ShipCity }} </td>
-						
-					</tr>
-				
-					<tr>
-						<td width='30%' class='label-view text-right'>ShipRegion</td>
-						<td>{{ $row->ShipRegion }} </td>
-						
-					</tr>
-				
-					<tr>
-						<td width='30%' class='label-view text-right'>ShipPostalCode</td>
-						<td>{{ $row->ShipPostalCode }} </td>
-						
-					</tr>
-				
-					<tr>
-						<td width='30%' class='label-view text-right'>ShipCountry</td>
-						<td>{{ $row->ShipCountry }} </td>
-						
-					</tr>
+					@endif
 				
 		</tbody>	
 	</table>    

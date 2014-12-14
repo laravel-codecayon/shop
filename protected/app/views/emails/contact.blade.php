@@ -7,13 +7,13 @@
 		<h2>Hello Admin , </h2>
 		<p> You have new contact mail from  </p>
 		<p>
-			Email : {{ $sender }} <br />
+			Email : {{ $email }} <br />
 			Name : {{ $name }}<br />
 			Password : {{ $subject }}<br />
 		</p>
 		<p> Message : </p>
 		<div>
-			{{ $notes }}
+			{{ $content }}
 		</div>
 		
 		<p> Thank You </p><br /><br />

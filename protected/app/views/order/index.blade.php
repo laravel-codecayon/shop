@@ -22,10 +22,10 @@
 			<i class="icon-bubble-trash"></i>&nbsp;{{ Lang::get('core.btn_remove') }}</a>
 			@endif 		
 			@if($access['is_excel'] ==1)
-			<a href="{{ URL::to('order/download?md='.$masterdetail["filtermd"]) }}" class="tips btn btn-xs btn-default" title="{{ Lang::get('core.btn_download') }}">
+			<a id="export-excel" href="javascript:" class="tips btn btn-xs btn-default" title="{{ Lang::get('core.btn_download') }}">
 			<i class="icon-folder-download2"></i>&nbsp;{{ Lang::get('core.btn_download') }} </a>
 			@endif		
-		 	@if(Session::get('gid') ==1)
+		 	@if(Session::get('gid') ==1 && 1 == 2)
 			<a href="{{ URL::to('module/config/order') }}" class="tips btn btn-xs btn-default"  title="{{ Lang::get('core.btn_config') }}">
 			<i class="icon-cog"></i>&nbsp;{{ Lang::get('core.btn_config') }} </a>	
 			@endif  			
@@ -114,6 +114,10 @@ $(document).ready(function(){
 	});
 	$("#filter_footer").click(function(){
 		$('#SximoTable').attr('action','{{ URL::to("order/multisearch")}}');
+		$('#SximoTable').submit();
+	});
+	$("#export-excel").click(function(){
+		$('#SximoTable').attr('action','{{ URL::to("order/downloads")}}');
 		$('#SximoTable').submit();
 	});
 });	

@@ -81,16 +81,16 @@
 		<li @if(Request::is('Promotion')) class="active" @endif>
 			<a href="{{ URL::to('Promotion')}}"><i class="icon-drawer2"></i> <span class="nav-label">Promotion</span><span class="fa arrow"></span></a>
 		</li>
-		<li @if(Request::is('News')) class="active" @endif>
-			<a href="{{ URL::to('News')}}"><i class="icon-drawer2"></i> <span class="nav-label">News</span><span class="fa arrow"></span></a>
-		</li>
 		<li @if(Request::is('Slideshow')) class="active" @endif>
 			<a href="{{ URL::to('Slideshow')}}"><i class="icon-drawer2"></i> <span class="nav-label">Slideshow</span><span class="fa arrow"></span></a>
 		</li>
 		<li @if(Request::is('pages')) class="active" @endif>
 			<a href="{{ URL::to('pages')}}"><i class="icon-drawer2"></i> <span class="nav-label">Pages</span><span class="fa arrow"></span></a>
 		</li>
-		@if(Session::get('gid') ==1)
+		<li @if(Request::is('order')) class="active" @endif>
+			<a href="{{ URL::to('order')}}"><i class="icon-drawer2"></i> <span class="nav-label">Order</span><span class="fa arrow"></span></a>
+		</li>
+		@if(Session::get('gid') ==1 || Session::get('gid') ==2)
 			<li @if(Request::is('permission')) class="active" @endif>
 				<a href="{{ URL::to('permission')}}"><i class="icon-drawer2"></i> <span class="nav-label">Permission</span><span class="fa arrow"></span></a>
 			</li>

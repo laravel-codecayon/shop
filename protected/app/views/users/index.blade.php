@@ -23,7 +23,7 @@
 			<a href="javascript://ajax"  onclick="SximoDelete();" class="tips btn btn-xs btn-danger" title="{{ Lang::get('core.btn_remove') }}">
 			<i class="icon-bubble-trash"></i>&nbsp; {{ Lang::get('core.btn_remove') }}</a>
 			@endif 		
-			@if($access['is_excel'] ==1)
+			@if($access['is_excel'] ==1 && 1==2)
 			<a href="{{ URL::to('users/download') }}" class="tips btn btn-xs btn-default" title="{{ Lang::get('core.btn_download') }}">
 			<i class="icon-folder-download2"></i>&nbsp;{{ Lang::get('core.btn_download') }} </a>
 			@endif		

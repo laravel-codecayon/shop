@@ -131,10 +131,9 @@
   </div>-->
   <div class="contact">
     <ul>
-      <li class="address">Second plaza, Delhi, india.</li>
-      <li class="mobile">191 191 91 19</li>
-      <li class="email"><a href="mailto:info@demo.com">info@demo.com</a></li>
-      <li class="fax">191 191 91 19</li>
+      <li class="address">{{CNF_ADDRESS}}</li>
+      <li class="mobile">{{CNF_PHONE}}</li>
+      <li class="email"><a href="mailto:{{CNF_EMAIL}}">{{CNF_EMAIL}}</a></li>
     </ul>
   </div>
   

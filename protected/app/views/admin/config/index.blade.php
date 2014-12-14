@@ -27,9 +27,9 @@
 <div class="block-content">
 	<ul class="nav nav-tabs" >
 	  <li class="active"><a href="{{ URL::to('config')}}"> {{ Lang::get('core.tab_siteinfo'); }}  </a></li>
-	  <li ><a href="{{ URL::to('config/email') }}" >  {{ Lang::get('core.tab_email'); }} </a></li>
+	  <!--<li ><a href="{{ URL::to('config/email') }}" >  {{ Lang::get('core.tab_email'); }} </a></li>
 	  <li ><a href="{{ URL::to('config/security') }}" >  {{ Lang::get('core.tab_loginsecurity'); }}  </a></li>
-	  <li ><a href="{{ URL::to('config/translation') }}" >  Translation  <sup class="badge " style="background:#5BC0DE" >New </sup> </a></li>
+	  <li ><a href="{{ URL::to('config/translation') }}" >  Translation  <sup class="badge " style="background:#5BC0DE" >New </sup> </a></li>-->
 	   <li ><a href="{{ URL::to('config/log') }}" >  Clear Cache & Logs  </a></li>
 	</ul>	
 <div class="tab-content m-t">
@@ -65,6 +65,18 @@
 	 </div> 
   </div>   
   <div class="form-group">
+    <label for="ipt" class=" control-label col-md-4">{{ Lang::get('core.address'); }} </label>
+	<div class="col-md-8">
+	<input name="cnf_address" type="text" id="cnf_address" class="form-control input-sm" value="{{ CNF_ADDRESS }}" /> 
+	 </div> 
+  </div>   
+  <div class="form-group">
+    <label for="ipt" class=" control-label col-md-4">{{ Lang::get('core.phone'); }} </label>
+	<div class="col-md-8">
+	<input name="cnf_phone" type="text" id="cnf_phone" class="form-control input-sm" value="{{ CNF_PHONE }}" /> 
+	 </div> 
+  </div>   
+  <!--<div class="form-group">
     <label for="ipt" class=" control-label col-md-4"> Muliti language <br /> <small> Only Layout Interface </small> </label>
 	<div class="col-md-8">
 		<div class="checkbox">
@@ -99,7 +111,7 @@
 			@endforeach
 		</select>
 	 </div> 
-  </div> 
+  </div> -->
   
   <div class="form-group">
     <label for="ipt" class=" control-label col-md-4">&nbsp;</label>

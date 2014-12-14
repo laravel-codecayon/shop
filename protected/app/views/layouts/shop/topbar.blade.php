@@ -7,7 +7,7 @@
           <li>
             <a
               @if($menu['menu_type'] =='external')
-                href="{{ URL::to($menu['url']."/#")}}" 
+                href="{{ URL::to($menu['module'])}}" 
               @else
                 href="{{ URL::to($menu['module'])}}" 
               @endif
@@ -19,7 +19,7 @@
                   @foreach($menu['childs'] as $menu2)
                     <li><a 
                       @if($menu['menu_type'] =='external')
-                        href="{{ URL::to($menu2['url'])}}" 
+                        href="{{ URL::to($menu2['module'])}}" 
                       @else
                         href="{{ URL::to($menu2['module'])}}" 
                       @endif

@@ -102,6 +102,16 @@ class SiteHelpers
 		return $data;
 	}
 
+	public static function getNameaddress($id = '',$table = '',$key=''){
+		$data = DB::table($table)->where($key,"=",$id)->first();
+		$name = count($data) > 0 ? $data->name : '';
+		return $name;
+	}
+
+	public static function getSex($sex = ''){
+		return $sex == 1 ? "Nam" : "Nu";
+	}
+
 	public static function templateProduct($data = "")
 	{
 		$image = $data->image == '' ? URL::to('').'/sximo/images/no_pic.png' : URL::to('').'/uploads/products/thumb/'.$data->image;
@@ -252,6 +262,11 @@ class SiteHelpers
 		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
 		$cat = DB::table('categories')->where("lang",'=', $lang)->where("status",'=', '1')->get();
 		return $cat;
+	}
+
+	public static function getNameCat($id= ''){
+		$cat = DB::table('categories')->where("CategoryID",'=', $id)->first();
+		return count($cat) > 0 ? $cat->CategoryName : '';
 	}
 	
 	public static function CF_encode_json($arr) {

@@ -136,9 +136,46 @@
 									 <div class="col-md-2">
 									 	
 									 </div>
-								  </div> 					
+								  </div>
+								  @if(count($items) > 0)
+								   <div class="form-group  " >
+									<label for="ShipCity" class=" control-label col-md-4 text-left"> Order Details </label>
+									<div class="col-md-6">
+									  <table class="table table-bordered table-striped">
+								          <thead class="no-border">
+								            <tr>
+								              <th style="width:50%;">Name</th>
+								              <th>SL</th>
+								              <th class="text-right">Price</th>
+								            </tr>
+								          </thead>
+								          <tbody class="no-border-y">
+								          	@foreach($items as $item)
+								          	{{--*/ $product = DB::table('products')->where("ProductID","=",$item->ProductID)->first(); /*--}}
+								            <tr>
+								              <td style="width:30%;">{{$product->ProductName}}</td>
+								              <td>
+								              	<input type="text" id="item_{{$item->ProductID}}" value="{{$item->Quantity}}" size="3" />
+								              	<a href="javascript:" onclick="update_order({{$item->ProductID}},{{$item->OrderID}})" title="Update"><span class="badge">U</span></a>
+								              	<a href="javascript:" onclick="del_order({{$item->ProductID}},{{$item->OrderID}})" title="Delete"><span class="badge badge-danger">D</span></a>
+								              </td>
+								              <td class="text-right">{{number_format(($item->UnitPrice * $item->Quantity),0,',','.') }}</td>
+								            </tr>
+								            @endforeach
+								          </tbody>
+								        </table> 
+									 </div> 
+									 <div class="col-md-2">
+									 	
+									 </div>
+								  </div>
+								  @endif
 								  </fieldset>
 			</div>
+
+			<div class="col-sm-6 col-md-6">
+
+  </div>
 			
 			
 			<div style="clear:both"></div>	
@@ -173,4 +210,21 @@
       {  selected_value : "{{$row['wardid']}}" });
       });
 	});
+	function update_order(id,order){
+		var val = $("#item_"+id).val();
+		var link = "{{ URL::to('order/updateorder?id=') }}"+id+"&qual="+val+"&order="+order;
+      		$.get(link,function(data,status){
+      			if(data == 2){
+      				$("#item_"+id).parent().parent().remove();
+      			}
+  	  		});
+	}
+	function del_order(id,order){
+		var link = "{{ URL::to('order/delorder?id=') }}"+id+"&order="+order;
+      		$.get(link,function(data,status){
+      			if(data == 2){
+      				$("#item_"+id).parent().parent().remove();
+      			}
+  	  		});
+	}
 	</script>		 

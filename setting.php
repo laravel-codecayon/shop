@@ -1,14 +1,16 @@
 <?php 
-define('CNF_APPNAME','My Company App');
+define('CNF_APPNAME','My Company Apps');
 define('CNF_APPDESC','Internal PHP Application');
 define('CNF_COMNAME','My Company Name');
-define('CNF_EMAIL','info@mail.com');
+define('CNF_EMAIL','tranquocdungqn@gmail.com');
 define('CNF_METAKEY','my site , my company  , Larvel Crud');
-define('CNF_METADESC','Write description for your site');
+define('CNF_METADESC','Write description for your sites');
+define('CNF_PHONE','123456789');
+define('CNF_ADDRESS','401, Dhaval Plaza, New Duperi Road, New Mumbai, Maharashtra Address 1');
 define('CNF_GROUP','3');
 define('CNF_ACTIVATION','manual');
-define('CNF_MULTILANG','1');
-define('CNF_LANG','vi');
+define('CNF_MULTILANG','0');
+define('CNF_LANG','vn');
 define('CNF_REGIST','true');
 define('CNF_FRONT','true');
 define('CNF_RECAPTCHA','true');

@@ -103,6 +103,12 @@
 					  {{ Form::text('menu_name', $row['menu_name'],array('class'=>'form-control', 'placeholder'=>'')) }} 
 					 </div> 
 				  </div>
+				  <div class="form-group  " >
+					<label for="ipt" class=" control-label col-md-4 text-right">Link  </label>
+					<div class="col-md-8">
+					  {{ Form::text('link', $row['module'],array('class'=>'form-control', 'placeholder'=>'')) }} 
+					 </div> 
+				  </div>
 				  			  					
 				  <!--<div class="form-group  ext-link" >
 					<label for="ipt" class=" control-label col-md-4 text-right"> Url  </label>
@@ -213,19 +219,19 @@ $(document).ready(function(){
 
 function mType( val )
 {
-		if(val == 'external') {
+		/*if(val == 'external') {
 			$('.ext-link').show(); 
 			$('.int-link').hide();
 		} else {
 			$('.ext-link').hide(); 
 			$('.int-link').show();
-		}	
+		}	*/
 }
 
 	
 function update_out(selector, sel2){
 	
-	var out = $(selector).nestable('serialize');alert(JSON.stringify(out));
+	var out = $(selector).nestable('serialize');
 	$(sel2).val(JSON.stringify(out));
 
 }

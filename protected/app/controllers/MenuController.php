@@ -141,12 +141,13 @@ class MenuController extends BaseController {
 		$validator = Validator::make(Input::all(), $rules);	
 		if ($validator->passes()) {
 			//$pos = Input::get('position');	
-			$data = $this->validatePost('tb_menu');
+			$data = $this->getDataPost('tb_menu');
 			$data['position'] = "top";
 			$data['allow_guest'] = "1";
 			if(Input::get('module') == '')
 			{
 				$data['menu_type'] = "external";
+				$data['module'] = Input::get('link') == '' ? '#' : Input::get('link');
 			}
 			else
 			{

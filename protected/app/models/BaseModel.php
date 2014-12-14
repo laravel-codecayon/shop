@@ -98,7 +98,7 @@ class BaseModel extends Eloquent  {
 		}else{
 			$table = $params[0]; 
 			if($table == "tb_groups"){
-				$row =  DB::table($table)->where("group_id","!=","1")->where("lang","=",$lang)->get();
+				$row =  DB::table($table)->where("group_id","!=","1")->get();
 			}elseif($table == "promotion"){
 				$row =  DB::table($table)->where('status','=','1')->get();
 			}elseif($table == "province"){
