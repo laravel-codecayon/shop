@@ -23,12 +23,15 @@ class Pages extends BaseModel  {
 	}
 	
 
-	public static $columnTable=array(
-			"title" => array("label"=>"Name", "type"=>"text", "name"=>"title", "value" => ""),
-			"alias" => array("label"=>"Slug", "type"=>"text", "name"=>"alias", "value" => ""),
-			"status" => array("label"=>"Status", "type"=>"radio", "name"=>"status", "value" => "","option"=>array("0"=>"Disable","1"=>"Enable")),
+	public function columnTable(){
+		$array = array(
+			"title" => array("label"=>Lang::get('core.table_name'), "type"=>"text", "name"=>"title", "value" => ""),
+			//"alias" => array("label"=>Lang::get('core.table_slug'), "type"=>"text", "name"=>"alias", "value" => ""),
+			"status" => array("label"=>Lang::get('core.table_status'), "type"=>"radio", "name"=>"status", "value" => "","option"=>array("0"=>Lang::get('core.disable'),"1"=>Lang::get('core.enable'))),
 			//"CategoryID" => array("label"=>"Category", "type"=>"select", "name"=>"CategoryID", "value" => "", "model"=>"categories", "id"=>"CategoryID", "show" =>"CategoryName"),
-			"created" => array("label"=>"Created", "type"=>"date", "name"=>"created", "value" => ""),
+			"created" => array("label"=>Lang::get('core.table_created'), "type"=>"date", "name"=>"created", "value" => ""),
 		);
+		return $array;
+	}
 
 }

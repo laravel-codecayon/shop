@@ -60,7 +60,7 @@ class PagesController extends BaseController {
 		$page = $page >= 1 && filter_var($page, FILTER_VALIDATE_INT) !== false ? $page : 1;	
 		$pagination = Paginator::make($results['rows'], $results['total'],$params['limit']);		
 		
-		$test 						= Pages::$columnTable;
+		$test 						= $this->model->columnTable();
 		$arr_search 				= SiteHelpers::arraySearch(Input::get('search'));
 		foreach($arr_search as $key=>$val){
 			if($key != "sort" && $key != "order" && $key != "rows"){
@@ -95,7 +95,7 @@ class PagesController extends BaseController {
 	
 		if($this->access['is_view'] ==0) 
 			return Redirect::to('')
-				->with('message', SiteHelpers::alert('error',' Your are not allowed to access the page '));
+				->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));
 			
 		$id = ($id == null ? '' : SiteHelpers::encryptID($id,true)) ;
 		
@@ -155,7 +155,7 @@ class PagesController extends BaseController {
 	
 		if($this->access['is_detail'] ==0) 
 			return Redirect::to('')
-				->with('message', SiteHelpers::alert('error',' Your are not allowed to access the page '));
+				->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));
 					
 		$ids = ($id == null ? '' : SiteHelpers::encryptID($id,true)) ;
 		$row = $this->model->getRow($ids);
@@ -211,9 +211,9 @@ class PagesController extends BaseController {
 			$alias= $data['alias'].$id.".html";
 			DB::table('tb_pages')->where('pageID', '=',$id )->update(array('alias' => $alias));
 			self::createRouters();
-			return Redirect::to('pages')->with('message', SiteHelpers::alert('success','Data Has Been Save Successfull'));
+			return Redirect::to('pages')->with('message', SiteHelpers::alert('success',Lang::get('core.note_success')));
 		} else {
-			return Redirect::to('pages/add/'.$id)->with('message', SiteHelpers::alert('error','The following errors occurred'))
+			return Redirect::to('pages/add/'.$id)->with('message', SiteHelpers::alert('error',Lang::get('core.note_error')))
 			->withErrors($validator)->withInput();
 		}	
 	
@@ -224,7 +224,7 @@ class PagesController extends BaseController {
 		
 		if($this->access['is_remove'] ==0) 
 			return Redirect::to('')
-				->with('message', SiteHelpers::alert('error',' Your are not allowed to access the page '));	
+				->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));	
 		
 		$ids = Input::get('id')	;	
 		/*for($i=0; $i<count($ids);$i++)
@@ -241,7 +241,7 @@ class PagesController extends BaseController {
 		// delete multipe rows 
 		$data = $this->model->destroy(Input::get('id'));
 		self::createRouters();
-		Session::flash('message', SiteHelpers::alert('success','Successfully deleted row!'));
+		Session::flash('message', SiteHelpers::alert('success',Lang::get('core.note_success_delete')));
 		return Redirect::to('pages');
 	}	
 

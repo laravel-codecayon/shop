@@ -14,7 +14,7 @@ class OrderController extends BaseController {
 		$this->access = $this->model->validAccess($this->info['id']);
 	
 		$this->data = array(
-			'pageTitle'	=> 	$this->info['title'],
+			'pageTitle'	=> 	Lang::get('core.order'),
 			'pageNote'	=>  $this->info['note'],
 			'pageModule'=> 'order',
 			'trackUri' 	=> ''	
@@ -61,7 +61,7 @@ class OrderController extends BaseController {
 		$pagination = Paginator::make($results['rows'], $results['total'],$params['limit']);		
 		
 
-		$test 						= Order::$columnTable;
+		$test 						= $this->model->columnTable();
 		$arr_search 				= SiteHelpers::arraySearch(Input::get('search'));
 		foreach($arr_search as $key=>$val){
 			if($key != "sort" && $key != "order" && $key != "rows"){
@@ -200,8 +200,7 @@ class OrderController extends BaseController {
 		if($this->access['is_excel'] ==0) 
 			return Redirect::to('')
 				->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));
-		
-		$list = Order::$columnTable;
+
 		$sort = (!is_null(Input::get('sort')) ? Input::get('sort') : 'OrderID'); 
 		$order = (!is_null(Input::get('order')) ? Input::get('order') : 'desc');
 		$data = DB::table('orders');
@@ -230,15 +229,15 @@ class OrderController extends BaseController {
 		$content = $this->data['pageTitle'];
 		$content .= '<table border="1">';
 		$content .= '<tr>';
-		$content .= '<th style="background:#f9f9f9;">Order ID</th>';
-		$content .= '<th style="background:#f9f9f9;">Name</th>';
-		$content .= '<th style="background:#f9f9f9;">Phone</th>';
-		$content .= '<th style="background:#f9f9f9;">Email</th>';
-		$content .= '<th style="background:#f9f9f9;">Sex</th>';
-		$content .= '<th style="background:#f9f9f9;">City</th>';
-		$content .= '<th style="background:#f9f9f9;">District</th>';
-		$content .= '<th style="background:#f9f9f9;">Ward</th>';
-		$content .= '<th style="background:#f9f9f9;">Order date</th>';
+		$content .= '<th style="background:#f9f9f9;">'.Lang::get('core.table_id').'</th>';
+		$content .= '<th style="background:#f9f9f9;">'.Lang::get('core.table_name').'</th>';
+		$content .= '<th style="background:#f9f9f9;">'.Lang::get('core.table_phone').'</th>';
+		$content .= '<th style="background:#f9f9f9;">'.Lang::get('core.table_email').'</th>';
+		$content .= '<th style="background:#f9f9f9;">'.Lang::get('core.sex').'</th>';
+		$content .= '<th style="background:#f9f9f9;">'.Lang::get('core.table_city').'</th>';
+		$content .= '<th style="background:#f9f9f9;">'.Lang::get('core.table_district').'</th>';
+		$content .= '<th style="background:#f9f9f9;">'.Lang::get('core.table_ward').'</th>';
+		$content .= '<th style="background:#f9f9f9;">'.Lang::get('core.table_date').'</th>';
 		$content .= '</tr>';
 		
 		foreach ($data as $item)

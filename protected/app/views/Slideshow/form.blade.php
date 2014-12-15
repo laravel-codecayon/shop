@@ -42,7 +42,7 @@
 									  {{ Form::hidden('slideshow_id', $row['slideshow_id'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 									  {{ Form::hidden('slideshow_image', $row['slideshow_image'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 								  <div class="form-group  " >
-									<label for="Slideshow Name" class=" control-label col-md-4 text-left"> Slideshow Name </label>
+									<label for="Slideshow Name" class=" control-label col-md-4 text-left"> {{ Lang::get('core.table_name') }} </label>
 									<div class="col-md-6">
 									  {{ Form::text('slideshow_name', $row['slideshow_name'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 									 </div> 
@@ -64,7 +64,7 @@
 									 </div>
 								  </div>
 								  <div class="form-group  " >
-									<label for="Slideshow Link" class=" control-label col-md-4 text-left"> Slideshow Link </label>
+									<label for="Slideshow Link" class=" control-label col-md-4 text-left"> {{ Lang::get('core.table_link') }} </label>
 									<div class="col-md-6">
 									  {{ Form::text('slideshow_link', $row['slideshow_link'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 									 </div> 
@@ -73,12 +73,12 @@
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="Slideshow Status" class=" control-label col-md-4 text-left"> Slideshow Status </label>
+									<label for="Slideshow Status" class=" control-label col-md-4 text-left"> {{ Lang::get('core.table_status') }} </label>
 									<div class="col-md-6">
 									  <label class='checked'>
-										<input type='radio' name='slideshow_status' value ='0' required @if($row['slideshow_status'] == '0' || $row['slideshow_status'] == '') checked="checked" @endif > Disable </label>
+										<input type='radio' name='slideshow_status' value ='0' required @if($row['slideshow_status'] == '0' || $row['slideshow_status'] == '') checked="checked" @endif > {{ Lang::get('core.disable') }} </label>
 										<label class='checked'>
-										<input type='radio' name='slideshow_status' value ='1' required @if($row['slideshow_status'] == '1') checked="checked" @endif > Enable </label> 
+										<input type='radio' name='slideshow_status' value ='1' required @if($row['slideshow_status'] == '1') checked="checked" @endif > {{ Lang::get('core.enable') }} </label> 
 									 </div> 
 									 <div class="col-md-2">
 									 	

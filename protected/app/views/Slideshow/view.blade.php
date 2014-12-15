@@ -24,31 +24,31 @@
 		<tbody>	
 	
 					<tr>
-						<td width='30%' class='label-view text-right'>Slideshow Id</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_id') }}</td>
 						<td>{{ $row->slideshow_id }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Slideshow Name</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_name') }}</td>
 						<td>{{ $row->slideshow_name }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Slideshow Link</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_link') }}</td>
 						<td>{{ $row->slideshow_link }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Slideshow Status</td>
-						<td> @if($row->slideshow_status == 1) Enable @else Disable @endif </td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_status') }}</td>
+						<td> @if($row->slideshow_status == 1) {{ Lang::get('core.enable') }} @else {{ Lang::get('core.disable') }} @endif </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Created</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_created') }}</td>
 						<td>{{date('Y-m-d',$row->created)}}</td>
 						
 					</tr>

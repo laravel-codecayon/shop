@@ -125,20 +125,20 @@ class NproductsController extends BaseController {
 		$content = $this->data['pageTitle'];
 		$content .= '<table border="1">';
 		$content .= '<tr>';
-		$content .= '<th style="background:#f9f9f9;">Product ID</th>';
-		$content .= '<th style="background:#f9f9f9;">Product Name</th>';
-		$content .= '<th style="background:#f9f9f9;">Price</th>';
-		$content .= '<th style="background:#f9f9f9;">Category</th>';
-		$content .= '<th style="background:#f9f9f9;">Promotion</th>';
-		$content .= '<th style="background:#f9f9f9;">Status</th>';
-		$content .= '<th style="background:#f9f9f9;">Created</th>';
+		$content .= '<th style="background:#f9f9f9;">'.Lang::get('core.table_id').'</th>';
+		$content .= '<th style="background:#f9f9f9;">'.Lang::get('core.table_name').'</th>';
+		$content .= '<th style="background:#f9f9f9;">'.Lang::get('core.table_price').'</th>';
+		$content .= '<th style="background:#f9f9f9;">'.Lang::get('core.table_category').'</th>';
+		$content .= '<th style="background:#f9f9f9;">'.Lang::get('core.table_promotion').'</th>';
+		$content .= '<th style="background:#f9f9f9;">'.Lang::get('core.table_status').'</th>';
+		$content .= '<th style="background:#f9f9f9;">'.Lang::get('core.table_created').'</th>';
 		$content .= '</tr>';
 		
 		foreach ($data as $item)
 		{
 			$promotion = SiteHelpers::getNamePromotion($item->id_promotion);
 			$promotion = count($promotion) > 0 ? $promotion->name : '';
-			$status = $item->status == 1 ? "Enable" : "Disable";
+			$status = $item->status == 1 ? Lang::get('core.enable') : Lang::get('core.disable');
 			$content .= '<tr>';
 			$content .= '<td>'. $item->ProductID . '</td>';
 			$content .= '<td>'. $item->ProductName . '</td>';
@@ -313,7 +313,7 @@ class NproductsController extends BaseController {
 				->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));		
 		// delete multipe rows 
 		//$this->model->destroy(Input::get('id'));
-		$this->inputLogs("ID : ".implode(",",Input::get('id'))."  , Has Been Removed Successfull");
+		$this->inputLogs("ID : ".implode(",",Input::get('id')).Lang::get('core.note_success_delete'));
 
 		foreach(Input::get('id') as $idpro){
 			$data_pro = $this->model->getRow($idpro);

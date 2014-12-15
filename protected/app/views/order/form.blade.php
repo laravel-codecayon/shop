@@ -26,13 +26,13 @@
 		</ul>
 		 {{ Form::open(array('url'=>'order/save/'.SiteHelpers::encryptID($row['OrderID']).'?md='.$filtermd.$trackUri, 'class'=>'form-horizontal','files' => true , 'parsley-validate'=>'','novalidate'=>' ')) }}
 				<div class="col-md-12">
-						<fieldset><legend> Order ({{$row['OrderID']}})</legend>
+						<fieldset><legend> {{ Lang::get('core.order') }} ({{$row['OrderID']}})</legend>
 
 
 									  {{ Form::hidden('OrderID', $row['OrderID'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 
 								  <div class="form-group  " >
-									<label for="CustomerID" class=" control-label col-md-4 text-left"> Customer </label>
+									<label for="CustomerID" class=" control-label col-md-4 text-left"> {{ Lang::get('core.table_customer') }} </label>
 									<div class="col-md-6">
 									  {{ Form::text('name', $row['name'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 									 </div> 
@@ -41,7 +41,7 @@
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="EmployeeID" class=" control-label col-md-4 text-left"> Address </label>
+									<label for="EmployeeID" class=" control-label col-md-4 text-left"> {{ Lang::get('core.table_address') }} </label>
 									<div class="col-md-6">
 									  {{ Form::text('address', $row['address'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 									 </div> 
@@ -50,7 +50,7 @@
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="OrderDate" class=" control-label col-md-4 text-left"> City </label>
+									<label for="OrderDate" class=" control-label col-md-4 text-left"> {{ Lang::get('core.table_city') }} </label>
 									<div class="col-md-6">
 									  
 				<select name='provinceid' rows='5' id='city' code='{$provinceid}' 
@@ -61,7 +61,7 @@
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="RequiredDate" class=" control-label col-md-4 text-left"> District </label>
+									<label for="RequiredDate" class=" control-label col-md-4 text-left"> {{ Lang::get('core.table_district') }} </label>
 									<div class="col-md-6">
 									  
 				<select name='districtid' rows='5' id='district' code='{$districtid}' 
@@ -72,7 +72,7 @@
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="ShippedDate" class=" control-label col-md-4 text-left"> Ward </label>
+									<label for="ShippedDate" class=" control-label col-md-4 text-left"> {{ Lang::get('core.table_ward') }} </label>
 									<div class="col-md-6">
 									  
 				<select name='wardid' rows='5' id='ward' code='{$wardid}' 
@@ -83,7 +83,7 @@
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="ShipVia" class=" control-label col-md-4 text-left"> Email </label>
+									<label for="ShipVia" class=" control-label col-md-4 text-left"> {{ Lang::get('core.table_email') }} </label>
 									<div class="col-md-6">
 									  {{ Form::text('email', $row['email'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 									 </div> 
@@ -92,7 +92,7 @@
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="Freight" class=" control-label col-md-4 text-left"> Phone </label>
+									<label for="Freight" class=" control-label col-md-4 text-left"> {{ Lang::get('core.table_phone') }} </label>
 									<div class="col-md-6">
 									  {{ Form::text('phone', $row['phone'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 									 </div> 
@@ -101,19 +101,19 @@
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="ShipName" class=" control-label col-md-4 text-left"> Sex </label>
+									<label for="ShipName" class=" control-label col-md-4 text-left"> {{ Lang::get('core.sex') }} </label>
 									<div class="col-md-6">
 									  <label class='checked'>
-										<input type='radio' name='sex' value ='0' required @if($row['sex'] == '0' || $row['sex'] == '') checked="checked" @endif > Nữ </label>
+										<input type='radio' name='sex' value ='0' required @if($row['sex'] == '0' || $row['sex'] == '') checked="checked" @endif > {{ Lang::get('core.woman') }} </label>
 										<label class='checked'>
-										<input type='radio' name='sex' value ='1' required @if($row['sex'] == '1') checked="checked" @endif > Nam </label> 
+										<input type='radio' name='sex' value ='1' required @if($row['sex'] == '1') checked="checked" @endif > {{ Lang::get('core.man') }} </label> 
 									 </div> 
 									 <div class="col-md-2">
 									 	
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="ShipAddress" class=" control-label col-md-4 text-left"> Note </label>
+									<label for="ShipAddress" class=" control-label col-md-4 text-left"> {{ Lang::get('core.table_note') }} </label>
 									<div class="col-md-6">
 									  {{ Form::textarea('content', $row['content'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 									 </div> 
@@ -122,16 +122,16 @@
 									 </div>
 								  </div> 					
 								  <div class="form-group  " >
-									<label for="ShipCity" class=" control-label col-md-4 text-left"> Status </label>
+									<label for="ShipCity" class=" control-label col-md-4 text-left"> {{ Lang::get('core.table_status') }} </label>
 									<div class="col-md-6">
 									  <label class='checked'>
-										<input type='radio' name='status' value ='0' required @if($row['status'] == '0' || $row['status'] == '') checked="checked" @endif > New </label>
+										<input type='radio' name='status' value ='0' required @if($row['status'] == '0' || $row['status'] == '') checked="checked" @endif > {{ Lang::get('core.order_new') }} </label>
 										<label class='checked'>
-										<input type='radio' name='status' value ='1' required @if($row['status'] == '1') checked="checked" @endif > Waiting </label> 
+										<input type='radio' name='status' value ='1' required @if($row['status'] == '1') checked="checked" @endif > {{ Lang::get('core.order_wait') }} </label> 
 										<label class='checked'>
-										<input type='radio' name='status' value ='2' required @if($row['status'] == '2') checked="checked" @endif > Finish </label> 
+										<input type='radio' name='status' value ='2' required @if($row['status'] == '2') checked="checked" @endif > {{ Lang::get('core.order_finish') }} </label> 
 										<label class='checked'>
-										<input type='radio' name='status' value ='3' required @if($row['status'] == '3') checked="checked" @endif > Destroy </label> 
+										<input type='radio' name='status' value ='3' required @if($row['status'] == '3') checked="checked" @endif > {{ Lang::get('core.order_des') }} </label> 
 									 </div> 
 									 <div class="col-md-2">
 									 	
@@ -139,14 +139,14 @@
 								  </div>
 								  @if(count($items) > 0)
 								   <div class="form-group  " >
-									<label for="ShipCity" class=" control-label col-md-4 text-left"> Order Details </label>
+									<label for="ShipCity" class=" control-label col-md-4 text-left"> {{ Lang::get('core.detail_order') }} </label>
 									<div class="col-md-6">
 									  <table class="table table-bordered table-striped">
 								          <thead class="no-border">
 								            <tr>
-								              <th style="width:50%;">Name</th>
-								              <th>SL</th>
-								              <th class="text-right">Price</th>
+								              <th style="width:50%;">{{ Lang::get('core.table_name') }}</th>
+								              <th>{{ Lang::get('core.table_sl') }}</th>
+								              <th class="text-right">{{ Lang::get('core.table_price') }}</th>
 								            </tr>
 								          </thead>
 								          <tbody class="no-border-y">
@@ -156,8 +156,8 @@
 								              <td style="width:30%;">{{$product->ProductName}}</td>
 								              <td>
 								              	<input type="text" id="item_{{$item->ProductID}}" value="{{$item->Quantity}}" size="3" />
-								              	<a href="javascript:" onclick="update_order({{$item->ProductID}},{{$item->OrderID}})" title="Update"><span class="badge">U</span></a>
-								              	<a href="javascript:" onclick="del_order({{$item->ProductID}},{{$item->OrderID}})" title="Delete"><span class="badge badge-danger">D</span></a>
+								              	<a href="javascript:" onclick="update_order({{$item->ProductID}},{{$item->OrderID}})" title="{{ Lang::get('core.update') }}"><span class="badge">U</span></a>
+								              	<a href="javascript:" onclick="del_order({{$item->ProductID}},{{$item->OrderID}})" title="{{ Lang::get('core.delete') }}"><span class="badge badge-danger">D</span></a>
 								              </td>
 								              <td class="text-right">{{number_format(($item->UnitPrice * $item->Quantity),0,',','.') }}</td>
 								            </tr>

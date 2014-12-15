@@ -24,92 +24,92 @@
 		<tbody>	
 	
 					<tr>
-						<td width='30%' class='label-view text-right'>OrderID</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_id') }}</td>
 						<td>{{ $row->OrderID }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Customer</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_customer') }}</td>
 						<td>{{ $row->name }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Email</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_email') }}</td>
 						<td>{{ $row->email }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Phone</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_phone') }}</td>
 						<td>{{ $row->phone }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Address</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_address') }}</td>
 						<td>{{ $row->address }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Status</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_status') }}</td>
 						<td>
-							@if($row->status == 0) New 
-							@elseif($row->status == 1) Waiting 
-							@elseif($row->status == 2) Finish 
-							@elseif($row->status == 3) Destroy 
+							@if($row->status == 0) {{ Lang::get('core.order_new') }} 
+							@elseif($row->status == 1) {{ Lang::get('core.order_wait') }} 
+							@elseif($row->status == 2) {{ Lang::get('core.order_finish') }} 
+							@elseif($row->status == 3) {{ Lang::get('core.order_des') }} 
 							@endif 
 						</td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>City</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_city') }}</td>
 						<td>{{ SiteHelpers::getNameaddress($row->provinceid,'province','provinceid') }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>District</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_district') }}</td>
 						<td>{{ SiteHelpers::getNameaddress($row->districtid,'district','districtid') }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Ward</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_ward') }}</td>
 						<td>{{ SiteHelpers::getNameaddress($row->wardid,'ward','wardid') }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Order Date</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_date') }}</td>
 						<td>{{ $row->OrderDate }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Sex</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.sex') }}</td>
 						<td>@if($row->sex == 1) Nam @else Nu @endif </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Note</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_note') }}</td>
 						<td>{{ $row->content }} </td>
 						
 					</tr>
 					@if(count($items) > 0)
 					<tr>
-						<td width='30%' class='label-view text-right'>Order Detail</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.detail_order') }}</td>
 						<td>
 							<table class="table table-bordered table-striped">
 								          <thead class="no-border">
 								            <tr>
-								              <th style="width:50%;">Name</th>
-								              <th>SL</th>
-								              <th class="text-right">Price</th>
+								              <th style="width:50%;">{{ Lang::get('core.table_name') }}</th>
+								              <th>{{ Lang::get('core.table_sl') }}</th>
+								              <th class="text-right">{{ Lang::get('core.table_price') }}</th>
 								            </tr>
 								          </thead>
 								          <tbody class="no-border-y">

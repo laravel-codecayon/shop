@@ -32,32 +32,32 @@
 		<tbody>	
 	
 					<tr>
-						<td width='30%' class='label-view text-right'>Title</td>
+						<td width='30%' class='label-view text-right'>{{Lang::get('core.table_title')}}</td>
 						<td>{{ $row->title }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Slug</td>
+						<td width='30%' class='label-view text-right'>{{Lang::get('core.table_title')}}</td>
 						<td>{{ $row->alias }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Created</td>
+						<td width='30%' class='label-view text-right'>{{Lang::get('core.table_created')}}</td>
 						<td>{{date('Y-m-d',$row->created)}} </td>
 						
 					</tr>
 
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Status</td>
-						<td>@if($row->status == 1) Enable @else Disable @endif  </td>
+						<td width='30%' class='label-view text-right'>{{Lang::get('core.table_status')}}</td>
+						<td>@if($row->status == 1) {{Lang::get('core.enable')}} @else {{Lang::get('core.disable')}} @endif  </td>
 						
 					</tr>
 
 					<tr>
-						<td width='30%' class='label-view text-right'>Content</td>
+						<td width='30%' class='label-view text-right'>{{Lang::get('core.table_content')}}</td>
 						<td>{{ $row->content }} </td>
 						
 					</tr>

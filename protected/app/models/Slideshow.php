@@ -28,11 +28,14 @@ class Slideshow extends BaseModel  {
 			"file" => "mimes:gif,png,jpg,jpeg|image|max:20000",
 		);
 
-	public static $columnTable=array(
-			"slideshow_name" => array("label"=>"Name", "type"=>"text", "name"=>"slideshow_name", "value" => ""),
-			"slideshow_status" => array("label"=>"Status", "type"=>"radio", "name"=>"slideshow_status", "value" => "","option"=>array("0"=>"Disable","1"=>"Enable")),
-			"slideshow_link" => array("label"=>"Name", "type"=>"text", "name"=>"slideshow_link", "value" => ""),
-			"created" => array("label"=>"Created", "type"=>"date", "name"=>"created", "value" => ""),
+	public function columnTable(){
+		$array =array(
+			"slideshow_name" => array("label"=>Lang::get('core.table_name'), "type"=>"text", "name"=>"slideshow_name", "value" => ""),
+			"slideshow_status" => array("label"=>Lang::get('core.table_status'), "type"=>"radio", "name"=>"slideshow_status", "value" => "","option"=>array("0"=>Lang::get('core.disable'),"1"=>Lang::get('core.enable'))),
+			"slideshow_link" => array("label"=>Lang::get('core.table_link'), "type"=>"text", "name"=>"slideshow_link", "value" => ""),
+			"created" => array("label"=>Lang::get('core.table_created'), "type"=>"date", "name"=>"created", "value" => ""),
 		);
+		return $array;
+	}
 
 }

@@ -11,7 +11,7 @@
 		  <ul class="breadcrumb">
 			<li><a href="{{ URL::to('dashboard') }}">{{ Lang::get('core.home'); }}</a></li>
 			<li><a href="{{ URL::to('pages') }}">{{ $pageTitle }}</a></li>
-			<li class="active"> Add </li>
+			<li class="active"> {{ Lang::get('core.add'); }} </li>
 		  </ul>
 		 
 	  
@@ -31,7 +31,7 @@
 
 			<div class="col-sm-8 ">
 				<div class="sbox">
-					<div class="sbox-title">Page Content </div>	
+					<div class="sbox-title">{{ Lang::get('core.table_content'); }} </div>	
 					<div class="sbox-content">				
 						
 					  <div class="form-group  " >
@@ -47,16 +47,16 @@
 		 
 		 <div class="col-sm-4 ">
 			<div class="sbox">
-				<div class="sbox-title">Page Info </div>	
+				<div class="sbox-title">{{ Lang::get('core.table_info'); }} </div>	
 				<div class="sbox-content">						
 				  <div class="form-group hidethis " style="display:none;">
-					<label for="ipt" class=""> PageID </label>
+					<label for="ipt" class=""> {{ Lang::get('core.table_id'); }} </label>
 					
 					  {{ Form::hidden('pageID', $row['pageID'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 					
 				  </div> 					
 				  <div class="form-group  " >
-					<label for="ipt" > Title </label>
+					<label for="ipt" > {{ Lang::get('core.table_title'); }} </label>
 					
 					  {{ Form::text('title', $row['title'],array('class'=>'form-control', 'placeholder'=>'', 'required'=>'true'  )) }} 
 					
@@ -66,32 +66,32 @@
 
 
 				  <div class="form-group hidethis " style="display:none;">
-					<label for="ipt" class=" control-label col-md-4 text-right"> Created </label>
+					<label for="ipt" class=" control-label col-md-4 text-right"> {{ Lang::get('core.created'); }} </label>
 					<div class="col-md-8">
 					  {{ Form::text('created', $row['created'],array('class'=>'form-control', 'placeholder'=>'',   )) }} 
 					 </div> 
 				  </div> 					
 	
 				  <div class="form-group  " >
-					<label> Status </label>
+					<label> {{ Lang::get('core.table_status'); }} </label>
 					<label class="radio">					
 					  <input  type='radio' name='status'  value="1" required
 					  @if( $row['status'] =='1')  	checked	  @endif				  
 					   /> 
-					  Enable
+					  {{ Lang::get('core.enable'); }}
 					</label> 
 					<label class="radio">					
 					  <input  type='radio' name='status'  value="0" required
 					   @if( $row['status'] =='0')  	checked	  @endif				  
 					   /> 
-					  Disabled
+					  {{ Lang::get('core.disable'); }}
 					</label> 					 
 				  </div> 
 
 				  
 			  <div class="form-group">
 				
-				<button type="submit" class="btn btn-primary ">  Submit </button>
+				<button type="submit" class="btn btn-primary ">  {{ Lang::get('core.submit'); }} </button>
 				 
 		
 			  </div> 

@@ -39,12 +39,12 @@
     <table class="table table-striped  ">
         <thead>
 		<tr>
-			<th> No </th>
+			<th> {{ Lang::get('core.table_no') }} </th>
 			<th> <input type="checkbox" class="checkall i-checks-all " /></th>
 		 @foreach ($test as $t)
 						<th>{{ $t['label'] }}</th>
 				@endforeach
-		  	<th> Url </th>
+		  	<th> {{ Lang::get('core.table_url') }} </th>
 			<th> {{ Lang::get('core.btn_action') }} </th>
            </tr>
         </thead>

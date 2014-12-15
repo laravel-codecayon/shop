@@ -192,14 +192,36 @@ return array(
 	"table_content"				=> "Mô tả",
 	"table_image"				=> "Ảnh đại diện",
 	"table_type_promotion"		=> "Loại khuyến mãi",
+	"table_link"				=> "Link",
+	"table_url"					=> "URL",
+	"table_info"				=> "Thông tin trang",
+	"table_title"				=> "Tiêu đề trang",
+	"table_customer"			=> "Tên khách hàng",
+	"table_phone"				=> "Điện thoại",
+	"table_address"				=> "Địa chỉ",
+	"table_email"				=> "Email",
+	"table_city"				=> "Thành phố",
+	"table_date"				=> "Ngày",
+	"table_district"			=> "Quận/Huyện",
+	"table_ward"				=> "Phường/Xã",
+	"table_note"				=> "Ghi chú",
+	"table_sl"					=> "Số lượng",
+
+	"order_new"					=> "Mới",
+	"order_wait"				=> "Đang giao hàng",
+	"order_finish"				=> "Hoàn thành",
+	"order_des"					=> "Hủy",
 
 	"product_image_multi"		=> "Nhiều hình ảnh",
 
 	"enable"					=> "Hiện",
 	"disable"					=> "Ẩn",
-
-
-
-
+	"add"						=> "Thêm",
+	"sex"						=> "Giới tính",
+	"woman"						=> "Nữ",
+	"man"						=> "Nam",
+	"detail_order"				=> "Chi tiết đơn hàng",
+	"update"					=> "Cập nhật",
+	"delete"					=> "Xóa",
 
 );

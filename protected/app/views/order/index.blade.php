@@ -43,7 +43,7 @@
     <table class="table table-striped ">
         <thead>
 			<tr>
-				<th> No </th>
+				<th> {{ Lang::get('core.table_no') }} </th>
 				<th> <input type="checkbox" class="checkall" /></th>
 				
 				@foreach ($test as $t)
