@@ -48,7 +48,7 @@ class ConfigController extends BaseController  {
 			$val .= 	"define('CNF_ACTIVATION','".CNF_ACTIVATION."');\n";	
 			$val .= 	"define('CNF_MULTILANG','".(!is_null(Input::get('cnf_multilang')) ? 1 : 0 )."');\n";
 			//$val .= 	"define('CNF_LANG','".Input::get('cnf_lang')."');\n";
-			$val .= 	"define('CNF_LANG','vn');\n";
+			$val .= 	"define('CNF_LANG','vi');\n";
 			$val .= 	"define('CNF_REGIST','".CNF_REGIST."');\n";	
 			$val .= 	"define('CNF_FRONT','".CNF_FRONT."');\n";		
 			$val .= 	"define('CNF_RECAPTCHA','".CNF_RECAPTCHA."');\n";	

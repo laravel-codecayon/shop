@@ -164,4 +164,17 @@ return array(
 
 
 	"product_image"				=> "Image",
+	"dashboard"					=> "Dashboard",
+	"summary_info_site"			=> "Sumary into site",
+	"chart"						=> "Chart",
+	"last_login"				=> "Last login",
+	"product"					=> "Products",
+	"promotion"					=> "Promotion",
+	"slideshow"					=> "Slide Show",
+	"pages"						=> "Pages",
+	"order"						=> "Orders",
+	"permission"				=> "Permission",
+	"user"						=> "Users",
+	"menu"						=> "Menu",
+	"main_site"					=> "Main Site",
 );

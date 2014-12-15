@@ -5,7 +5,7 @@
             
         </div>
             <ul class="nav navbar-top-links navbar-right">
-		@if(CNF_MULTILANG ==1)
+		@if(CNF_MULTILANG ==0)
 		<li  class="user dropdown"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><?php print_r(SiteHelpers::langShow())?> <i class="icon-flag2"></i><i class="caret"></i></a>
 			 <ul class="dropdown-menu dropdown-menu-right icons-right">
 				@foreach(SiteHelpers::langOption() as $lang)
@@ -43,7 +43,7 @@
 		<li class="user dropdown"><a class="dropdown-toggle" href="javascript:void(0)"  data-toggle="dropdown"><i class="icon-user"></i> <span>{{ Lang::get('core.m_myaccount'); }}</span><i class="caret"></i></a>
 		  <ul class="dropdown-menu dropdown-menu-right icons-right">
 		  	<li><a href="{{ URL::to('dashboard')}}"><i class="icon-stats-up"></i> {{ Lang::get('core.m_dashboard'); }}</a></li>
-			<li><a href="{{ URL::to('')}}" target="_blank"><i class="icon-stats-up"></i>  Main Site </a></li>
+			<li><a href="{{ URL::to('')}}" target="_blank"><i class="icon-stats-up"></i>  {{ Lang::get('core.main_site'); }} </a></li>
 			<li><a href="{{ URL::to('user/profile')}}"><i class="icon-user"></i> {{ Lang::get('core.m_profile'); }}</a></li>
 			<li><a href="{{ URL::to('user/logout')}}"><i class="icon-exit"></i> {{ Lang::get('core.m_logout'); }}</a></li>
 		  </ul>

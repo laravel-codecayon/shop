@@ -2,30 +2,30 @@
 
 return array(
 // General 
-	"norecord" => "No Record Found",
-	"create" => "Create New",
+	"norecord" => "Không có dữ liệu",
+	"create" => "Tạo mới",
 
 	// General , Login Info & Signup
 	"home" => "Trang chủ",
-	"group" => "Group",
+	"group" => "Nhóm",
 	"username" => "Username",
-	"email" => "Email Address",
+	"email" => "Email",
 	"password" => "Password",
-	"repassword" => "Confirm Password",
-	"forgotpassword" => "Forgot Password",
-	"newpassword" => "New Password",
-	"conewpassword" => "Confirm Password",
-	"notepassword" => "Leave blank if you don't want to change current password", // updated apidevlab	
+	"repassword" => "Nhập lại Password",
+	"forgotpassword" => "Quên Password",
+	"newpassword" => "Password mới",
+	"conewpassword" => "Xác nhận Password",
+	"notepassword" => "Hãy để trống nếu bạn không muốn thay đổi Password", // updated apidevlab	
 	"submit" => "Submit",
-	"signin" => "Sign In",
-	"signup" => "Sign Up",
-	"language" => "Language",	
-	"firstname" => "First Name",
-	"lastname" => "Last Name ",
-	"lastlogin"	=> "Last Login",
-	"personalinfo"	=> "Personal Info",
-	"changepassword"	=> "Change Password",
-	"registernew" => "Register New Account ",
+	"signin" => "Đăng nhập",
+	"signup" => "Đăng ký",
+	"language" => "Ngôn ngữ",	
+	"firstname" => "Họ",
+	"lastname" => "Tên ",
+	"lastlogin"	=> "Đăng nhập gần nhất",
+	"personalinfo"	=> "Thông tin cá nhân",
+	"changepassword"	=> "Đổi Password",
+	"registernew" => "Tạo tài khoảng mới ",
 	
 /* grid , pagination */
 	"grid_displaying" 	=> "Displaying",
@@ -38,45 +38,45 @@ return array(
 
 /* Menu navigation here */
 	"m_controlpanel"	=> "Control Panel",
-	"m_dashboard" 		=> "Dashboard",
-	"m_setting" 		=> "Settings", // updated apidevlab
-	"m_usersgroups" 	=> "Users & Groups",
-	"m_users" 			=> "Users",
-	"m_groups" 			=> "Groups",
-	"m_pagecms" 		=> "Page CMS",
-	"m_menu" 			=> "Menu Management",
-	"m_logs" 			=> "Activity Logs",
+	"m_dashboard" 		=> "Bảng điều khiển",
+	"m_setting" 		=> "Cài đặt", // updated apidevlab
+	"m_usersgroups" 	=> "Tài khoản & Nhóm",
+	"m_users" 			=> "Tài khoản",
+	"m_groups" 			=> "Nhóm",
+	"m_pagecms" 		=> "Trang",
+	"m_menu" 			=> "Quản lý Menu",
+	"m_logs" 			=> "Lịch sử hoạt động",
 	"m_codebuilder" 	=> "Code Builder",
 	"m_blastemail" 		=> "Blast Email",
-	"m_myaccount" 		=> "My Account",
-	"m_logout" 			=> "Logout",
-	"m_profile" 		=> "Profile",
-	"m_manual" 		=> "Manual Guide ",
+	"m_myaccount" 		=> "Tài khoản",
+	"m_logout" 			=> "Đăng xuất",
+	"m_profile" 		=> "Hồ sơ",
+	"m_manual" 		=> "Hướng dẫn sử dụng",
 
 /* Setting page translation */	
 
-	"t_generalsetting"		=> "General Settings", //updated apidevlab
-	"t_generalsettingsmall"	=> "Manage Settings Configuration", // updated apidevlab
+	"t_generalsetting"		=> "Cài đặt chung", //updated apidevlab
+	"t_generalsettingsmall"	=> "Quản lý cấu hình", // updated apidevlab
 	"t_blastemail"			=> "Blast Email", // updated apidevlab
-	"t_blastemailsmall"		=> "Send Bulk Email",
-	"t_emailtemplate"		=> "Email Templates",
-	"t_emailtemplatesmall"	=> "Manage Email Templates", // updated apidevlab
-	"t_loginsecurity"		=> "Login & Security", // updated apidevlab
-	"t_loginsecuritysmall"	=> "Manage Logins & Security",	// updated apidevlab	
-	"t_socialmedia"			=> "Social Media Login", // updated apidevlab
-	"t_lfb"					=> "Login via Facebook", // updated apidevlab
-	"t_lgoogle"				=> "Login via Google", // updated apidevlab
-	"t_ltwit"				=> "Login via Twitter", // updated apidevlab
-	"tab_siteinfo"			=> "General Settings", // Site Info updated apidevlab
-	"tab_loginsecurity"		=> "Login & Security",
-	"tab_email"				=> "Email Templates", // updated apidevlab
+	"t_blastemailsmall"		=> "Gửi Email hàng loạt",
+	"t_emailtemplate"		=> "Mẫu Email",
+	"t_emailtemplatesmall"	=> "Quản lý mẫu Email", // updated apidevlab
+	"t_loginsecurity"		=> "Đăng nhập & Bảo mật", // updated apidevlab
+	"t_loginsecuritysmall"	=> "Quản lý nhập & Bảo mật",	// updated apidevlab	
+	"t_socialmedia"			=> "Mạng xã hội", // updated apidevlab
+	"t_lfb"					=> "Đăng nhập qua Facebook", // updated apidevlab
+	"t_lgoogle"				=> "Đăng nhập qua Google", // updated apidevlab
+	"t_ltwit"				=> "Đăng nhập qua Twitter", // updated apidevlab
+	"tab_siteinfo"			=> "Cài đặt chung", // Site Info updated apidevlab
+	"tab_loginsecurity"		=> "Đăng nhập & Bảo mật",
+	"tab_email"				=> "Mẫu Email", // updated apidevlab
 	"fr_appname"			=> "Application Name ",
 	"fr_appdesc"			=> "Application Desc",
 	"fr_comname"			=> "Company Name ",
-	"fr_emailsys"			=> "Email System ",
-	"fr_emailmessage"		=> "Email Message ",
+	"fr_emailsys"			=> "Hệ thống Email ",
+	"fr_emailmessage"		=> "Tin nhắn Email ",
 	"fr_enable"				=> "Enable",
-	"fr_mainlanguage"			=> "Main Language",
+	"fr_mainlanguage"		=> "Main Language",
 	"fr_appid"				=> "APP ID",
 	"fr_secret"				=> "SECRET NUMBER",
 	"fr_registrationdefault"		=> "Default Group Registration ",
@@ -100,34 +100,34 @@ return array(
 	"sb_cancel"					=> "Cancel",	
 	
 /* button */
-	"btn_back"						=> "Back",	
-	"btn_action"					=> "Action",	
-	"btn_search"					=> "Search",	
+	"btn_back"						=> "Trở về",	
+	"btn_action"					=> "Hành động",	
+	"btn_search"					=> "Tìm kiếm",	
 	"btn_download"					=> "Download",	
 	"btn_config"					=> "Configuration",	
-	"btn_create"					=> "Create",	
-	"btn_remove"					=> "Remove",
-	"btn_edit"						=> "Edit",	
-	"btn_view"						=> "View",
+	"btn_create"					=> "Tạo",	
+	"btn_remove"					=> "Xóa",
+	"btn_edit"						=> "Sửa",	
+	"btn_view"						=> "Chi tiết",
 	"btn_typesearch"				=> "Type & Enter",	// updated apidevlab	
 	
 /* Core Module */
-	"t_menu"						=> "Menu Management",
-	"t_menusmall"					=> "List Of All Menu",
-	"t_tipsdrag"					=> "Drag and Drop to reorder menu list", // updated apidevlab
-	"t_tipsnote"					=> "Note!, Menus only support 3 levels ", // updated apidevlab
-	"tab_topmenu"					=> "Top Menu",
+	"t_menu"						=> "Quản lý Menu",
+	"t_menusmall"					=> "Danh sách Menu",
+	"t_tipsdrag"					=> "Kéo và thả để sắp xếp Menu", // updated apidevlab
+	"t_tipsnote"					=> "Menu chỉ hỗ trợ 2 cấp", // updated apidevlab
+	"tab_topmenu"					=> "Menu trang chủ",
 	"tab_sidemenu"					=> "Side Menu ",
-	"sb_reorder"					=> "Reorder Menu",	
-	"fr_mtitle"						=> "Name / Title ",	
-	"fr_mtype"						=> "Menu Type",	
-	"fr_mposition"					=> "Position",	
-	"fr_mactive"					=> "Active",	
-	"fr_minactive"					=> "Inactive",
-	"fr_maccess"					=> "Access", // updated apidevlab	
+	"sb_reorder"					=> "Lưu Menu",	
+	"fr_mtitle"						=> "Tên / Tiêu đề ",	
+	"fr_mtype"						=> "Loại Menu",	
+	"fr_mposition"					=> "Vị trí",	
+	"fr_mactive"					=> "Hoạt động",	
+	"fr_minactive"					=> "Không hoạt động",
+	"fr_maccess"					=> "Quyền", // updated apidevlab	
 	"fr_miconclass"					=> "Icon Class",
-	"fr_mpublic"					=> "Public",
-	"fr_mexample"					=> "Example",
+	"fr_mpublic"					=> "Chấp nhận",
+	"fr_mexample"					=> "Ví dụ",
 	"fr_musage"						=> "Useage", // updated apidevlab	
 	
 /* Module */
@@ -143,17 +143,17 @@ return array(
 	
 /*updates	on may ,5 2014 */
 	
-	"loginsocial"				=> "Login via Social Networking", // updated apidevlab
-	"enteremailforgot"			=> "Enter Your Email Address",
-	"detail" 					=> "View Detail",
+	"loginsocial"				=> "Đăng nhập qua mạng xã hội", // updated apidevlab
+	"enteremailforgot"			=> "Nhập địa chỉ Email của bạn",
+	"detail" 					=> "Chi tiết",
 	"addedit" 					=> "Thêm - Sửa",
 	
 /* Notification */
-	"note_noexists"				=> "Sorry, The Page Does Not Exist!", // updated apidevlab
-	"note_restric"				=> "Sorry, You are not allowed to access this page!", // updated apidevlab
-	"note_success"				=> "Saved successfully!", // updated apidevlab
+	"note_noexists"				=> "Thứ lỗi ! Trang không tồn tại .", // updated apidevlab
+	"note_restric"				=> "Thứ lỗi, Bạn không được quyền truy cập vào trang này!", // updated apidevlab
+	"note_success"				=> "Lưu thành công!", // updated apidevlab
 	"note_error"				=> "Các lỗi sau !",
-	"note_success_delete"		=> "Removed successfully!",	// updated apidevlab
+	"note_success_delete"		=> "Xóa thành công",	// updated apidevlab
 
 	"category"					=> "Danh mục",
 	"category_id"				=> "ID Danh mục",
@@ -163,5 +163,43 @@ return array(
 
 
 
-	"product_image"				=> "Hình ảnh",
+	"product_image"				=> "Ảnh đại diện",
+	"dashboard"					=> "Bảng điều khiển",
+	"summary_info_site"			=> "Tóm tắt trang",
+	"chart"						=> "Đồ thị",
+	"last_login"				=> "Đăng nhập gần nhất",
+	"product"					=> "Sản phẩm",
+	"promotion"					=> "Khuyến mãi",
+	"slideshow"					=> "Slide Show",
+	"pages"						=> "Trang",
+	"order"						=> "Đơn hàng",
+	"permission"				=> "Phân quyền",
+	"user"						=> "Tài khoản",
+	"menu"						=> "Menu",
+	"main_site"					=> "Trang chủ",
+	"table_id"					=> "ID",
+	"table_name"				=> "Tên",
+	"table_price"				=> "Giá",
+	"table_category"			=> "Danh mục",
+	"table_promotion"			=> "Khuyến mãi",
+	"table_status"				=> "Trạng thái",
+	"table_created"				=> "Ngày tạo",
+	"table_no"					=> "STT",
+	"table_disable"				=> "Ẩn",
+	"table_enable"				=> "Hiện",
+	"table_stock"				=> "Số lượng",
+	"table_description"			=> "Mô tả ngắn",
+	"table_content"				=> "Mô tả",
+	"table_image"				=> "Ảnh đại diện",
+	"table_type_promotion"		=> "Loại khuyến mãi",
+
+	"product_image_multi"		=> "Nhiều hình ảnh",
+
+	"enable"					=> "Hiện",
+	"disable"					=> "Ẩn",
+
+
+
+
+
 );

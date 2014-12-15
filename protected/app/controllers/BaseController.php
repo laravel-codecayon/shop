@@ -368,7 +368,7 @@ class BaseController extends Controller {
 		{
 			$arrdata[$col] = (Input::get($col)) ? Input::get($col) : "";
 		}
-		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+		$lang = Session::get('lang') == '' ? CNF_LANG : Session::get('lang');
 		$arrdata['lang'] = $lang;
 		return $arrdata;
 	}

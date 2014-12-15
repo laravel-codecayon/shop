@@ -24,57 +24,57 @@
 		<tbody>	
 	
 					<tr>
-						<td width='30%' class='label-view text-right'>ProductID</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_id') }} </td>
 						<td>{{ $row->ProductID }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>ProductName</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_name') }} </td>
 						<td>{{ $row->ProductName }} </td>
 						
 					</tr>
 
 					<tr>
-						<td width='30%' class='label-view text-right'>Image</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.product_image') }} </td>
 						<td><img src="/uploads/products/thumb/{{ $row->image }}" /> </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Promotion</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_promotion') }} </td>
 						<td>{{ SiteHelpers::transNameOfId("suppliers",$row->SupplierID,"SupplierID","CompanyName") }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Category</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_category') }} </td>
 						<td>{{ SiteHelpers::transNameOfId("categories",$row->CategoryID,"CategoryID","CategoryName") }} </td>
 						
 					</tr>
 					<tr>
-						<td width='30%' class='label-view text-right'>UnitPrice</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_price') }} </td>
 						<td>{{ $row->UnitPrice }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>UnitsInStock</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_stock') }} </td>
 						<td>{{ $row->UnitsInStock }} </td>
 						
 					</tr>
 					<tr>
-						<td width='30%' class='label-view text-right'>Description</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_description') }} </td>
 						<td>{{ $row->description }} </td>
 						
 					</tr>
 					<tr>
-						<td width='30%' class='label-view text-right'>Status</td>
-						<td>@if($row->status == 1) Enable @else Disable @endif </td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_status') }} </td>
+						<td>@if($row->status == 1) {{ Lang::get('core.enable') }}  @else {{ Lang::get('core.disable') }}  @endif </td>
 						
 					</tr>
 					<tr>
-						<td width='30%' class='label-view text-right'>Created</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_created') }} </td>
 						<td>{{date('Y-m-d',$row->created)}} </td>
 						
 					</tr>

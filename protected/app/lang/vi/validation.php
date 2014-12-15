@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
 	"accepted"         => "The :attribute must be accepted.",
 	"active_url"       => "The :attribute is not a valid URL.",
 	"after"            => "The :attribute must be a date after :date.",
@@ -22,7 +21,7 @@ return array(
 	"different"        => "The :attribute and :other must be different.",
 	"digits"           => "The :attribute must be :digits digits.",
 	"digits_between"   => "The :attribute must be between :min and :max digits.",
-	"email"            => "The :attribute format is invalid.",
+	"email"            => ":attribute Không đúng định dạng.",
 	"exists"           => "The selected :attribute is invalid.",
 	"image"            => "The :attribute must be an image.",
 	"in"               => "The selected :attribute is invalid.",
@@ -42,9 +41,9 @@ return array(
 		"array"   => "The :attribute must have at least :min items.",
 	),
 	"not_in"           => "The selected :attribute is invalid.",
-	"numeric"          => "The :attribute must be a number.",
+	"numeric"          => ":attribute phải là số.",
 	"regex"            => "The :attribute format is invalid.",
-	"required"         => "The :attribute field is required.",
+	"required"         => ":attribute không được rỗng.",
 	"required_if"      => "The :attribute field is required when :other is :value.",
 	"required_with"    => "The :attribute field is required when :values is present.",
 	"required_without" => "The :attribute field is required when :values is not present.",
@@ -55,9 +54,9 @@ return array(
 		"string"  => "The :attribute must be :size characters.",
 		"array"   => "The :attribute must contain :size items.",
 	),
-	"unique"           => "The :attribute has already been taken.",
-	"url"              => "The :attribute format is invalid.",
-	"recaptcha" => 'The :attribute field is not correct.',
+	"unique"           => ":attribute đã tồn tại.",
+	"url"              => ":attribute không đúng định dạng.",
+	"recaptcha" => ':attribute Không chính xác',
 	/*
 	|--------------------------------------------------------------------------
 	| Custom Validation Language Lines

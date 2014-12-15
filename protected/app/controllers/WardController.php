@@ -19,7 +19,7 @@ class WardController extends BaseController {
 	public function __construct() {
 		
 		parent::__construct();
-		$this->lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+		$this->lang = Session::get('lang') == '' ? CNF_LANG : Session::get('lang');
 		 $this->layout = "layouts.".CNF_THEME.".index";
 		$this->model = new Nproducts();
 		

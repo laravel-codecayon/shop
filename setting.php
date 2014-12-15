@@ -10,7 +10,7 @@ define('CNF_ADDRESS','401, Dhaval Plaza, New Duperi Road, New Mumbai, Maharashtr
 define('CNF_GROUP','3');
 define('CNF_ACTIVATION','manual');
 define('CNF_MULTILANG','0');
-define('CNF_LANG','vn');
+define('CNF_LANG','vi');
 define('CNF_REGIST','true');
 define('CNF_FRONT','true');
 define('CNF_RECAPTCHA','true');

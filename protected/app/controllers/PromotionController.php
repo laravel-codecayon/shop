@@ -13,7 +13,7 @@ class PromotionController extends BaseController {
 		$this->info = $this->model->makeInfo( $this->module);
 		$this->access = $this->model->validAccess($this->info['id']);
 		$this->data = array(
-			'pageTitle'	=> 	$this->info['title'],
+			'pageTitle'	=> 	Lang::get('core.promotion'),
 			'pageNote'	=>  $this->info['note'],
 			'pageModule'=> 'Promotion',
 			'trackUri' 	=> ''	
@@ -59,7 +59,7 @@ class PromotionController extends BaseController {
 		$page = $page >= 1 && filter_var($page, FILTER_VALIDATE_INT) !== false ? $page : 1;	
 		$pagination = Paginator::make($results['rows'], $results['total'],$params['limit']);		
 
-		$test 						= Promotion::$columnTable;
+		$test 						= $this->model->columnTable();
 		$arr_search 				= SiteHelpers::arraySearch(Input::get('search'));
 
 		foreach($arr_search as $key=>$val){
@@ -195,7 +195,7 @@ class PromotionController extends BaseController {
 		foreach(Input::get('id_promotion') as $id_pro){
 			DB::table('products')->where('id_promotion','=',$id_pro)->update(array('id_promotion'=>'0'));
 		}
-		$this->inputLogs("ID : ".implode(",",Input::get('id_promotion'))."  , Has Been Removed Successfull");
+		$this->inputLogs("ID : ".implode(",",Input::get('id_promotion'))." , ".Lang::get('core.note_success_delete'));
 		// redirect
 		Session::flash('message', SiteHelpers::alert('success',Lang::get('core.note_success_delete')));
 		return Redirect::to('Promotion?md='.Input::get('md'));

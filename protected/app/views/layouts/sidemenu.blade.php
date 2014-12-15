@@ -15,7 +15,7 @@
 				<a href="{{ URL::to('user/profile') }}" >
 				<span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ Session::get('fid') }}</strong>
 				 <br />
-				Last Login : <br />
+				{{ Lang::get('core.last_login') }} : <br />
 				<small>{{ date("H:i F j, Y", strtotime(Session::get('ll'))) }}</small>				
 				 </span> 
 				 </span>
@@ -73,35 +73,35 @@
 			</li>
 		@endforeach-->
 		<li @if(Request::is('nproducts')) class="active" @endif>
-			<a href="{{ URL::to('nproducts')}}"><i class="icon-drawer3"></i> <span class="nav-label">Products</span><span class="fa arrow"></span></a>
+			<a href="{{ URL::to('nproducts')}}"><i class="icon-drawer3"></i> <span class="nav-label">{{ Lang::get('core.product') }}</span><span class="fa arrow"></span></a>
 		</li>
 		<li @if(Request::is('ncategories')) class="active" @endif>
-			<a href="{{ URL::to('ncategories')}}"><i class="icon-drawer2"></i> <span class="nav-label">Category</span><span class="fa arrow"></span></a>
+			<a href="{{ URL::to('ncategories')}}"><i class="icon-drawer2"></i> <span class="nav-label">{{ Lang::get('core.category') }}</span><span class="fa arrow"></span></a>
 		</li>
 		<li @if(Request::is('Promotion')) class="active" @endif>
-			<a href="{{ URL::to('Promotion')}}"><i class="icon-drawer2"></i> <span class="nav-label">Promotion</span><span class="fa arrow"></span></a>
+			<a href="{{ URL::to('Promotion')}}"><i class="icon-drawer2"></i> <span class="nav-label">{{ Lang::get('core.promotion') }}</span><span class="fa arrow"></span></a>
 		</li>
 		<li @if(Request::is('Slideshow')) class="active" @endif>
-			<a href="{{ URL::to('Slideshow')}}"><i class="icon-drawer2"></i> <span class="nav-label">Slideshow</span><span class="fa arrow"></span></a>
+			<a href="{{ URL::to('Slideshow')}}"><i class="icon-drawer2"></i> <span class="nav-label">{{ Lang::get('core.slideshow') }}</span><span class="fa arrow"></span></a>
 		</li>
 		<li @if(Request::is('pages')) class="active" @endif>
-			<a href="{{ URL::to('pages')}}"><i class="icon-drawer2"></i> <span class="nav-label">Pages</span><span class="fa arrow"></span></a>
+			<a href="{{ URL::to('pages')}}"><i class="icon-drawer2"></i> <span class="nav-label">{{ Lang::get('core.pages') }}</span><span class="fa arrow"></span></a>
 		</li>
 		<li @if(Request::is('order')) class="active" @endif>
-			<a href="{{ URL::to('order')}}"><i class="icon-drawer2"></i> <span class="nav-label">Order</span><span class="fa arrow"></span></a>
+			<a href="{{ URL::to('order')}}"><i class="icon-drawer2"></i> <span class="nav-label">{{ Lang::get('core.order') }}</span><span class="fa arrow"></span></a>
 		</li>
 		@if(Session::get('gid') ==1 || Session::get('gid') ==2)
 			<li @if(Request::is('permission')) class="active" @endif>
-				<a href="{{ URL::to('permission')}}"><i class="icon-drawer2"></i> <span class="nav-label">Permission</span><span class="fa arrow"></span></a>
+				<a href="{{ URL::to('permission')}}"><i class="icon-drawer2"></i> <span class="nav-label">{{ Lang::get('core.permission') }}</span><span class="fa arrow"></span></a>
 			</li>
 			<li @if(Request::is('users')) class="active" @endif>
-				<a href="{{ URL::to('users')}}"><i class="fa fa-user"></i> <span class="nav-label">Users</span><span class="fa arrow"></span></a>
+				<a href="{{ URL::to('users')}}"><i class="fa fa-user"></i> <span class="nav-label">{{ Lang::get('core.user') }}</span><span class="fa arrow"></span></a>
 			</li>
 			<li @if(Request::is('groups')) class="active" @endif>
-				<a href="{{ URL::to('groups')}}"><i class="fa fa-users"></i> <span class="nav-label">Groups</span><span class="fa arrow"></span></a>
+				<a href="{{ URL::to('groups')}}"><i class="fa fa-users"></i> <span class="nav-label">{{ Lang::get('core.group') }}</span><span class="fa arrow"></span></a>
 			</li>
 			<li @if(Request::is('menu')) class="active" @endif>
-				<a href="{{ URL::to('menu')}}"><i class="fa fa-users"></i> <span class="nav-label">Menu</span><span class="fa arrow"></span></a>
+				<a href="{{ URL::to('menu')}}"><i class="fa fa-users"></i> <span class="nav-label">{{ Lang::get('core.menu') }}</span><span class="fa arrow"></span></a>
 			</li>
 		@endif
       </ul>

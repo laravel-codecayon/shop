@@ -28,12 +28,15 @@ public static $rules=array(
 			"promotion" => "required|numeric",
 		);
 
-	public static $columnTable=array(
-			"id_promotion" => array("label"=>"ID", "type"=>"text", "name"=>"id_promotion", "value" => ""),
-			"name" => array("label"=>"Name", "type"=>"text", "name"=>"name", "value" => ""),
-			"status" => array("label"=>"Status", "type"=>"radio", "name"=>"status", "value" => "","option"=>array("0"=>"Disable","1"=>"Enable")),
-			"promotion" => array("label"=>"Promotion", "type"=>"text", "name"=>"promotion", "value" => ""),
-			"created" => array("label"=>"Created", "type"=>"date", "name"=>"created", "value" => ""),
+	public function columnTable(){
+		$array =array(
+			"id_promotion" => array("label"=>Lang::get('core.table_id'), "type"=>"text", "name"=>"id_promotion", "value" => ""),
+			"name" => array("label"=>Lang::get('core.table_name'), "type"=>"text", "name"=>"name", "value" => ""),
+			"status" => array("label"=>Lang::get('core.table_status'), "type"=>"radio", "name"=>"status", "value" => "","option"=>array("0"=>Lang::get('core.disable'),"1"=>Lang::get('core.enable'))),
+			"promotion" => array("label"=>Lang::get('core.table_promotion'), "type"=>"text", "name"=>"promotion", "value" => ""),
+			"created" => array("label"=>Lang::get('core.table_created'), "type"=>"date", "name"=>"created", "value" => ""),
 		);
+		return $array;
+	}
 
 }

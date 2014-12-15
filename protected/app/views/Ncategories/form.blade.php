@@ -73,12 +73,12 @@
 									 </div>
 								  </div>
 								  <div class="form-group  " >
-									<label for="Status" class=" control-label col-md-4 text-left"> Status </label>
+									<label for="Status" class=" control-label col-md-4 text-left"> {{ Lang::get('core.table_status') }} </label>
 									<div class="col-md-6">
 									  <label class='checked'>
-										<input type='radio' name='status' value ='0' required @if($row['status'] == '0' || $row['status'] == '') checked="checked" @endif > Disable </label>
+										<input type='radio' name='status' value ='0' required @if($row['status'] == '0' || $row['status'] == '') checked="checked" @endif > {{ Lang::get('core.disable') }} </label>
 										<label class='checked'>
-										<input type='radio' name='status' value ='1' required @if($row['status'] == '1') checked="checked" @endif > Enable </label> 
+										<input type='radio' name='status' value ='1' required @if($row['status'] == '1') checked="checked" @endif > {{ Lang::get('core.enable') }} </label> 
 									 </div> 
 									 <div class="col-md-2">
 									 	

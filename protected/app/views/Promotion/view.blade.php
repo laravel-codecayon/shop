@@ -24,37 +24,37 @@
 		<tbody>	
 	
 					<tr>
-						<td width='30%' class='label-view text-right'>Id</td>
+						<td width='30%' class='label-view text-right'>{{Lang::get('core.table_id')}}</td>
 						<td>{{ $row->id_promotion }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Name</td>
+						<td width='30%' class='label-view text-right'>{{Lang::get('core.table_name')}}</td>
 						<td>{{ $row->name }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Status</td>
-						<td>@if($row->status == 1) Enable @else Disable @endif </td>
+						<td width='30%' class='label-view text-right'>{{Lang::get('core.table_status')}}</td>
+						<td>@if($row->status == 1) {{Lang::get('core.enable')}} @else {{Lang::get('core.disable')}} @endif </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Promotion</td>
+						<td width='30%' class='label-view text-right'>{{Lang::get('core.table_promotion')}}</td>
 						<td>{{ $row->promotion }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Type</td>
-						<td>@if($row->type == 1) Money @else Percent @endif </td>
+						<td width='30%' class='label-view text-right'>{{Lang::get('core.table_type_promotion')}}</td>
+						<td>@if($row->type == 1) VNĐ @else % @endif </td>
 						
 					</tr>
 
 					<tr>
-						<td width='30%' class='label-view text-right'>Created</td>
+						<td width='30%' class='label-view text-right'>{{Lang::get('core.table_created')}}</td>
 						<td>{{date('Y-m-d',$row->created)}}</td>
 						
 					</tr>

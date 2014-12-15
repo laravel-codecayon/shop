@@ -32,12 +32,15 @@ class Ncategories extends BaseModel  {
 			"Description" => "required",
 			"file" => "mimes:gif,png,jpg,jpeg|image|max:20000",
 		);
-	public static $columnTable=array(
-			"CategoryID" => array("label"=>"ID", "type"=>"text", "name"=>"CategoryID", "value" => ""),
-			"CategoryName" => array("label"=>"Name", "type"=>"text", "name"=>"CategoryName", "value" => ""),
-			"created" => array("label"=>"Created", "type"=>"date", "name"=>"created", "value" => ""),
-			"status" => array("label"=>"Status", "type"=>"radio", "name"=>"status", "value" => "","option"=>array("0"=>"Disable","1"=>"Enable")),
+	public function columnTable(){
+		$array = array(
+			"CategoryID" => array("label"=>Lang::get('core.table_id'), "type"=>"text", "name"=>"CategoryID", "value" => ""),
+			"CategoryName" => array("label"=>Lang::get('core.table_name'), "type"=>"text", "name"=>"CategoryName", "value" => ""),
+			"created" => array("label"=>Lang::get('core.table_created'), "type"=>"date", "name"=>"created", "value" => ""),
+			"status" => array("label"=>Lang::get('core.table_status'), "type"=>"radio", "name"=>"status", "value" => "","option"=>array("0"=>Lang::get('core.disable'),"1"=>Lang::get('core.enable'))),
 			//"UnitPrice" => array("label"=>"Price", "type"=>"text", "name"=>"UnitPrice", "value" => ""),
 			//"CategoryID" => array("label"=>"Category", "type"=>"select", "name"=>"CategoryID", "value" => "", "model"=>"categories", "id"=>"CategoryID", "show" =>"CategoryName"),
 		);
+		return $array;
+	}
 }

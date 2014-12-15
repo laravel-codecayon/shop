@@ -12,7 +12,7 @@
 */
 
 /* Code Improvment By  mailbeez */
-if (defined('CNF_MULTILANG') && CNF_MULTILANG == 1) {
+if (defined('CNF_MULTILANG')) {
     $lang = (Session::get('lang') != "" ? Session::get('lang') : CNF_LANG);
     App::setLocale($lang);
 }

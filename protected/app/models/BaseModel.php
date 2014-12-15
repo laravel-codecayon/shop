@@ -90,7 +90,7 @@ class BaseModel extends Eloquent  {
 
 	static function getComboselect( $params , $nested = array())
 	{	
-		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+		$lang = Session::get('lang') == '' ? CNF_LANG : Session::get('lang');
 
 	   if(isset($params[3]) AND !empty($params[4]) ){
 			$table = $params[0]; 

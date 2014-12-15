@@ -14,9 +14,9 @@ class NcategoriesController extends BaseController {
 		$this->model = new Ncategories();
 		$this->info = $this->model->makeInfo( $this->module);
 		$this->access = $this->model->validAccess($this->info['id']);
-		$this->lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+		$this->lang = Session::get('lang') == '' ? CNF_LANG : Session::get('lang');
 		$this->data = array(
-			'pageTitle'	=> 	$this->info['title'],
+			'pageTitle'	=> 	Lang::get('core.category'),
 			'pageNote'	=>  $this->info['note'],
 			'pageModule'=> 'Ncategories',
 			'trackUri' 	=> ''
@@ -63,7 +63,7 @@ class NcategoriesController extends BaseController {
 		$page = $page >= 1 && filter_var($page, FILTER_VALIDATE_INT) !== false ? $page : 1;	
 		$pagination = Paginator::make($results['rows'], $results['total'],$params['limit']);		
 
-		$test 						= Ncategories::$columnTable;
+		$test 						= $this->model->columnTable();
 		$arr_search 				= SiteHelpers::arraySearch(Input::get('search'));
 		foreach($arr_search as $key=>$val){
 			if($key != "sort" && $key != "order" && $key != "rows"){

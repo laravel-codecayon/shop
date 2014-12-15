@@ -12,7 +12,7 @@ class SlideshowController extends BaseController {
 		$this->model = new Slideshow();
 		$this->info = $this->model->makeInfo( $this->module);
 		$this->access = $this->model->validAccess($this->info['id']);
-		$this->lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+		$this->lang = Session::get('lang') == '' ? CNF_LANG : Session::get('lang');
 		$this->data = array(
 			'pageTitle'	=> 	$this->info['title'],
 			'pageNote'	=>  $this->info['note'],

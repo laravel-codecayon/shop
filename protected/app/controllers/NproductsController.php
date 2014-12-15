@@ -12,9 +12,9 @@ class NproductsController extends BaseController {
 		$this->model = new Nproducts();
 		$this->info = $this->model->makeInfo( $this->module);
 		$this->access = $this->model->validAccess($this->info['id']);
-		$this->lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+		$this->lang = Session::get('lang') == '' ? CNF_LANG : Session::get('lang');
 		$this->data = array(
-			'pageTitle'	=> 	$this->info['title'],
+			'pageTitle'	=> 	Lang::get('core.product'),
 			'pageNote'	=>  $this->info['note'],
 			'pageModule'=> 'Nproducts',
 			'trackUri' 	=> ''	
@@ -74,7 +74,7 @@ class NproductsController extends BaseController {
 		$this->data['tableForm'] 	= $this->info['config']['forms'];
 		$this->data['colspan'] 		= SiteHelpers::viewColSpan($this->info['config']['grid']);
 
-		$test 						= Nproducts::$columnTable;
+		$test 						= $this->model->columnTable();
 		$arr_search 				= SiteHelpers::arraySearch(Input::get('search'));
 		foreach($arr_search as $key=>$val){
 			if($key != "sort" && $key != "order" && $key != "rows"){

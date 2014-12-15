@@ -209,13 +209,13 @@ class SiteHelpers
 	}
 
 	public static function saleProducts(){
-		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+		$lang = Session::get('lang') == '' ? CNF_LANG : Session::get('lang');
 		$data = DB::table('products')->where('status','=','1')->where('lang','=',$lang)->where('id_promotion','!=','0')->orderBy(DB::raw('RAND()'))->limit(5)->get();
 		return $data;
 	}
 
 	public static function randomProduct(){
-		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+		$lang = Session::get('lang') == '' ? CNF_LANG : Session::get('lang');
 		$data = DB::table('products')->where('status','=','1')->where('lang','=',$lang)->orderBy(DB::raw('RAND()'))->limit(5)->get();
 		return $data;
 	}
@@ -240,7 +240,7 @@ class SiteHelpers
 	
 	public static function nestedMenu($parent=0,$position ='top',$active = '1')
 	{
-		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+		$lang = Session::get('lang') == '' ? CNF_LANG : Session::get('lang');
 		$group_sql = " AND tb_menu_access.group_id ='".Session::get('gid')."' ";
 		$active 	=  ($active =='all' ? "" : "AND active ='1' ");
 		$Q = DB::select("
@@ -253,13 +253,13 @@ class SiteHelpers
 	}
 
 	public static function GetSlideshow(){
-		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+		$lang = Session::get('lang') == '' ? CNF_LANG : Session::get('lang');
 		$slide = DB::table('slideshow')->where("lang",'=', $lang)->where("slideshow_status",'=', '1')->get();
 		return $slide;
 	}
 
 	public static function GetCategories(){
-		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+		$lang = Session::get('lang') == '' ? CNF_LANG : Session::get('lang');
 		$cat = DB::table('categories')->where("lang",'=', $lang)->where("status",'=', '1')->get();
 		return $cat;
 	}
@@ -791,7 +791,7 @@ public static function alphaID($in, $to_num = false, $pad_up = false, $passKey =
 	}
 
 	public static function transFormsearch($field){
-		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+		$lang = Session::get('lang') == '' ? CNF_LANG : Session::get('lang');
 		switch($field['type'])
 		{
 			default;
@@ -1302,7 +1302,7 @@ public static function alphaID($in, $to_num = false, $pad_up = false, $passKey =
 	}
 
 	public static function langShow(){
-		$lang = Session::get('lang') == '' ? 'en' : Session::get('lang');
+		$lang = Session::get('lang') == '' ? CNF_LANG : Session::get('lang');
 		$fp = file_get_contents(app_path().'/lang/'.$lang.'/info.json');
 		$fp = json_decode($fp,true);
 		return $fp['name'];

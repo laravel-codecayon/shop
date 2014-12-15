@@ -2,12 +2,12 @@
 <div class="page-content row">
 	<div class="page-header">
 	  <div class="page-title">
-		<h3> Dashboard <small> Summary info site </small></h3>
+		<h3> {{ Lang::get('core.dashboard') }} <small> {{ Lang::get('core.summary_info_site') }} </small></h3>
 	  </div>
 
 		  <ul class="breadcrumb">
-			<li><a href="{{ URL::to('config/dashboard') }}">Home</a></li>
-			<li class="active">Dashboard</li>
+			<li><a href="{{ URL::to('config/dashboard') }}">{{ Lang::get('core.home') }}</a></li>
+			<li class="active">{{ Lang::get('core.dashboard') }}</li>
 		  </ul>
 		  
 	</div>
@@ -22,7 +22,7 @@
 			<div class="col-sm-6 col-md-3 b-r  p-sm ">
 				<span class="pull-left m-r-sm text-navy"><i class="icon-plus-circle2"></i></span> 
 				<a href="{{ URL::to('module/add') }}" class="clear">
-					<span class="h3 block m-t-xs"><strong> Modules  </strong>
+					<span class="h3 block m-t-xs"><strong> Modules </strong>
 					</span> <small class="text-muted text-uc"> Manage Existing Modules or Create new one </small>
 				</a>
 			</div>
@@ -51,7 +51,7 @@
 	<div class="row m-t">
 		<div class="col-md-12">
 			<div class="sbox">
-				<div class="sbox-title"> <h3> Sample Chart <small> ( Plugins js using Chart Js ) </small> </h3> </div>
+				<div class="sbox-title"> <h3> {{ Lang::get('core.chart') }} </h3> </div>
 				<div class="sbox-content">
 					<div class="row">
 						<div class="col-md-11">
@@ -68,7 +68,6 @@
 		
 	
 	</div>
-	@endif
 </div>	
 	
 </div>
@@ -108,6 +107,6 @@
 			responsive: true
 		});
 	}
-	
+	@endif
 </script>	
 
