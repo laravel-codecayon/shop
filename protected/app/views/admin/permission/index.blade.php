@@ -34,12 +34,11 @@
 		<table class="table table-striped ">
 			<thead>
 			<tr>
-				<th>Action</th>					
-				<th><input type="checkbox" class="checkall" /></th>
-				<th>Module</th>
-				<th>Controller</th>
-				<th>Database</th>
-				<th>PRI</th>
+				<th>{{ Lang::get('core.btn_action') }}</th>					
+				<!--<th><input type="checkbox" class="checkall" /></th>-->
+				<th>{{ Lang::get('core.btn_module') }}</th>
+				<th>{{ Lang::get('core.btn_controller') }}</th>
+				<th>{{ Lang::get('core.btn_database') }}</th>
 		
 			</tr>
 			</thead>
@@ -57,13 +56,12 @@
 					</ul>
 				</div>					
 				</td>
-				<td>
+				<!--<td>-->
 				 @if($type !='core')
-				<input type="checkbox" class="ids" name="id[]" value="{{ $row->module_id }}" /> @endif</td>
+				<!--<input type="checkbox" class="ids" name="id[]" value="{{ $row->module_id }}" /> @endif</td>-->
 				<td>{{ $row->module_title }} </td>
 				<td>{{ $row->module_name }} </td>
 				<td>{{ $row->module_db }} </td>
-				<td>{{ $row->module_db_key }} </td>
 			</tr>
 		@endforeach	
 	</tbody>		

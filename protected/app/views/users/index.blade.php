@@ -39,8 +39,8 @@
 	
 	
 	<ul class="nav nav-tabs" style="margin-bottom:10px;">
-	  <li class="active"><a href="#"> Users </a></li>
-	  <li ><a href="{{ URL::to('groups')}}">Groups</a></li>
+	  <li class="active"><a href="#"> {{Lang::get('core.user')}} </a></li>
+	  <li ><a href="{{ URL::to('groups')}}">{{Lang::get('core.group')}}</a></li>
 	</ul>	
 		
 	@if(Session::has('message'))	  
@@ -53,7 +53,7 @@
     <table class="table table-striped  ">
         <thead>
 			<tr>
-				<th> No </th>
+				<th> {{ Lang::get('core.table_no') }}  </th>
 				<th> <input type="checkbox" class="checkall" /></th>
 				@foreach ($test as $t)
 						<th>{{ $t['label'] }}</th>

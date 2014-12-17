@@ -43,12 +43,15 @@ FROM tb_users LEFT JOIN tb_groups ON tb_groups.group_id = tb_users.group_id ";
 		return $result;
 	}
 
-	public static $columnTable=array(
-			"id" => array("label"=>"ID", "type"=>"text", "name"=>"id", "value" => ""),
-			"username" => array("label"=>"User name", "type"=>"text", "name"=>"username", "value" => ""),
-			"email" => array("label"=>"Email", "type"=>"text", "name"=>"email", "value" => ""),
-			"group_id" => array("label"=>"Group", "type"=>"select_nola", "name"=>"group_id", "value" => "", "model"=>"tb_groups", "id"=>"group_id", "show" =>"name"),
+	public function columnTable(){
+		$array =array(
+			"id" => array("label"=>Lang::get('core.table_id'), "type"=>"text", "name"=>"id", "value" => ""),
+			"username" => array("label"=>Lang::get('core.table_name'), "type"=>"text", "name"=>"username", "value" => ""),
+			"email" => array("label"=>Lang::get('core.table_email'), "type"=>"text", "name"=>"email", "value" => ""),
+			"group_id" => array("label"=>Lang::get('core.group'), "type"=>"select_nola", "name"=>"group_id", "value" => "", "model"=>"tb_groups", "id"=>"group_id", "show" =>"name"),
 		);
+		return $array;
+	}
 		
 	
 }

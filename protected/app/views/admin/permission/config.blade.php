@@ -3,12 +3,12 @@
     <!-- Page header -->
     <div class="page-header">
       <div class="page-title">
-          <h3> Edit Module : {{ $row->module_name }} <small> Manage Installed Module </small></h3>
+          <h3> {{ Lang::get('core.edit_module') }} : {{ $row->module_name }}</h3>
       </div>
       <ul class="breadcrumb">
-        <li><a href="{{ URL::to('') }}">Home</a></li>
+        <li><a href="{{ URL::to('') }}">{{ Lang::get('core.home') }}</a></li>
         <li ><a href="{{ URL::to( $module ) }}">{{ $pageTitle }}</a></li>
-		<li class="active"> Module Permission  Editor </li>
+		<li class="active"> {{ $row->module_name }}</li>
       </ul>		  
 	  
     </div>
@@ -22,13 +22,13 @@
  {{ Form::open(array('url'=>$module.'/savepermission/'.$module_name, 'class'=>'form-horizontal')) }}
 
 <div class="sbox">
-	<div class="sbox-title"><h5> Module Permission </h5></div>
+	<div class="sbox-title"><h5> {{ Lang::get('core.permission') }} </h5></div>
 	<div class="sbox-content">	
 		<table class="table table-striped table-bordered" id="table">
 		<thead class="no-border">
   <tr>
-	<th field="name1" width="20">No</th>
-	<th field="name2">Group </th>
+	<th field="name1" width="20">{{ Lang::get('core.table_no') }}</th>
+	<th field="name2">{{ Lang::get('core.group') }} </th>
 	<?php foreach($tasks as $item=>$val) {?>	
 	<th field="name3" data-hide="phone"><?php echo $val;?> </th>
 	<?php }?>
@@ -56,14 +56,7 @@
   </tbody>
 </table>	
 
-<div class="infobox infobox-danger fade in">
-  <button type="button" class="close" data-dismiss="alert"> x </button>
-  <h5>Please Read !</h5>
-  <ol> 
-  	<li> If you want users <strong>only</strong> able to access they own records , then <strong>Global</strong> must be <code>uncheck</code> </li>
-	<li> When you using this feature , Database table must have <strong><code>entry_by</code></strong> field </li>
-	</ol>	
-</div>	
+
 <button type="submit" class="btn btn-success"> Save Changes </button>	
 	
 <input name="module_id" type="hidden" id="module_id" value="<?php echo $row->module_id;?>" />

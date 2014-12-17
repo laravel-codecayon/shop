@@ -13,7 +13,7 @@ class PermissionController extends BaseController {
 		//$this->model = new Module();		
 
 		$this->data = array(
-			'pageTitle'	=> 'Permission',
+			'pageTitle'	=>  Lang::get('core.permission') ,
 			'pageNote'	=> 'Config permission for module',
 		);
 		$driver 		= Config::get('database.default');
@@ -57,7 +57,7 @@ class PermissionController extends BaseController {
 									->get();
 			if(count($row) <= 0){
 				return Redirect::to($this->module)
-					->with('message', SiteHelpers::alert('error','Can not find module'));		
+					->with('message', SiteHelpers::alert('error',Lang::get('core.not_found_module')));		
 			}
 			$row = $row[0];									
 			$this->data['row'] = $row;			
@@ -182,7 +182,7 @@ class PermissionController extends BaseController {
 		}
 				
 		return Redirect::to($this->module.'/config/'.$row->module_name)
-		->with('message',SiteHelpers::alert('success','Permission Has Changed Successful.')); 
+		->with('message',SiteHelpers::alert('success',Lang::get('core.permission_note_success'))); 
 		
 			return Redirect::to('module')
 			->with('message', SiteHelpers::alert('error',' Feature disabled on demo page '));			

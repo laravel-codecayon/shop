@@ -10,7 +10,7 @@
       <ul class="breadcrumb">
         <li><a href="{{ URL::to('config/dashboard') }}">{{ Lang::get('core.home'); }}</a></li>
 		<li><a href="{{ URL::to('users') }}">{{ $pageTitle }}</a></li>
-        <li class="active"> Add </li>
+        <li class="active"> {{ Lang::get('core.addedit') }} </li>
       </ul>
 	</div>  
 	@if(Session::has('message'))	  
@@ -33,7 +33,7 @@
 		 <div class="col-md-6">
 									
 				  <div class="form-group hidethis " style="display:none;">
-					<label for="ipt" class=" control-label col-md-4 text-right"> Id </label>
+					<label for="ipt" class=" control-label col-md-4 text-right"> {{ Lang::get('core.table_id') }} </label>
 					<div class="col-md-8">
 					  {{ Form::text('id', $row['id'],array('class'=>'form-control', 'placeholder'=>'')) }} 
 					 </div> 
@@ -46,7 +46,7 @@
 					 </div> 
 				  </div> 					
 				  <div class="form-group  " >
-					<label for="ipt" class=" control-label col-md-4 text-right">  {{ Lang::get('core.username') }} </label>
+					<label for="ipt" class=" control-label col-md-4 text-right">  {{ Lang::get('core.table_username') }} </label>
 					<div class="col-md-8">
 					  {{ Form::text('username', $row['username'],array('class'=>'form-control', 'placeholder'=>'')) }} 
 					 </div> 
@@ -58,7 +58,7 @@
 					 </div> 
 				  </div> 					
 				  <div class="form-group  " >
-					<label for="ipt" class=" control-label col-md-4 text-right"> {{ Lang::get('core.firstname') }} </label>
+					<label for="ipt" class=" control-label col-md-4 text-right"> {{ Lang::get('core.lastname') }} </label>
 					<div class="col-md-8">
 					  {{ Form::text('last_name', $row['last_name'],array('class'=>'form-control ')) }} 
 					 </div> 
@@ -70,17 +70,17 @@
 					 </div> 
 				  </div> 										
 				  <div class="form-group  " >
-					<label for="ipt" class=" control-label col-md-4 text-right"> Status </label>
+					<label for="ipt" class=" control-label col-md-4 text-right"> {{ Lang::get('core.table_status') }} </label>
 					<div class="col-md-8">
 					  
 					<label class='checked'>
-					<input type='radio' name='active' value ='0' required @if($row['active'] == '0') checked="checked" @endif > Inactive </label>
+					<input type='radio' name='active' value ='0' required @if($row['active'] == '0') checked="checked" @endif > {{ Lang::get('core.fr_minactive') }} </label>
 					<label class='checked'>
-					<input type='radio' name='active' value ='1' required @if($row['active'] == '1') checked="checked" @endif > Active </label> 
+					<input type='radio' name='active' value ='1' required @if($row['active'] == '1') checked="checked" @endif > {{ Lang::get('core.fr_mactive') }} </label> 
 					 </div> 
 				  </div> 					
 				  <div class="form-group  " >
-					<label for="ipt" class=" control-label col-md-4 text-right"> Avatar </label>
+					<label for="ipt" class=" control-label col-md-4 text-right"> {{ Lang::get('core.avartar') }} </label>
 					<div class="col-md-8">
 					  <input  type='file' name='avatar' id='avatar' class=''  
 					 style='width:150px !important;'  />
@@ -109,7 +109,7 @@
 		@if($row['id'] !='')
 			{{ Lang::get('core.notepassword') }}
 		@else
-			Create Password
+			{{ Lang::get('core.change_pass') }} 
 		@endif	 
 	</div>
 	</div>		  

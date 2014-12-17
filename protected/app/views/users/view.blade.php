@@ -33,7 +33,7 @@
 		<tbody>	
 	
 					<tr>
-						<td width='30%' class='label-view text-right'>ID</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_id') }}</td>
 						<td>{{ $row->id }} </td>
 						
 					</tr>
@@ -43,31 +43,31 @@
 						
 					</tr>				
 					<tr>
-						<td width='30%' class='label-view text-right'>{{ Lang::get('core.username') }}</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_username') }}</td>
 						<td>{{ $row->username }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>{{ Lang::get('core.email') }}</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_email') }}</td>
 						<td>{{ $row->email }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Full Name</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.fullname') }}</td>
 						<td>{{ $row->first_name }} {{ $row->last_name }} </td>
 						
 					</tr>
 				
 					<tr>
-						<td width='30%' class='label-view text-right'>Status</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.table_status') }}</td>
 						<td>{{ ($row->active ==1 ? '<lable class="label label-success">Active</label>' : '<lable class="label label-danger">Inactive</label>')  }}	 </td>
 						
 					</tr>
 
 					<tr>
-						<td width='30%' class='label-view text-right'>Avatar</td>
+						<td width='30%' class='label-view text-right'>{{ Lang::get('core.avartar') }}</td>
 						<td>
 						{{ SiteHelpers::showUploadedFile( $row->avatar,'/uploads/users/') }}
 						</td>

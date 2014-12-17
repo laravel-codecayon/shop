@@ -110,6 +110,9 @@ return array(
 	"btn_edit"						=> "Sửa",	
 	"btn_view"						=> "Chi tiết",
 	"btn_typesearch"				=> "Type & Enter",	// updated apidevlab	
+	"btn_module"					=> "Module",
+	"btn_controller"				=> "Controller",
+	"btn_database"					=> "Database",
 	
 /* Core Module */
 	"t_menu"						=> "Quản lý Menu",
@@ -206,6 +209,8 @@ return array(
 	"table_ward"				=> "Phường/Xã",
 	"table_note"				=> "Ghi chú",
 	"table_sl"					=> "Số lượng",
+	"table_username"			=> "Username",
+
 
 	"order_new"					=> "Mới",
 	"order_wait"				=> "Đang giao hàng",
@@ -223,5 +228,11 @@ return array(
 	"detail_order"				=> "Chi tiết đơn hàng",
 	"update"					=> "Cập nhật",
 	"delete"					=> "Xóa",
+	"avartar"					=> "Ảnh đại diện",
+	"change_pass"				=> "Thay đôi Password",
+
+	"edit_module"				=> "Phân quyền Module",
+
+	"permission_note_success"	=> "Phân quyền thành công !",
 
 );
