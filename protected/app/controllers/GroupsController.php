@@ -14,7 +14,7 @@ class GroupsController extends BaseController {
 		$this->access = $this->model->validAccess($this->info['id']);
 	
 		$this->data = array(
-			'pageTitle'	=> 	$this->info['title'],
+			'pageTitle'	=> 	Lang::get('core.group'),
 			'pageNote'	=>  $this->info['note'],
 			'pageModule'	=> 'groups',
 		);
@@ -27,7 +27,7 @@ class GroupsController extends BaseController {
 	{
 		if($this->access['is_view'] ==0) 
 			return Redirect::to('')
-				->with('message', SiteHelpers::alert('error',' Your are not allowed to access the page '));
+				->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));
 				
 		// Filter sort and order for query 
 		$sort = (!is_null(Input::get('sort')) ? Input::get('sort') : 'group_id'); 
@@ -87,13 +87,13 @@ class GroupsController extends BaseController {
 		if($id =='')
 		{
 			if($this->access['is_add'] ==0 )
-			return Redirect::to('')->with('message', SiteHelpers::alert('error',' Your are not allowed to access the page '));
+			return Redirect::to('')->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));
 		}	
 		
 		if($id !='')
 		{
 			if($this->access['is_edit'] ==0 )
-			return Redirect::to('')->with('message', SiteHelpers::alert('error',' Your are not allowed to access the page '));
+			return Redirect::to('')->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));
 		}				
 			
 		$id = ($id == null ? '' : SiteHelpers::encryptID($id,true)) ;
@@ -114,7 +114,7 @@ class GroupsController extends BaseController {
 	
 		if($this->access['is_detail'] ==0) 
 			return Redirect::to('')
-				->with('message', SiteHelpers::alert('error',' Your are not allowed to access the page '));
+				->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));
 					
 		$ids = ($id == null ? '' : SiteHelpers::encryptID($id,true)) ;
 		$row = $this->model->getRow($ids);
@@ -149,9 +149,9 @@ class GroupsController extends BaseController {
 				$this->inputLogs(" ID : $ID  , Has Been Changed Successfull");
 			}
 			// Redirect after save	
-			return Redirect::to('groups')->with('message', SiteHelpers::alert('success','Data Has Been Save Successfull'));
+			return Redirect::to('groups')->with('message', SiteHelpers::alert('success',Lang::get('core.note_success')));
 		} else {
-			return Redirect::to('groups/add/'.$id)->with('message', SiteHelpers::alert('error','The following errors occurred'))
+			return Redirect::to('groups/add/'.$id)->with('message', SiteHelpers::alert('error',Lang::get('core.note_error')))
 			->withErrors($validator)->withInput();
 		}	
 	
@@ -162,10 +162,10 @@ class GroupsController extends BaseController {
 		
 		if($this->access['is_remove'] ==0) 
 			return Redirect::to('')
-				->with('message', SiteHelpers::alert('error',' Your are not allowed to access the page '));		
+				->with('message', SiteHelpers::alert('error',Lang::get('core.note_restric')));		
 		// delete multipe rows 
 		$this->model->destroy(Input::get('id'));
-		$this->inputLogs("ID : ".implode(",",Input::get('id'))."  , Has Been Removed Successfull");
+		$this->inputLogs("ID : ".implode(",",Input::get('id'))."  , ".Lang::get('core.note_success_delete'));
 		// redirect
 		Session::flash('message', SiteHelpers::alert('success','Successfully deleted row!'));
 		return Redirect::to('groups');

@@ -234,5 +234,5 @@ return array(
 	"edit_module"				=> "Phân quyền Module",
 
 	"permission_note_success"	=> "Phân quyền thành công !",
-
+	"fullname"					=> "Họ tên ",
 );

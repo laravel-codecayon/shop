@@ -4,14 +4,14 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
-		<h2>Hello Admin , </h2>
-		<p> You have new contact mail from  </p>
+		<h2>Xin chào Admin  ! </h2>
+		<p> Bạn có 1 thông tin liên hệ mới từ khách hàng </p>
 		<p>
 			Email : {{ $email }} <br />
-			Name : {{ $name }}<br />
-			Password : {{ $subject }}<br />
+			Tên : {{ $name }}<br />
+			Tiêu đề : {{ $subject }}<br />
 		</p>
-		<p> Message : </p>
+		<p> Nội dung : </p>
 		<div>
 			{{ $content }}
 		</div>

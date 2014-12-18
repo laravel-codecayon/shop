@@ -45,7 +45,7 @@ class HomeController extends BaseController {
 	{
 		$cart = Session::get('addcart');
 		if(count($cart) <= 0){
-			return Redirect::to('')->with('message', SiteHelpers::alert('success','Thank You , Your message has been sent !'));	
+			return Redirect::to('')->with('message', SiteHelpers::alert('success','Bạn vui lòng chọn mua sản phẩm'));	
 		}
 		$datacart = array();
 		$mdPro = new Nproducts();
@@ -120,11 +120,55 @@ class HomeController extends BaseController {
 		}
 	}
 
+	public function search(){
+		if(Input::get('search') == ''){
+			return Redirect::to('');
+		}
+		$s = Input::get('search');
+		$sortget = ( Input::get('sort') != '') ? Input::get('sort') : 'ProductID-desc';
+		list($sort,$order) = explode('-', $sortget);
+		$filter = " AND status = 1 AND (ProductName LIKE '%".$s."%' OR Slug LIKE '%".$s."%' OR Content LIKE '%".$s."%' OR description LIKE '%".$s."%') AND lang = '$this->lang'";
+		$page = (!is_null(Input::get('page') && Input::get('page') != '')) ? Input::get('page') : 1;
+		$params = array(
+			'page'		=> $page ,
+			'limit'		=> (!is_null(Input::get('numpage')) ? filter_var(Input::get('numpage'),FILTER_VALIDATE_INT) : $this->perpage ) ,
+			'sort'		=> $sort ,
+			'order'		=> $order,
+			'params'	=> $filter,
+			//'global'	=> (isset($this->access['is_global']) ? $this->access['is_global'] : 0 )
+		);
+		$model = new Nproducts();
+		$results = $model->getRows( $params );
+		// Build pagination setting
+		$page = $page >= 1 && filter_var($page, FILTER_VALIDATE_INT) !== false ? $page : 1;	
+		$pagination = Paginator::make($results['rows'], $results['total'],$params['limit']);
+		$data['search']		=$s;
+		$data['data']		= $results['rows'];
+		$data['page']		= $page;
+		$data['sort']		= $sortget;
+		$data['numpage']	= $params['limit'];
+		// Build Pagination 
+		$data['pagination']	= $pagination;
+		// Build pager number and append current param GET
+		$data['pager'] 		= $this->injectPaginate();
+
+
+		$this->data['pageTitle'] = 'Kết qua tìm kiếm từ khóa'.'"'.$s.'"';
+		$this->data['pageNote'] = 'Welcome To Our Site';
+
+		//$this->data['breadcrumb'] = 'inactive';
+		$page = 'pages.template.search';
+
+
+		$page = SiteHelpers::renderHtml($page);
+		$this->layout->nest('content',$page,$data)->with('page', $this->data);
+	}
+
 	public function checkout()
 	{
 		$cart = Session::get('addcart');
 		if(count($cart) <= 0){
-			return Redirect::to('')->with('message', SiteHelpers::alert('success','Thank You , Your message has been sent !'));	
+			return Redirect::to('')->with('message', SiteHelpers::alert('success','Bạn không có sản phẩm nào trong giỏ hàng !'));	
 		}
 		$input = array(
 				'name'	=>'',
@@ -341,18 +385,22 @@ class HomeController extends BaseController {
 		{
 			
 			$data = array('name'=>Input::get('name'),'phone'=>Input::get('phone'),'email'=>Input::get('email'),'content'=>Input::get('content'),'subject'=>Input::get('subject')); 
-			$message = View::make('emails.contact', $data); 		
+			/*$message = View::make('emails.contact', $data); 		
 			$to 		= 	CNF_EMAIL;
 			$subject 	= Input::get('subject');
 			$headers  	= 'MIME-Version: 1.0' . "\r\n";
 			$headers 	.= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 			$headers 	.= 'From: '.Input::get('name').' <'.Input::get('email').'>' . "\r\n";
-			mail($to, $subject, $message, $headers);
-
-			return Redirect::to(URL::to('')."/contact-us.html")->with('message', SiteHelpers::alert('success','Thank You , Your message has been sent !'));	
+			mail($to, $subject, $message, $headers);*/
+			Mail::send('emails.contact', $data, function($message)
+			{
+				$message->from( Input::get('email'), Input::get('name') );
+			    $message->to(CNF_EMAIL, 'Admin')->subject(Input::get('subject'));
+			});
+			return Redirect::to(URL::to('')."/contact-us.html")->with('message', SiteHelpers::alert('success','Yêu cầu của bạn đã được gởi !'));	
 				
 		} else {
-			return Redirect::to(URL::to('')."/contact-us.html")->with('message_contact', SiteHelpers::alert('error','The following errors occurred'))->with('input_rd',Input::all())
+			return Redirect::to(URL::to('')."/contact-us.html")->with('message_contact', SiteHelpers::alert('error','Vui lòng khắc phục các lỗi bên dưới'))->with('input_rd',Input::all())
 			->withErrors($validator)->withInput();
 		}		
 	}

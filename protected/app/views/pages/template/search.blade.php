@@ -1,14 +1,14 @@
 {{ HTML::script('sximo/themes/shop/js/jquery.cookie.js') }}
 <div id="content">
       <!--Breadcrumb Part Start-->
-      <div class="breadcrumb"> <a href="{{URL::to('')}}">Trang chủ</a> » <a href="javascript:">{{$cat->CategoryName}}</a></div>
+      <div class="breadcrumb"> <a href="{{URL::to('')}}">Trang chủ</a> » <a href="javascript:">Kết quả từ khóa "{{$search}}"</a></div>
       <!--Breadcrumb Part End-->
-      <h1>{{$cat->CategoryName}}</h1>
+      <h1>{{$search}}</h1>
       <div class="product-filter">
         <div class="display"><b>Display:</b> <a href="javascript:" onclick="display('gird')"><span class="list1-icon" title="Grid View">Grid</span></a><a href="javascript:" onclick="display('list')" class="grid-icon" title="List View">List</a></div>
-        <form id="formsort" method="get" action="{{URL::to('')}}/category/{{$cat->alias}}-{{$cat->CategoryID}}.html">
-        	
-	        <div class="limit"><b>Số trang:</b>
+        <form id="formsort" method="get" action="{{URL::to('')}}/search.html">
+        	<input type="hidden" name="search" value="{{$search}}" />
+	        <div class="limit"><b>Show:</b>
 	          <select id="numpage" name="numpage">
 	          	<option selected="selected"  value="12">12</option>
 	            <option   value="16">16</option>
@@ -18,9 +18,9 @@
 	            <option value="100">100</option>
 	          </select>
 	        </div>
-	        <div class="sort"><b>Sắp xếp:</b>
+	        <div class="sort"><b>Sort By:</b>
 	          <select id="sort" name="sort">
-	            <option  selected="selected" value="">Sắp xếp</option>
+	            <option  selected="selected" value="">Sắp sếp</option>
 	            <option value="ProductName-asc">Tên sản phẩm (A - Z)</option>
 	            <option value="ProductName-desc">Tên sản phẩm (Z - A)</option>
 	            <option value="UnitPrice-asc">Giá (Low &gt; High)</option>
@@ -38,6 +38,7 @@
 		    });
 		    var sort = '{{$sort}}';
 		    var numpage = '{{$numpage}}';
+		    var search = '{{$search}}';
 			$('#sort option[value='+sort+']').attr('selected','selected');
 		    $('#numpage option[value='+numpage+']').attr('selected','selected');
 		});
@@ -51,7 +52,7 @@
       <!--Product Grid End-->
       <!--Pagination Part Start-->
       <div class="pagination">
-        <div class="links"> {{ $pagination->appends(array("sort"=>"$sort","numpage"=>$numpage,"page"=>$page))->links('pagination_site') }}</div>
+        <div class="links"> {{ $pagination->appends(array("sort"=>"$sort","numpage"=>$numpage,"page"=>$page,"search"=>$search))->links('pagination_site') }}</div>
         <div class="results">{{Lang::get('core.grid_displaying') }} {{ $pagination->getFrom() }} {{Lang::get('core.grid_to') }} {{ $pagination->getTo() }} {{ Lang::get('core.grid_of') }} {{ $pagination->getTotal() }}</div>
       </div>
       <!--Pagination Part End-->

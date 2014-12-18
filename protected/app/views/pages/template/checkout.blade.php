@@ -5,21 +5,21 @@
     @endif
     <div id="content">
       <!--Breadcrumb Part Start-->
-      <div class="breadcrumb"> <a href="index-2.html">Home</a> » <a href="#">Shopping Cart</a></div>
+      <div class="breadcrumb"> <a href="{{URL::to('')}}">Trang chủ</a> » <a href="{{URL::to('cart.html')}}">Giỏ hàng</a> » <a href="">Thanh toán</a></div>
       <!--Breadcrumb Part End-->
-      <h1>Checkout</h1>
+      <h1>Thanh toán</h1>
       <div class="checkout">
-        <div class="checkout-heading">Step 1: Checkout Options</div>
+        <div class="checkout-heading">Step 1: Thông tin thanh toán</div>
         <div class="checkout-content" style="display: block;">
         <form id="form_checkout" method="post" action="{{URL::to('')}}/home/order">
           <table class="form">
             <tbody>
               <tr>
-                <td><span class="required">*</span> Name:</td>
+                <td><span class="required">*</span> Họ tên:</td>
                 <td><input type="text" class="large-field" value="{{$input['name']}}" name="name" id="name"></td>
               </tr>
               <tr>
-                <td><span class="required">*</span> Sex:</td>
+                <td><span class="required">*</span> Giới tính:</td>
                 <td>
                   <label for="nam">
                     <input type="radio" checked="checked" id="nam" value="1" name="sex">
@@ -31,7 +31,7 @@
                 </td>
               </tr>
               <tr>
-                <td><span class="required">*</span> Phone number:</td>
+                <td><span class="required">*</span> Điện thoại:</td>
                 <td><input type="text" class="large-field" value="{{$input['phone']}}" name="phone" id="phone"></td>
               </tr>
               <tr>
@@ -39,18 +39,18 @@
                 <td><input type="text" class="large-field" value="{{$input['email']}}" name="email" id="email"></td>
               </tr>
               <tr>
-                <td><span class="required">*</span> Address:</td>
+                <td><span class="required">*</span> Địa chỉ:</td>
                 <td><input type="text" class="large-field" value="{{$input['address']}}" name="address" id="address"></td>
               </tr>
               <tr>
-                <td><span class="required">*</span> City:</td>
+                <td><span class="required">*</span> Tỉnh/Thành:</td>
                 <td>
                   <select class="large-field" id="city" name="provinceid">
                   </select>
                 </td>
               </tr>
               <tr>
-                <td><span class="required">*</span> District:</td>
+                <td><span class="required">*</span> Quận/Huyện:</td>
                 <td>
                   <select class="large-field"  id="district" name="districtid">
 
@@ -58,7 +58,7 @@
                 </td>
               </tr>
               <tr>
-                <td><span class="required">*</span> Ward:</td>
+                <td><span class="required">*</span> Phường/Xã:</td>
                 <td>
                   <select class="large-field"  id="ward" name="wardid">
 
@@ -73,7 +73,7 @@
               </tr>
               @if(CNF_RECAPTCHA =='true') 
               <tr>
-                <td><span class="required">*</span> Are u human>:</td>
+                <td><span class="required">*</span> Mã bảo mật:</td>
                 <td>{{ Form::captcha(array('theme' => 'white')); }}</td>
               </tr>
               @endif
@@ -82,17 +82,17 @@
       </div>
     </div>
       <div class="checkout">
-        <div class="checkout-heading">Step 6: Confirm Order</div>
+        <div class="checkout-heading">Step 2: Xác nhận đơn hàng</div>
         <div class="checkout-content">
           <div class="checkout-product">
             <table>
               <thead>
                 <tr>
-                  <td class="name">Product Name</td>
-                  <td class="model">Model</td>
-                  <td class="quantity">Quantity</td>
-                  <td class="price">Price</td>
-                  <td class="total">Total</td>
+                  <td class="name">Tên sản phẩm</td>
+                  <td class="model">Danh mục</td>
+                  <td class="quantity">Số lượng</td>
+                  <td class="price">Giá</td>
+                  <td class="total">Tổng</td>
                 </tr>
               </thead>
               <tbody>
@@ -108,7 +108,7 @@
               </tbody>
               <tfoot>
                 <tr>
-                  <td class="price" colspan="4"><b>Total:</b></td>
+                  <td class="price" colspan="4"><b>Tổng cộng:</b></td>
                   <td class="total">{{$total_real}}</td>
                 </tr>
               </tfoot>

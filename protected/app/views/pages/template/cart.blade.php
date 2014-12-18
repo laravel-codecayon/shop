@@ -1,19 +1,19 @@
 <div id="content">
       <!--Breadcrumb Part Start-->
-      <div class="breadcrumb"> <a href="index-2.html">Home</a> » <a href="#">Shopping Cart</a></div>
+      <div class="breadcrumb"> <a href="{{URL::to('')}}">Trang chủ</a> » <a href="">Giỏ hàng</a></div>
       <!--Breadcrumb Part End-->
-      <h1>Shopping Cart</h1>
+      <h1>Giỏ hàng</h1>
       <form enctype="multipart/form-data" method="post" action="#">
         <div class="cart-info">
           <table>
             <thead>
               <tr>
-                <td class="image">Image</td>
-                <td class="name">Product Name</td>
-                <td class="model">Model</td>
-                <td class="quantity">Quantity</td>
-                <td class="price">Unit Price</td>
-                <td class="total">Total</td>
+                <td class="image">Hình ảnh</td>
+                <td class="name">Tên sản phẩm</td>
+                <td class="model">Danh mục</td>
+                <td class="quantity">Số lượng</td>
+                <td class="price">Giá</td>
+                <td class="total">Tổng</td>
               </tr>
             </thead>
             <tbody>
@@ -44,15 +44,15 @@
           <tbody>
           
             <tr>
-              <td class="right"><b>Total:</b></td>
+              <td class="right"><b>Tổng cộng:</b></td>
               <td class="right">{{$total_real}}</td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="buttons">
-        <div class="right"><a class="button" href="{{URL::to('')}}/checkout.html">Checkout</a></div>
-        <div class="center"><a class="button" href="{{URL::to('')}}">Continue Shopping</a></div>
+        <div class="right"><a class="button" href="{{URL::to('')}}/checkout.html">Thanh toán</a></div>
+        <div class="center"><a class="button" href="{{URL::to('')}}">Tiếp tục mua hàng</a></div>
       </div>
     </div>
     <!--Middle Part End-->

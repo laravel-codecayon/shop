@@ -45,7 +45,9 @@
     <div id="logo"><a href="{{URL::to('')}}"><img src="{{ asset('sximo/themes/shop/image/logo.png')}}" title="ecommerce Html Template" alt="ecommerce Html Template" /></a></div>
     <div id="search">
       <div class="button-search"></div>
-      <input type="text" value="" placeholder="" id="filter_name" name="search">
+      <form action="<?php echo URL::to(''); ?>/search.html" method="get">
+        <input type="text" value="" placeholder="" id="filter_name" name="search">
+      </form>
     </div>
     <!--Mini Cart Start-->
     <div id="cart">
@@ -156,8 +158,16 @@
   }
   function loadcart(){
     var link = "{{ URL::to('home/loadcart') }}";
+    $(".mini-cart-info").html('');
+    $(".checkout").hide();
     $.get(link,function(data,status){
+      if(data != ''){
         $(".mini-cart-info").html(data);
+        $(".checkout").show();
+      }else{
+        $(".mini-cart-info").html('Không có gì trong giỏ hàng !');
+      }
+        
     });
   }
   function remove_cart_mini(id){
